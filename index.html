@@ -1,7 +1,106 @@
 ---
 layout: default
 title: Home
-redirect_to: /posts/
 ---
-<meta http-equiv="refresh" content="0; url=/posts/" />
-<script>window.location.replace("{{ '/posts/' | relative_url }}");</script>
+
+<!-- Hero -->
+<section class="hero-section">
+  <div class="hero-inner">
+    <div class="hero-grid">
+
+      <!-- Left: headline + buttons -->
+      <div class="hero-left">
+        <span class="issue-badge">Issue 014 · Spring 2026</span>
+        <h1 class="hero-title">
+          Adobe CJA<br>
+          &amp; AEP,<br>
+          <span class="hero-highlight-wrap">
+            <span class="hero-highlight-text">explained</span>
+            <span class="hero-highlight-bar"></span>
+          </span> like<br>
+          a human.
+        </h1>
+        <p class="hero-sub">
+          A quirky, hands-on field guide to
+          <strong>Customer Journey Analytics</strong> and the
+          <strong>Adobe Experience Platform</strong>.
+          Less acronym soup, more "ohhh, that's what schemas do."
+        </p>
+        <div class="hero-ctas">
+          <a href="{{ '/posts/' | relative_url }}" class="btn-primary">start reading →</a>
+          <a href="{{ '/about/' | relative_url }}" class="btn-secondary">who's writing this?</a>
+        </div>
+      </div>
+
+      <!-- Right: mood card -->
+      <div class="hero-right">
+        <div class="mood-card">
+          <div class="mood-card-tape"></div>
+          <div class="mood-label">Today's mood</div>
+          <div class="mood-quote">"What do you mean my XDM field is in the wrong namespace??"</div>
+          <div class="mood-debug">
+            <span class="mood-dot"></span>
+            debugging at 11pm
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Coral marquee (home page only) -->
+<div class="coral-marquee" aria-hidden="true">
+  <div class="coral-marquee-track">
+    <span>★ EVENT-LEVEL DATA</span>
+    <span>★ STITCHED IDENTITIES</span>
+    <span>★ DERIVED FIELDS</span>
+    <span>★ PROFILE FRAGMENTS</span>
+    <span>★ DATA VIEWS</span>
+    <span>★ XDM SCHEMAS</span>
+    <span>★ EVENT-LEVEL DATA</span>
+    <span>★ STITCHED IDENTITIES</span>
+    <span>★ DERIVED FIELDS</span>
+    <span>★ PROFILE FRAGMENTS</span>
+    <span>★ DATA VIEWS</span>
+    <span>★ XDM SCHEMAS</span>
+  </div>
+</div>
+
+<!-- Latest posts -->
+<section class="latest-section">
+  <div class="latest-inner">
+    <div class="latest-header">
+      <div>
+        <div class="latest-eyebrow">§01 — Latest</div>
+        <h2 class="latest-title">Fresh off the dataset.</h2>
+      </div>
+      <a href="{{ '/posts/' | relative_url }}" class="see-all-link">see all posts →</a>
+    </div>
+
+    <div class="home-posts-grid">
+      {% for post in site.posts limit: 3 %}
+        {% assign tag = post.tags | first %}
+        {% assign color = "none" %}
+        {% if tag == "CJA" %}{% assign color = "coral" %}{% endif %}
+        {% if tag == "AEP" %}{% assign color = "lime" %}{% endif %}
+        {% if tag == "Field Notes" %}{% assign color = "sky" %}{% endif %}
+
+        <a href="{{ post.url | relative_url }}" class="post-card {% if forloop.first %}post-card-featured{% endif %}" data-tags="{{ post.tags | join: ',' }}">
+          <div class="card-tape"></div>
+          <div class="card-top-row">
+            <span class="tag-pill {{ color }}">{{ tag }}</span>
+            {% if post.read_time %}<span class="card-read-time">{{ post.read_time }} min</span>{% endif %}
+          </div>
+          {% if post.emoji %}<div class="card-emoji">{{ post.emoji }}</div>{% endif %}
+          <div class="card-title">{{ post.title }}</div>
+          <p class="card-excerpt">{{ post.excerpt | strip_html | truncate: 120 }}</p>
+          <div class="card-footer">
+            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+            <span class="card-read-link">read it →</span>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>

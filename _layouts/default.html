@@ -9,7 +9,7 @@
   {% feed_meta %}
   {% seo %}
 </head>
-<body>
+<body {% if page.url == '/' %}class="home"{% endif %}>
 
   <header class="site-header">
     <a href="{{ '/' | relative_url }}" class="site-logo">
