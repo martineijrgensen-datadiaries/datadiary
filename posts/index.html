@@ -19,26 +19,25 @@ title: Posts
 <div class="post-grid" id="post-grid">
   {% for post in site.posts %}
     {% assign tag = post.tags | first %}
-    {% assign color = "gray" %}
+    {% assign color = "none" %}
     {% if tag == "CJA" %}{% assign color = "coral" %}{% endif %}
-    {% if tag == "AEP" %}{% assign color = "teal" %}{% endif %}
+    {% if tag == "AEP" %}{% assign color = "lime" %}{% endif %}
+    {% if tag == "Field Notes" %}{% assign color = "sky" %}{% endif %}
 
-    <article class="post-card" data-tags="{{ post.tags | join: ',' }}">
-      <div class="card-accent {{ color }}"></div>
-      <div class="card-body">
-        <div class="card-top-row">
-          <span class="tag-pill {{ color }}">{{ tag }}</span>
-          {% if post.read_time %}<span class="card-read-time">{{ post.read_time }} min</span>{% endif %}
-        </div>
-        {% if post.emoji %}<div class="card-emoji">{{ post.emoji }}</div>{% endif %}
-        <h2 class="card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
-        <p class="card-excerpt">{{ post.excerpt | strip_html | truncate: 120 }}</p>
-        <div class="card-footer">
-          <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
-          <a href="{{ post.url | relative_url }}" class="card-read-link">read it →</a>
-        </div>
+    <a href="{{ post.url | relative_url }}" class="post-card" data-tags="{{ post.tags | join: ',' }}">
+      <div class="card-tape"></div>
+      <div class="card-top-row">
+        <span class="tag-pill {{ color }}">{{ tag }}</span>
+        {% if post.read_time %}<span class="card-read-time">{{ post.read_time }} min</span>{% endif %}
       </div>
-    </article>
+      {% if post.emoji %}<div class="card-emoji">{{ post.emoji }}</div>{% endif %}
+      <div class="card-title">{{ post.title }}</div>
+      <p class="card-excerpt">{{ post.excerpt | strip_html | truncate: 120 }}</p>
+      <div class="card-footer">
+        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+        <span class="card-read-link">read it →</span>
+      </div>
+    </a>
   {% endfor %}
 </div>
 

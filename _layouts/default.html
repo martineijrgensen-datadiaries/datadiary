@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{% if page.title %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <title>{% if page.title and page.title != "Home" %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
   <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | truncate: 160 }}{% else %}{{ site.description }}{% endif %}" />
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}" />
   {% feed_meta %}
@@ -17,7 +17,7 @@
       data/diary
     </a>
     <nav class="site-nav">
-      <a href="{{ '/' | relative_url }}" {% if page.url == '/' or page.url contains 'posts' %}class="active"{% endif %}>home</a>
+      <a href="{{ '/' | relative_url }}" {% if page.url == '/' or page.url == '/posts/' or page.url contains '/posts' %}class="active"{% endif %}>home</a>
       <a href="{{ '/posts/' | relative_url }}" {% if page.url contains 'posts' %}class="active"{% endif %}>posts</a>
       <a href="{{ '/about/' | relative_url }}" {% if page.url contains 'about' %}class="active"{% endif %}>about</a>
       <a href="#" class="nav-signin">sign in</a>
@@ -28,24 +28,28 @@
     {{ content }}
   </main>
 
-  <footer>
+  <footer class="site-footer">
+    <div class="marquee-bar" aria-hidden="true">
+      <div class="marquee-track">
+        <span>★ DATA VIEW &gt; REPORT SUITE</span>
+        <span>★ SCHEMAS ARE VIBES</span>
+        <span>★ IDENTITY ≠ IDENTIFIER</span>
+        <span>★ DERIVED FIELDS SLAP</span>
+        <span>★ THE PROFILE IS A GRAPH, NOT A ROW</span>
+        <span>★ STITCHED IDENTITIES</span>
+        <span>★ EVENT-LEVEL DATA</span>
+        <span>★ DATA VIEW &gt; REPORT SUITE</span>
+        <span>★ SCHEMAS ARE VIBES</span>
+        <span>★ IDENTITY ≠ IDENTIFIER</span>
+        <span>★ DERIVED FIELDS SLAP</span>
+        <span>★ THE PROFILE IS A GRAPH, NOT A ROW</span>
+        <span>★ STITCHED IDENTITIES</span>
+        <span>★ EVENT-LEVEL DATA</span>
+      </div>
+    </div>
     <div class="site-footer-inner">
       <span>© {{ 'now' | date: '%Y' }} data/diary — written between dataset ingestions.</span>
       <span>Not affiliated with Adobe. Just nerds with opinions.</span>
-    </div>
-    <div class="marquee-bar" aria-hidden="true">
-      <div class="marquee-track">
-        <span>data view &gt; report suite</span><span class="sep">•</span>
-        <span>schemas are vibes</span><span class="sep">•</span>
-        <span>identity ≠ identifier</span><span class="sep">•</span>
-        <span>derived fields slap</span><span class="sep">•</span>
-        <span>the profile is a graph, not a row</span><span class="sep">•</span>
-        <span>data view &gt; report suite</span><span class="sep">•</span>
-        <span>schemas are vibes</span><span class="sep">•</span>
-        <span>identity ≠ identifier</span><span class="sep">•</span>
-        <span>derived fields slap</span><span class="sep">•</span>
-        <span>the profile is a graph, not a row</span><span class="sep">•</span>
-      </div>
     </div>
   </footer>
 
