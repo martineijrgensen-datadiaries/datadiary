@@ -3,26 +3,48 @@ layout: default
 ---
 
 {% assign tag = page.tags | first %}
-{% assign tag_color = "sky" %}
-{% if tag == "CJA" %}{% assign tag_color = "coral" %}{% endif %}
-{% if tag == "AEP" %}{% assign tag_color = "lime" %}{% endif %}
+{% assign color = "gray" %}
+{% if tag == "CJA" %}{% assign color = "coral" %}{% endif %}
+{% if tag == "AEP" %}{% assign color = "teal" %}{% endif %}
 
-<a href="{{ '/' | relative_url }}" class="back-link">← All posts</a>
+<div class="post-wrap">
+  <a href="{{ '/posts/' | relative_url }}" class="back-link">← all posts</a>
 
-<article>
-  <header class="post-header">
-    <div class="post-eyebrow">
-      <span class="tag-pill {{ tag_color }}">{{ tag }}</span>
-      <span>{{ page.date | date: "%B %-d, %Y" }}</span>
-      {% if page.read_time %}<span>{{ page.read_time }} min read</span>{% endif %}
-    </div>
-    <h1 class="post-title">{{ page.title }}</h1>
-    {% if page.subtitle %}<p class="post-subtitle">{{ page.subtitle }}</p>{% endif %}
-  </header>
+  <div class="post-meta-row">
+    <span class="tag-pill {{ color }}">{{ tag }}</span>
+    <span>{{ page.date | date: "%b %-d, %Y" }}</span>
+    {% if page.read_time %}<span>· {{ page.read_time }} min</span>{% endif %}
+  </div>
+
+  <h1 class="post-title">{{ page.title }}</h1>
+  {% if page.subtitle %}<p class="post-subtitle">{{ page.subtitle }}</p>{% endif %}
+  {% if page.emoji %}<div class="post-emoji">{{ page.emoji }}</div>{% endif %}
 
   <hr class="post-divider" />
 
   <div class="post-content">
     {{ content }}
   </div>
-</article>
+
+  {% assign other_posts = site.posts | where_exp: "p", "p.url != page.url" | limit: 2 %}
+  {% if other_posts.size > 0 %}
+  <div class="keep-reading">
+    <div class="keep-reading-label">Keep reading</div>
+    <div class="keep-reading-list">
+      {% for p in other_posts %}
+        {% assign ptag = p.tags | first %}
+        {% assign pcolor = "gray" %}
+        {% if ptag == "CJA" %}{% assign pcolor = "coral" %}{% endif %}
+        {% if ptag == "AEP" %}{% assign pcolor = "teal" %}{% endif %}
+        <a href="{{ p.url | relative_url }}" class="keep-reading-item">
+          <span class="keep-reading-item-left">
+            {% if p.emoji %}<span class="keep-reading-item-emoji">{{ p.emoji }}</span>{% endif %}
+            <span>{{ p.title }}</span>
+          </span>
+          <span>-</span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+</div>

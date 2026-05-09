@@ -11,45 +11,42 @@
 </head>
 <body>
 
-  <!-- Marquee ticker -->
-  <div class="marquee-bar" aria-hidden="true">
-    <div class="marquee-track">
-      <span>DataDiary</span><span class="sep">///</span>
-      <span>Customer Journey Analytics</span><span class="sep">///</span>
-      <span>Adobe Experience Platform</span><span class="sep">///</span>
-      <span>Field Notes</span><span class="sep">///</span>
-      <span>Real-time CDP</span><span class="sep">///</span>
-      <span>Data Engineering</span><span class="sep">///</span>
-      <span>DataDiary</span><span class="sep">///</span>
-      <span>Customer Journey Analytics</span><span class="sep">///</span>
-      <span>Adobe Experience Platform</span><span class="sep">///</span>
-      <span>Field Notes</span><span class="sep">///</span>
-      <span>Real-time CDP</span><span class="sep">///</span>
-      <span>Data Engineering</span><span class="sep">///</span>
-    </div>
-  </div>
-
-  <!-- Header -->
   <header class="site-header">
     <a href="{{ '/' | relative_url }}" class="site-logo">
-      data<span class="dot">.</span>diary
+      <span class="logo-icon"></span>
+      data/diary
     </a>
     <nav class="site-nav">
-      <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Posts</a>
-      <a href="{{ '/about/' | relative_url }}" {% if page.url contains 'about' %}class="active"{% endif %}>About</a>
+      <a href="{{ '/' | relative_url }}" {% if page.url == '/' or page.url contains 'posts' %}class="active"{% endif %}>home</a>
+      <a href="{{ '/posts/' | relative_url }}" {% if page.url contains 'posts' %}class="active"{% endif %}>posts</a>
+      <a href="{{ '/about/' | relative_url }}" {% if page.url contains 'about' %}class="active"{% endif %}>about</a>
+      <a href="#" class="nav-signin">sign in</a>
     </nav>
   </header>
 
-  <!-- Main content -->
   <main class="site-main">
     {{ content }}
   </main>
 
-  <!-- Footer -->
-  <footer class="site-footer">
-    <a href="{{ '/' | relative_url }}" class="footer-logo">data<span class="dot">.</span>diary</a>
-    <span>Field notes from the data trenches</span>
-    <span>{{ 'now' | date: '%Y' }}</span>
+  <footer>
+    <div class="site-footer-inner">
+      <span>© {{ 'now' | date: '%Y' }} data/diary — written between dataset ingestions.</span>
+      <span>Not affiliated with Adobe. Just nerds with opinions.</span>
+    </div>
+    <div class="marquee-bar" aria-hidden="true">
+      <div class="marquee-track">
+        <span>data view &gt; report suite</span><span class="sep">•</span>
+        <span>schemas are vibes</span><span class="sep">•</span>
+        <span>identity ≠ identifier</span><span class="sep">•</span>
+        <span>derived fields slap</span><span class="sep">•</span>
+        <span>the profile is a graph, not a row</span><span class="sep">•</span>
+        <span>data view &gt; report suite</span><span class="sep">•</span>
+        <span>schemas are vibes</span><span class="sep">•</span>
+        <span>identity ≠ identifier</span><span class="sep">•</span>
+        <span>derived fields slap</span><span class="sep">•</span>
+        <span>the profile is a graph, not a row</span><span class="sep">•</span>
+      </div>
+    </div>
   </footer>
 
 </body>

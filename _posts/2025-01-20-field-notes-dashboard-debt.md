@@ -4,6 +4,7 @@ title: "Field Notes: Dashboard Debt"
 subtitle: "Every dashboard you build is a promise. Most of them expire before anyone notices."
 tags: [Field Notes]
 read_time: 4
+emoji: "🗂️"
 ---
 
 We talk about technical debt in code. We don't talk about it enough in dashboards.
