@@ -3,9 +3,10 @@ layout: default
 ---
 
 {% assign tag = page.tags | first %}
-{% assign color = "gray" %}
+{% assign color = "none" %}
 {% if tag == "CJA" %}{% assign color = "coral" %}{% endif %}
-{% if tag == "AEP" %}{% assign color = "teal" %}{% endif %}
+{% if tag == "AEP" %}{% assign color = "lime" %}{% endif %}
+{% if tag == "Field Notes" %}{% assign color = "sky" %}{% endif %}
 
 <div class="post-wrap">
   <a href="{{ '/posts/' | relative_url }}" class="back-link">← all posts</a>
@@ -30,21 +31,15 @@ layout: default
   {% if other_posts.size > 0 %}
   <div class="keep-reading">
     <div class="keep-reading-label">Keep reading</div>
-    <div class="keep-reading-list">
-      {% for p in other_posts %}
-        {% assign ptag = p.tags | first %}
-        {% assign pcolor = "gray" %}
-        {% if ptag == "CJA" %}{% assign pcolor = "coral" %}{% endif %}
-        {% if ptag == "AEP" %}{% assign pcolor = "teal" %}{% endif %}
-        <a href="{{ p.url | relative_url }}" class="keep-reading-item">
-          <span class="keep-reading-item-left">
-            {% if p.emoji %}<span class="keep-reading-item-emoji">{{ p.emoji }}</span>{% endif %}
-            <span>{{ p.title }}</span>
-          </span>
-          <span>-</span>
-        </a>
-      {% endfor %}
-    </div>
+    {% for p in other_posts %}
+      <a href="{{ p.url | relative_url }}" class="keep-reading-item">
+        <span class="keep-reading-item-left">
+          {% if p.emoji %}<span>{{ p.emoji }}</span>{% endif %}
+          <span>{{ p.title }}</span>
+        </span>
+        <span>-</span>
+      </a>
+    {% endfor %}
   </div>
   {% endif %}
 </div>
