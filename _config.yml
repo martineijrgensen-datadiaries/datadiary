@@ -1,8 +1,8 @@
 title: DataDiary
 description: Field notes from the data trenches — CJA, AEP, and beyond.
 author: martineijrgensen
-url: "https://martineijrgensen-datadiaries.github.io"
-baseurl: "/datadiary"
+url: "https://datadiary.dk"
+baseurl: ""
 
 # Build
 markdown: kramdown
