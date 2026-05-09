@@ -1,0 +1,58 @@
+---
+layout: default
+title: Posts
+---
+
+<p class="archive-eyebrow">The Archive</p>
+<div class="archive-title-row">
+  <h1 class="archive-title">All the posts.</h1>
+  <span class="archive-count">{{ site.posts | size }} of {{ site.posts | size }}</span>
+</div>
+
+<div class="tag-filter" role="group">
+  <button class="tag-btn active" data-tag="all">All</button>
+  <button class="tag-btn" data-tag="CJA">CJA</button>
+  <button class="tag-btn" data-tag="AEP">AEP</button>
+  <button class="tag-btn" data-tag="Field Notes">Field Notes</button>
+</div>
+
+<div class="post-grid" id="post-grid">
+  {% for post in site.posts %}
+    {% assign tag = post.tags | first %}
+    {% assign color = "gray" %}
+    {% if tag == "CJA" %}{% assign color = "coral" %}{% endif %}
+    {% if tag == "AEP" %}{% assign color = "teal" %}{% endif %}
+
+    <article class="post-card" data-tags="{{ post.tags | join: ',' }}">
+      <div class="card-accent {{ color }}"></div>
+      <div class="card-body">
+        <div class="card-top-row">
+          <span class="tag-pill {{ color }}">{{ tag }}</span>
+          {% if post.read_time %}<span class="card-read-time">{{ post.read_time }} min</span>{% endif %}
+        </div>
+        {% if post.emoji %}<div class="card-emoji">{{ post.emoji }}</div>{% endif %}
+        <h2 class="card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+        <p class="card-excerpt">{{ post.excerpt | strip_html | truncate: 120 }}</p>
+        <div class="card-footer">
+          <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+          <a href="{{ post.url | relative_url }}" class="card-read-link">read it →</a>
+        </div>
+      </div>
+    </article>
+  {% endfor %}
+</div>
+
+<script>
+  const btns  = document.querySelectorAll('.tag-btn');
+  const cards = document.querySelectorAll('.post-card');
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const tag = btn.dataset.tag;
+      cards.forEach(card => {
+        card.style.display = (tag === 'all' || card.dataset.tags.split(',').includes(tag)) ? '' : 'none';
+      });
+    });
+  });
+</script>

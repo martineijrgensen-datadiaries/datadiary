@@ -4,6 +4,7 @@ title: "CJA Derived Fields: Regex Replace in Practice"
 subtitle: "How to clean up messy URL parameters and campaign strings without touching the data layer."
 tags: [CJA]
 read_time: 6
+emoji: "⚙️"
 ---
 
 Derived fields in Customer Journey Analytics are one of those features that sound straightforward until you're staring at a regex replace rule that refuses to behave. This is a short field note on the patterns that actually work in production.

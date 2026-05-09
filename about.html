@@ -3,45 +3,31 @@ layout: default
 title: About
 ---
 
-<div class="about-grid">
-  <div class="about-content">
-    <h1>About this diary</h1>
-    <p>
-      DataDiary is a running log of things I learn, break, and figure out while working with Adobe's data stack — primarily Customer Journey Analytics and the Experience Platform.
-    </p>
-    <p>
-      Most posts start as personal notes. The kind of thing I wish existed when I was searching for answers at 11pm before a client call. If they're useful to someone else, even better.
-    </p>
-    <p>
-      I work with data for a living — schema design, data flows, reporting layers, the whole pipeline. This is where I write about the parts that don't make it into official docs.
-    </p>
+<p class="about-eyebrow">About the diary</p>
+<h1 class="about-title">Two analytics nerds,<br>one shared trauma:<br><span class="accent">implementing AEP.</span></h1>
+
+<div class="about-body">
+  <p><strong>data/diary</strong> is a small, opinionated blog about Adobe's analytics universe — specifically <strong>Customer Journey Analytics (CJA)</strong> and the <strong>Adobe Experience Platform (AEP)</strong>. We write the posts we wish existed when we first got handed a sandbox and a vague mandate to "modernise the data layer."</p>
+  <p>The vibe is simple: friendly, hands-on, and just quirky enough to keep you awake on the third dataset of the day.</p>
+  <p>We don't sell consulting. We don't have a course. We do have strong feelings about identity stitching.</p>
+</div>
+
+<div class="feature-boxes">
+  <div class="feature-box">
+    <div class="feature-box-emoji">👋</div>
+    <div class="feature-box-title">Plain language</div>
+    <div class="feature-box-desc">No 'leverage synergies'. Ever.</div>
   </div>
-
-  <div class="about-sidebar">
-    <div class="info-block">
-      <div class="info-block-label">Topics covered</div>
-      <div class="tag-pills">
-        <span class="tag-pill-item coral">CJA</span>
-        <span class="tag-pill-item lime">AEP</span>
-        <span class="tag-pill-item sky">Field Notes</span>
-      </div>
-    </div>
-
-    <div class="info-block">
-      <div class="info-block-label">Format</div>
-      <div class="info-block-value">Short-form field notes, walkthroughs, and the occasional deep-dive.</div>
-    </div>
-
-    <div class="info-block">
-      <div class="info-block-label">Stack</div>
-      <div class="info-block-value">Adobe CJA · AEP · Real-time CDP · Data Distiller</div>
-    </div>
-
-    <div class="info-block">
-      <div class="info-block-label">GitHub</div>
-      <div class="info-block-value">
-        <a href="https://github.com/martineijrgensen-datadiaries" style="color: var(--coral); text-decoration: underline;">martineijrgensen-datadiaries</a>
-      </div>
-    </div>
+  <div class="feature-box">
+    <div class="feature-box-emoji">✏️</div>
+    <div class="feature-box-title">Real examples</div>
+    <div class="feature-box-desc">Schemas, queries, screenshots from the trenches.</div>
+  </div>
+  <div class="feature-box">
+    <div class="feature-box-emoji">🌶️</div>
+    <div class="feature-box-title">Honest takes</div>
+    <div class="feature-box-desc">Including when AEP is overkill.</div>
   </div>
 </div>
+
+<a href="{{ '/posts/' | relative_url }}" class="btn-outline">← read the posts</a>

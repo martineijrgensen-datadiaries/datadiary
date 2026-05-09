@@ -4,6 +4,7 @@ title: "AEP Schema Design: Getting Identity Map Right"
 subtitle: "The identity map field is deceptively simple. Here's what trips people up in real implementations."
 tags: [AEP]
 read_time: 8
+emoji: "🗺️"
 ---
 
 The identity map in Adobe Experience Platform is one of those things you configure once, get slightly wrong, and then wonder for months why your profile merge rates are lower than expected. This is what I've learned from fixing it in production.
