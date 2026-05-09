@@ -1,0 +1,64 @@
+---
+layout: default
+title: Posts
+---
+
+<section class="hero">
+  <p class="hero-eyebrow">// field notes from the data trenches</p>
+  <h1 class="hero-title">data<em>.</em>diary</h1>
+  <p class="hero-desc">Practical notes on Customer Journey Analytics, Adobe Experience Platform, and everything in between.</p>
+</section>
+
+<!-- Tag filter -->
+<div class="tag-filter" role="group" aria-label="Filter posts by tag">
+  <button class="tag-btn active" data-tag="all">All</button>
+  <button class="tag-btn" data-tag="CJA">CJA</button>
+  <button class="tag-btn" data-tag="AEP">AEP</button>
+  <button class="tag-btn" data-tag="Field Notes">Field Notes</button>
+</div>
+
+<!-- Post grid -->
+<div class="post-grid" id="post-grid">
+  {% for post in site.posts %}
+    {% assign tag = post.tags | first %}
+    {% assign tag_color = "sky" %}
+    {% if tag == "CJA" %}{% assign tag_color = "coral" %}{% endif %}
+    {% if tag == "AEP" %}{% assign tag_color = "lime" %}{% endif %}
+
+    <article class="zine-card tape-{{ tag_color }}" data-tags="{{ post.tags | join: ',' }}">
+      <div class="card-accent {{ tag_color }}"></div>
+      <div class="card-body">
+        <span class="card-tag {{ tag_color }}">{{ tag }}</span>
+        <h2 class="card-title">
+          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        </h2>
+        <p class="card-excerpt">{{ post.excerpt | strip_html | truncate: 140 }}</p>
+        <div class="card-meta">
+          <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+          <a href="{{ post.url | relative_url }}" class="card-read-link">Read →</a>
+        </div>
+      </div>
+    </article>
+  {% endfor %}
+</div>
+
+<script>
+  const btns = document.querySelectorAll('.tag-btn');
+  const cards = document.querySelectorAll('.zine-card');
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const tag = btn.dataset.tag;
+      cards.forEach(card => {
+        if (tag === 'all') {
+          card.style.display = '';
+        } else {
+          const tags = card.dataset.tags.split(',');
+          card.style.display = tags.includes(tag) ? '' : 'none';
+        }
+      });
+    });
+  });
+</script>
