@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% if page.title %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | truncate: 160 }}{% else %}{{ site.description }}{% endif %}" />
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}" />
+  {% feed_meta %}
+  {% seo %}
+</head>
+<body>
+
+  <!-- Marquee ticker -->
+  <div class="marquee-bar" aria-hidden="true">
+    <div class="marquee-track">
+      <span>DataDiary</span><span class="sep">///</span>
+      <span>Customer Journey Analytics</span><span class="sep">///</span>
+      <span>Adobe Experience Platform</span><span class="sep">///</span>
+      <span>Field Notes</span><span class="sep">///</span>
+      <span>Real-time CDP</span><span class="sep">///</span>
+      <span>Data Engineering</span><span class="sep">///</span>
+      <span>DataDiary</span><span class="sep">///</span>
+      <span>Customer Journey Analytics</span><span class="sep">///</span>
+      <span>Adobe Experience Platform</span><span class="sep">///</span>
+      <span>Field Notes</span><span class="sep">///</span>
+      <span>Real-time CDP</span><span class="sep">///</span>
+      <span>Data Engineering</span><span class="sep">///</span>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <a href="{{ '/' | relative_url }}" class="site-logo">
+      data<span class="dot">.</span>diary
+    </a>
+    <nav class="site-nav">
+      <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Posts</a>
+      <a href="{{ '/about/' | relative_url }}" {% if page.url contains 'about' %}class="active"{% endif %}>About</a>
+    </nav>
+  </header>
+
+  <!-- Main content -->
+  <main class="site-main">
+    {{ content }}
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <a href="{{ '/' | relative_url }}" class="footer-logo">data<span class="dot">.</span>diary</a>
+    <span>Field notes from the data trenches</span>
+    <span>{{ 'now' | date: '%Y' }}</span>
+  </footer>
+
+</body>
+</html>
