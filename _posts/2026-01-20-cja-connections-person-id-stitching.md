@@ -17,6 +17,8 @@ Instead:
 - Reporting is done based on this merged dataset (together with profile and lookup data)
 - Dataset origin no longer matters for analysis
 
+![Two datasets (Dataset A and Dataset B) being merged into one combined event dataset in CJA](/assets/images/connection.jpeg)
+
 ## Person ID merging across datasets
 
 If multiple datasets use a Person ID (even if the field names differ), CJA merges them into one Person ID column. This column is used to identify unique people. Then it builds sessions and attribution on top of it.
