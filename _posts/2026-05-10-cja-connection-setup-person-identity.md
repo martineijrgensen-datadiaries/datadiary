@@ -68,9 +68,13 @@ This is one of those decisions that looks simple in the UI, but has surprisingly
 
 **identityMap** is an alternative approach. Rather than a single flat field, identityMap is a structure (typically populated via the Web SDK) that holds multiple identifiers at once. Think of it as a container: one event might carry an ECID, a CRM ID after login, and potentially other identifiers, all stored together.
 
-One thing to be precise about: selecting identityMap in the Connection UI still requires you to pick a specific namespace from within it (like ECID or email). So you are still anchoring on one primary identifier, but drawn from within a richer structure that can carry multiple identities simultaneously. That richness becomes especially valuable when stitching enters the picture.
+One thing to be precise about: selecting identityMap in the Connection UI still requires you to pick a specific namespace from within it (like ECID or email). So you are still anchoring on one primary identifier, but drawn from within a richer structure that can carry multiple identities simultaneously.
 
-The mindset shift is this: selecting a single ID is like saying "a person only exists when this identifier exists." Using identityMap is like saying "I'll keep all the signals, and decide how to connect them."
+And the namespace you pick matters a lot. If you pick CRM ID as your namespace, you have the same problem as picking a single CRM ID field: anonymous events have no CRM ID, so they become "No Value." But if you pick ECID as the namespace, the cookie ID becomes the Person ID for any event where no authenticated ID is present. Anonymous visitor = still a person, just temporarily identified by their cookie.
+
+This is where identityMap combined with stitching becomes powerful. Before login, the ECID holds the person in place. After login, the CRM ID appears alongside it in the map. Stitching then sees that this ECID has been linked to a known customer, goes back in time, and re-keys all those earlier anonymous events to the real identity. No one falls through the cracks.
+
+The mindset shift is this: selecting a single CRM ID is like saying "a person only exists when they are logged in." Selecting identityMap with ECID means the cookie ID holds their place until we know who they really are.
 
 In a world where identity is messy, that flexibility tends to matter more than simplicity.
 
