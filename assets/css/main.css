@@ -375,7 +375,7 @@ a { color: inherit; }
 
 .post-content pre {
   background: var(--ink);
-  color: var(--cream);
+  color: #ffffff;
   border-radius: var(--radius-xl);
   border: 2px solid var(--ink);
   box-shadow: var(--shadow-zine-sm);
