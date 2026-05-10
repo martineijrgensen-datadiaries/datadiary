@@ -54,7 +54,7 @@ If your data layer produces page view hits with URL strings, you're translating 
 
 I've also seen hybrid versions. Adobe's ACDL being implemented and Page load events being sent together with all the curernt data and even custom events added to the same push. Not as seperate events. 
 
-I know event-driven tracking has existed for a long time. But it is not common everywhere or been prioritised. What I do see is that pushing clean events is much easier to analyse, to debug, to use across the Adobe products. There is less guessing and figuring out. 
+I know event-driven tracking has existed for a long time. But it is not common everywhere or been prioritised. What I see is that pushing clean events is much easier to analyse, to debug, to use across the Adobe products. There is less guessing and figuring out. 
 
 ## The AI argument
 
