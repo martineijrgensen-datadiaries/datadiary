@@ -53,5 +53,3 @@ Stitching exists to connect the dots when we see behavior before an identity is 
 So stitching is not automatic. It has to be enabled, and you need a clear, consistent schema and identity setup.
 
 ---
-
-*Tagged: #CJA #customerjourneyanalytics #adobe #datamodelling*
