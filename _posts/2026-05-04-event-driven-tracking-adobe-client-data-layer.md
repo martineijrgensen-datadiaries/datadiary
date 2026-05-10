@@ -2,7 +2,7 @@
 layout: post
 title: "From Pages to Events: Why Your Data Layer Needs to Think Like a User"
 subtitle: "What happens when your data layer thinks in pages but your platform speaks events."
-tags: [CJA, AEP]
+tags: [CJA, AEP, Field Notes]
 read_time: 5
 emoji: "⚡"
 ---
