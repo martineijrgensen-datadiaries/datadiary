@@ -1,21 +1,21 @@
 ---
 layout: post
 title: "CJA Derived Fields: Regex Replace in Practice"
-subtitle: "How to clean up messy URL parameters and campaign strings without touching the data layer."
+subtitle: "The derived field builder is actually great. The Java regex engine takes some getting used to."
 tags: [CJA]
 read_time: 6
 emoji: "⚙️"
 ---
 
-Derived fields in Customer Journey Analytics are one of those features that sound straightforward until you're staring at a regex replace rule that refuses to behave. This is a short field note on the patterns that actually work in production.
+Derived fields in CJA sound deceptively simple. Then you're twenty minutes into a regex replace rule that silently does nothing, and you start questioning your life choices. Here's what actually works in production, because the docs don't cover this part.
 
 ## The problem
 
-You've got a `page_url` dimension full of tracking parameters — UTMs, click IDs, session tokens — and marketing wants a clean `page_path` that strips everything after the `?`. Simple enough in SQL. In CJA's derived field builder, slightly less obvious.
+You've got a `page_url` dimension stuffed with UTMs, click IDs, and session tokens. Marketing wants a clean `page_path` with none of that. In SQL it's one line. In CJA's derived field builder it's a bit more of an adventure.
 
 ## The regex replace approach
 
-The function you want is **Regex Replace**. The gotcha is that CJA's regex engine is Java-based, so some shortcuts you're used to from JavaScript or Python won't behave the same way.
+The function you want is **Regex Replace**. The thing nobody mentions upfront: CJA's regex engine is Java-based. If you're coming from JavaScript or Python, some of your shortcuts won't behave the same way, and the error messages won't help much.
 
 To strip query strings:
 
@@ -24,39 +24,39 @@ Pattern:  \?.*$
 Replace:  (leave empty)
 ```
 
-This matches the `?` character and everything that follows, then replaces it with nothing. Works reliably for stripping UTM parameters.
+Matches the `?` and everything after it, replaces with nothing. Reliable for UTM cleanup every time.
 
 ## Capturing groups
 
-Where it gets interesting is when you want to *extract* something from the middle of a string rather than just strip a suffix. Say you want the first path segment from `/products/shoes/red`:
+Where it gets interesting is when you want to pull something out of the middle of a string instead of just chopping off a suffix. Say you want the first path segment from `/products/shoes/red`:
 
 ```
 Pattern:  ^\/([^\/]+).*$
 Replace:  $1
 ```
 
-The `$1` backreference returns just the first captured group — in this case `products`. CJA supports `$1` through `$9` for group references.
+`$1` is a backreference to the first captured group, which gives you `products`. CJA supports `$1` through `$9`.
 
 ## Case-insensitive matching
 
-CJA's regex replace doesn't have a flag toggle in the UI. To match case-insensitively, use the inline flag at the start of your pattern.:
+There's no flag toggle in the UI for this one. Instead, drop an inline flag at the start of your pattern:
 
 ```
 (?i)campaign
 ```
 
-This matches `Campaign`, `CAMPAIGN`, `campaign`, etc.
+Matches `Campaign`, `CAMPAIGN`, `campaign`, all of it.
 
 ## Chaining derived fields
 
-One derived field can reference another. This is useful when you want to build up a clean value in stages — first strip the query string, then extract the path segment, then recode known values with a lookup table. Each step is its own derived field, and they compose cleanly.
+One derived field can reference another, and this is genuinely useful. Strip the query string in field one, extract the path segment in field two, recode known values with a lookup table in field three. Each step is its own field and they compose cleanly.
 
-The build order matters: Jekyll compiles them top-to-bottom in the field list, so make sure a field is defined before anything that references it.
+Build order matters though: CJA evaluates them top-to-bottom in the field list, so a field has to be defined before anything else can reference it.
 
 ## What doesn't work
 
-- Lookaheads (`(?=...)`) — not supported
-- Named capture groups (`(?<name>...)`) — use positional `$1` instead
-- The `\s+` shorthand in character classes inside replace strings — spell it out as a space or use `[ \t]`
+- Lookaheads (`(?=...)`) -- not supported
+- Named capture groups (`(?<name>...)`) -- use positional `$1` instead
+- The `\s+` shorthand inside replace strings -- spell out a space or use `[ \t]`
 
-These limitations catch most people coming from a Python or JS regex background. Once you know them, the derived field builder is actually quite capable for the 80% of use cases that don't need lookaheads.
+These catch almost everyone coming from a Python or JS background. Once you know the limits, the builder handles the 80% of cases that don't need lookaheads just fine.
