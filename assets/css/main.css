@@ -804,3 +804,179 @@ a { color: inherit; }
   object-fit: contain;
   margin-bottom: 2rem;
 }
+
+/* ── Mode picker popup ───────────────────────── */
+.mode-overlay {
+  position: fixed;
+  inset: 0;
+  background: oklch(18% .04 270 / .65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 1.5rem;
+  backdrop-filter: blur(3px);
+}
+
+.mode-popup {
+  position: relative;
+  background: var(--cream);
+  border: 3px solid var(--ink);
+  border-radius: var(--radius-xl);
+  box-shadow: 12px 12px 0 0 var(--ink);
+  padding: 2.75rem 2rem 1.75rem;
+  max-width: 520px;
+  width: 100%;
+  text-align: center;
+}
+
+.mode-popup-tape {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 110px;
+  height: 26px;
+  background: #c4e951b3;
+  border: 1px solid oklch(18% .04 270 / .2);
+}
+
+.mode-popup-eyebrow {
+  font-family: var(--font-mono);
+  font-size: .65rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--coral);
+  font-weight: 700;
+  margin-bottom: .75rem;
+}
+
+.mode-popup-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -.04em;
+  margin-bottom: .6rem;
+}
+
+.mode-popup-sub {
+  font-size: .875rem;
+  color: var(--muted-fg);
+  margin-bottom: 2rem;
+}
+
+.mode-choices {
+  display: flex;
+  align-items: stretch;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+@media (max-width: 460px) {
+  .mode-choices { flex-direction: column; }
+  .mode-or { align-self: center; }
+}
+
+.mode-choice {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .4rem;
+  padding: 1.25rem 1rem;
+  border-radius: var(--radius-xl);
+  border: 2px solid var(--ink);
+  cursor: pointer;
+  transition: transform .12s, box-shadow .12s;
+  text-align: center;
+  box-shadow: var(--shadow-zine-sm);
+}
+.mode-choice:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-zine);
+}
+
+.mode-choice-real  { background: var(--coral); color: var(--cream); }
+.mode-choice-boring { background: #e6e6e6; color: #444; }
+
+.mode-choice-emoji { font-size: 2rem; line-height: 1; }
+.mode-choice-name  {
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+}
+.mode-choice-desc {
+  font-size: .72rem;
+  opacity: .8;
+  line-height: 1.45;
+}
+
+.mode-or {
+  font-family: var(--font-mono);
+  font-size: .8rem;
+  color: var(--muted-fg);
+  font-weight: 600;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.mode-popup-note {
+  font-family: var(--font-mono);
+  font-size: .62rem;
+  color: var(--muted-fg);
+  letter-spacing: .02em;
+}
+
+/* ── Mode toggle pill (persistent, bottom-right) ─ */
+.mode-toggle-btn {
+  position: fixed;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  z-index: 9000;
+  background: var(--ink);
+  color: var(--cream);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-full);
+  padding: .4rem 1rem;
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--shadow-zine-sm);
+  transition: transform .1s, box-shadow .1s;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+.mode-toggle-btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: var(--shadow-zine);
+}
+
+/* ── Boring mode overrides ───────────────────── */
+html.boring-mode {
+  --cream:       #f2f2f2;
+  --ink:         #2a2a2a;
+  --coral:       #888888;
+  --lime:        #c8c8c8;
+  --sky:         #aaaaaa;
+  --card:        #fafafa;
+  --muted-fg:    #666666;
+  --border:      rgba(0,0,0,.15);
+  --shadow-zine:    4px 4px 0 0 #2a2a2a;
+  --shadow-zine-sm: 2px 2px 0 0 #2a2a2a;
+  --font-display: 'Times New Roman', Georgia, serif;
+  --font-body:    Arial, Helvetica, sans-serif;
+  --font-mono:    'Courier New', Courier, monospace;
+}
+html.boring-mode img { filter: grayscale(100%); }
+html.boring-mode .mood-card,
+html.boring-mode .mood-card-back { transform: rotate(0deg); }
+html.boring-mode .datadiaryimage { display: none; }
+html.boring-mode .card-tape,
+html.boring-mode .mood-card-tape { background: #d4d4d4; border-color: rgba(0,0,0,.1); }
+html.boring-mode .mode-choice-real { background: #d0d0d0; color: #333; }
+html.boring-mode .mode-toggle-btn { background: #555; border-color: #555; }
