@@ -52,7 +52,7 @@ The first time it really clicked for me, it wasn't because of documentation. It 
 
 Instead of forcing everything into a single field, you're preserving the full identity context.
 
-Now, it's important to be precise here. Selecting identityMap doesn't magically define how people are counted in CJA: that still depends on your Person ID choice. But what it does do is give CJA access to more identity signals on each event. And that becomes especially valuable when stitching enters the picture.
+Now, it's important to be precise here. Selecting identityMap doesn't magically define how people are counted in CJA: that still depends on your Person ID choice. When you select identityMap in the Connection UI, you also have to pick a specific namespace from it (like ECID, email, or a custom ID). So you are still anchoring on one primary identifier, just drawn from within the map rather than a flat schema field. What identityMap does do is give CJA access to more identity signals on each event, because the map can carry multiple namespaces simultaneously. And that becomes especially valuable when stitching enters the picture.
 
 Technically, stitching can work without identityMap. But in practice, identityMap makes it more robust. Because multiple identifiers can coexist on the same event, the relationship between them becomes clearer, and CJA has a stronger foundation for connecting behavior over time.
 
@@ -130,7 +130,7 @@ CJA offers two stitching approaches, and choosing between them, or choosing not 
 
 ### Field-Based Stitching
 
-Field-based stitching is available with CJA Select. This method uses a persistent ID (like a CRM ID or login) and a transient ID (like an ECID) within the same event dataset. CJA uses a lookback window to retroactively assign the persistent ID to previously anonymous events. The result: pre-login sessions are linked to the authenticated customer, and the journey is reconstructed end-to-end.
+Field-based stitching is available with CJA Select. This method uses a persistent ID (like an ECID or cookie ID, always present even for anonymous visitors) and a transient ID (like a CRM ID or customer login ID, only present when authenticated) within the same event dataset. CJA uses a lookback window to retroactively assign the transient ID to previously anonymous events. The result: pre-login sessions are linked to the authenticated customer, and the journey is reconstructed end-to-end.
 
 ### Graph-Based Stitching
 
