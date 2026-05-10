@@ -7,41 +7,48 @@ read_time: 6
 emoji: "🔗"
 ---
 
-I spent more time than I'd like to admit confused about what a CJA Connection actually does to your datasets. Specifically: can you report on unique people across multiple data sources before you've enabled stitching?
+How does Customer Journey Analytics connection setup work? And can you already report on unique people across datasets before stitching ever comes into play?
 
-Turns out yes. But it depends entirely on how your Person IDs are set up, and nobody warned me about that upfront.
+When you create a Connection with different datasets, CJA does not keep those datasets separate.
 
-## What a Connection does to your datasets
+Instead:
 
-When I add multiple event datasets to a CJA Connection, they don't stay separate. CJA merges all included event datasets into one logical event dataset for reporting purposes, combined with any profile and lookup data I've added. Once I'm inside a Data View, the dataset origin is essentially invisible. Everything gets queried as one unified event stream.
+- All included event datasets are merged into one logical event dataset
+- Reporting is done based on this merged dataset (together with profile and lookup data)
+- Dataset origin no longer matters for analysis
 
-That matters because it means I can't do dataset-level segmentation at the Connection layer. If I want to compare behaviour across data sources, I do that with dimensions, filters, or calculated metrics inside my Data View. Not by querying datasets independently. I tried that mentally for a while and it doesn't exist.
+## Person ID merging across datasets
 
-## The Person ID thing that surprised me
+If multiple datasets use a Person ID (even if the field names differ), CJA merges them into one Person ID column. This column is used to identify unique people. Then it builds sessions and attribution on top of it.
 
-Here's the bit that genuinely surprised me: CJA doesn't require all datasets to use the same field *name* for Person ID. It just requires that each dataset has a Person ID field mapped in the Connection setup. Once mapped, CJA merges them into a single unified Person ID column used across the entire connection.
+This means you can already report on unique people across datasets and answer some business questions from this. No stitching required yet, as long as the Person ID is present and consistent — which is not always the case.
 
-So if Dataset A uses `email_hash` and Dataset B uses `crm_id`, but both contain the same underlying identifier values for my users, CJA can report on unique people across both datasets without any additional stitching. The Person ID values just need to be consistent (same format, same population) even if the field names are different.
+## The gap: when Person ID is missing
 
-Sessions, attribution, and flow analysis all build on top of this unified identifier. Which is quite elegant, really.
+Now we can see unique people and how they interact across datasets. But whenever we don't have a Person ID, we don't know who they are. A user might visit the website without being logged in for some time. Those sessions are not identified with a unique Person ID.
 
-## When stitching actually becomes necessary
+## When stitching becomes relevant
 
-Stitching is not about multi-dataset joins. I had that wrong for a while. It's specifically about anonymous-to-known resolution. I need it when:
+Stitching becomes relevant when identity is incomplete, for example:
 
-- **Anonymous visits precede login.** A user arrives as an ECID, browses, then logs in. Without stitching, their pre-login events are counted as a completely separate person. Spooky.
-- **Datasets lack a shared Person ID across all events.** If some events only have a cookie ID and others only have an authenticated ID, there's no common value to join on and the unified column can't help me.
-- **I need cross-channel analytics that spans anonymous and known behaviour.** Pre-login web behaviour stitched to CRM data, for example.
+- Anonymous visits (cookie / ECID only)
+- Login happens later in the session
+- Different datasets don't share the same Person ID on all events
 
-When stitching is enabled, CJA generates a stitched version of my event dataset with a new stitched ID column. Anonymous events get re-keyed to the known Person ID after login is observed, working both forward and backward in time depending on my stitching configuration. Time travel, basically.
+In those cases:
 
-One thing worth knowing: stitching isn't on by default. It needs deliberate enablement and a consistent schema setup. From 2026, it can be enabled directly through the Connection UI instead of requiring a support request. Small thing, but I'm genuinely happy about it.
+- CJA cannot connect anonymous and known behavior by default, so cross-channel analytics becomes difficult
+- People counts and journeys become fragmented
 
-## The mental model that finally made it click for me
+Stitching exists to connect the dots when we see behavior before an identity is known — not to enable basic reporting. Depending on your CJA license, you can use either Field Based Stitching or Graph Based Stitching.
 
-I now think of a CJA Connection as a join operation that runs once at ingestion time and produces a single flat event table. The Person ID column in that table is the key. If I can populate it consistently across my datasets, I get unified person-level reporting. If I can't (because some events are anonymous) stitching is the mechanism that fills in the gaps.
+## What happens when stitching is enabled
 
-Get the Person ID right at the Connection layer and most of the downstream analysis just works. Stitching is for when the anonymous-to-known problem is genuinely present in the data. Not before.
+- You get a stitched version of your event dataset added to your connection
+- A new stitched ID column is generated in that dataset
+- Anonymous events can be re-keyed to a known person after login
+
+So stitching is not automatic. It has to be enabled, and you need a clear, consistent schema and identity setup.
 
 ---
 
