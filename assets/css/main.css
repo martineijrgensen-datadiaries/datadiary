@@ -795,3 +795,11 @@ a { color: inherit; }
   .post-grid   { grid-template-columns: 1fr; }
   .archive-title-row { flex-direction: column; gap: .25rem; }
 }
+
+.datadiaryimage {
+  display: block;
+  width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  margin-bottom: 2rem;
+}
