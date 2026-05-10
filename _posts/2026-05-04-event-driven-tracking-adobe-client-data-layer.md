@@ -21,13 +21,8 @@ For a simple funnel report, fine. For anything downstream (personalization, Jour
 
 ## The Adobe Client Data Layer approach
 
-Adobe Client Data Layer (`window.adobeDataLayer`) gives us a structured, event-first way to push signals from our frontend into the pipeline.
+Adobe Client Data Layer (`window.adobeDataLayer`) gives us a structured, event-first way to push signals from our website into the AEP.
 
-<br>
-<img class="datadiaryimage" src="{{ "/eventdriven.png" | relative_url }}" alt="EvenDriven">
-
-
-<br>
  In other words, instead of inferring intent from URL changes or DOM state after the fact, we can push an explicit event at the moment something meaningful happens:
 
 ```js
@@ -42,8 +37,14 @@ window.adobeDataLayer.push({
 })
 ```
 
-So we're not capturing where the user is but what they did and what they chose. The step name, the option selected, the completion state: all explicit, all structured, no URL parsing required.
+So we're not capturing where the user is but what they did and what they chose. The step name, the option selected, the completion state: all explicit, all structured, no URL parsing required. I think you can visualise it this way:
 
+<br>
+<img class="datadiaryimage" src="{{ "/eventdriven.jpeg" | relative_url }}" alt="EvenDriven">
+
+<br>
+
+So in the event-driven example, we are not dependent on the page view to track every other event. Page view is for page details. The current state. While the events are relevant for the actions that are taken. Containing relevant attributes about those actions. Just like the checkout:step:complete event with the step name, number, type and selected option. 
 
 ## Why this matters for the Adobe stack?
 
@@ -51,19 +52,23 @@ My take is: CJA, AEP, and Journey Optimizer are all built around events. Not pag
 
 If your data layer produces page view hits with URL strings, you're translating that signal downstream the whole way. Parsing URLs, inferring intent, adding fragile logic to turn location data into action data. That's where errors pile up and where analysis gets soft. 
 
-I've also seen hybrid versions. Adobe's ACDL being implemented and Page load events being sent together with all the curernt data and even custom events added to this push. 
+I've also seen hybrid versions. Adobe's ACDL being implemented and Page load events being sent together with all the curernt data and even custom events added to the same push. Not as seperate events. 
 
-I know this has existed for a long time. But it is not common everywhere or the implementation changes has not been prioritised. What I do see is that pushing clean events is much easier to analyse, to debug, to use across the Adobe products. There is less guessing and figuring out. 
+I know event-driven tracking has existed for a long time. But it is not common everywhere or been prioritised. What I do see is that pushing clean events is much easier to analyse, to debug, to use across the Adobe products. There is less guessing and figuring out. 
 
 ## The AI argument
 
-So I also wanted to add a note about AI. Because after Summit, I think it has become even more clear how integrated AI agents will be with the rest of the Adobe ecosystem. But as everyone keeps saying.. "AI models are only as good as the signals you feed them". A model trained on page view sequences can learn navigation patterns. A model trained on structured events (steps completed, options chosen, friction points encountered) can learn intent patterns.
+So I also wanted to add a note about AI. Because after Adobe Summit, I think it has become even more clear how integrated AI agents will be with the rest of the Adobe ecosystem. But as everyone keeps saying.. "AI models are only as good as the signals you feed them". A model trained on page view sequences can learn navigation patterns. A model trained on structured events (steps completed, options chosen, friction points encountered) can learn intent patterns.
 
 That's not a minor upgrade. Recommendations, propensity scoring, next-best-action: all of these depend on the quality and specificity of the underlying event stream. Event-driven tracking is the infrastructure layer that makes those capabilities real. 
 
 ## The practical shift
 
-Moving to event-driven tracking isn't a rip-and-replace. It's a layer you add on top of what you already have, or build into it. And I think we can make it simple: Start with the moments that matter most: checkout steps, form completions, key product interactions. Push structured events for those. See how much cleaner the data looks in CJA before you've written a single derived field.
+Moving to event-driven tracking can range from a medium-sized implementation to a much larger transformation project. Sometimes it’s simply about restructuring the existing data layer, introducing separate events, and then testing and validating the setup properly. 
+
+But in other cases, it goes much deeper. It may require revisiting business requirements entirely and redesigning the data layer from the ground up around an event-driven model. That approach takes more effort, but it also creates a much stronger data foundation. One that actually reflects the current business logic.
+
+I do think we can make it simple: Start with the moments that matter most: checkout steps, form completions, key product interactions. Push structured events for those. See how much cleaner the data looks in CJA before you've written a single derived field.
 
 So from what I’ve seen across different implementations, tracking setups can vary massively depending on internal skills, understanding, prioritization, and ownership. And honestly, it’s incredibly easy to underestimate how important this part of the data collection actually is.
 
