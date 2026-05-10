@@ -39,7 +39,7 @@ The `$1` backreference returns just the first captured group — in this case `p
 
 ## Case-insensitive matching
 
-CJA's regex replace doesn't have a flag toggle in the UI. To match case-insensitively, use the inline flag at the start of your pattern:
+CJA's regex replace doesn't have a flag toggle in the UI. To match case-insensitively, use the inline flag at the start of your pattern.:
 
 ```
 (?i)campaign

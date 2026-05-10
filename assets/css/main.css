@@ -451,6 +451,8 @@ a { color: inherit; }
 .keep-reading-item-left { display: flex; align-items: center; gap: .6rem; }
 
 /* ── about page ──────────────────────────────── */
+.about-wrap { max-width: 680px; margin: 0 auto; }
+
 .about-eyebrow {
   font-family: var(--font-mono);
   font-size: .7rem;
@@ -478,7 +480,7 @@ a { color: inherit; }
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
   margin-bottom: 2.5rem;
-  max-width: 580px;
+
 }
 @media (max-width: 560px) { .feature-boxes { grid-template-columns: 1fr; } }
 
@@ -569,7 +571,7 @@ a { color: inherit; }
 
 .hero-title {
   font-family: var(--font-display);
-  font-size: clamp(3rem, 8vw, 5.5rem);
+  font-size: clamp(3rem, 8vw, 4rem);
   font-weight: 900;
   line-height: .95;
   letter-spacing: -.04em;
@@ -647,6 +649,8 @@ a { color: inherit; }
   transform: rotate(3deg);
   max-width: 280px;
   width: 100%;
+  margin: 1.5rem;
+  margin-top: 2rem;
 }
 .mood-card-tape {
   position: absolute;
@@ -688,6 +692,21 @@ a { color: inherit; }
   border-radius: 50%;
   background: var(--coral);
   flex-shrink: 0;
+}
+
+/* mood card stack — back card desktop only */
+.mood-card-stack {
+  position: relative;
+  width: 280px;
+  isolation: isolate;
+}
+.mood-card-back {
+  transform: rotate(-3deg);
+  z-index: -1;
+}
+@media (max-width: 768px) {
+  .mood-card-back { display: none; }
+  .site-nav-home { display: none;}
 }
 
 /* coral marquee (home page only) */
@@ -744,17 +763,15 @@ a { color: inherit; }
 }
 .see-all-link:hover { color: var(--coral); }
 
-/* home post grid — featured first card spans 2 rows */
+/* home post grid — 3 equal columns */
 .home-posts-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
 }
-.home-posts-grid .post-card-featured { grid-row: span 2; }
 
 @media (max-width: 640px) {
   .home-posts-grid { grid-template-columns: 1fr; }
-  .home-posts-grid .post-card-featured { grid-row: span 1; }
   .hero-inner { padding: 3rem 1rem; }
   .latest-section { padding: 3rem 0; }
 }
