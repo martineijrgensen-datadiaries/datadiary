@@ -28,6 +28,11 @@ The two hypotheses I set up for a checkout-error scenario:
 - Checkout → Error → Call Centre → Order
 - Checkout → No Error → Call Centre → Order
 
+<br>
+<img class="datadiaryimage" src="{{ "/journey.jpeg" | relative_url }}" alt="EvenDriven">
+
+<br>
+
 Both paths end in a call centre order. The interesting question is whether the error is correlated with the channel shift: is the friction creating call centre volume that wouldn't otherwise exist?
 
 If the first sequence is significantly more common than the second, I have something worth showing the team. The conversion rate looks fine on paper. The call centre is quietly absorbing what the website broke.
@@ -49,5 +54,3 @@ Once I could see cross-channel sequences, "abandoned" stopped being a terminal v
 The funnel didn't end. I just wasn't watching the right thing.
 
 ---
-
-*Tagged: #customerjourneyanalytics #adobe #adobeanalytics #analytics*

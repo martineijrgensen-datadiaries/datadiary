@@ -59,5 +59,3 @@ Once I have click quality rate as a dimension, I stop asking "which element gets
 Bounce tells you where users left. Clicks tell you what they touched. Click quality rate tells you whether the interaction actually worked. I need all three before I'll call something a winner.
 
 ---
-
-*Tagged: #customerjourneyanalytics #adobeanalytics #adobe #webanalytics*
