@@ -544,6 +544,7 @@ a { color: inherit; }
   max-width: 1152px;
   margin: 0 auto;
   padding: 5rem 1.5rem;
+  padding-top: 2rem;
 }
 .hero-grid {
   display: grid;
