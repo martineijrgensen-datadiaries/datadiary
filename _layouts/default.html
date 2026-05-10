@@ -6,6 +6,13 @@
   <title>{% if page.title and page.title != "Home" %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
   <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | truncate: 160 }}{% else %}{{ site.description }}{% endif %}" />
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}" />
+  <script>
+    (function(){
+      if (localStorage.getItem('datadiary-mode') === 'boring') {
+        document.documentElement.classList.add('boring-mode');
+      }
+    })();
+  </script>
   <link rel="icon" type="image/x-icon" href="{{ '/favicon.ico' | relative_url }}" />
   <link rel="icon" type="image/png" sizes="32x32" href="{{ '/favicon-32x32.png' | relative_url }}" />
   <link rel="apple-touch-icon" sizes="180x180" href="{{ '/apple-touch-icon.png' | relative_url }}" />
@@ -55,6 +62,161 @@
       <span>Not affiliated with Adobe. Just an enthusiast who loves to share and learn from others.</span>
     </div>
   </footer>
+
+
+  <!-- ── Mode picker popup ── -->
+  <div id="mode-overlay" class="mode-overlay" style="display:none">
+    <div class="mode-popup">
+      <div class="mode-popup-tape"></div>
+      <p class="mode-popup-eyebrow">⚠ important question</p>
+      <h2 class="mode-popup-title">how do you take your data?</h2>
+      <p class="mode-popup-sub">you're new here. before we let you in, you need to decide.</p>
+      <div class="mode-choices">
+        <button class="mode-choice mode-choice-real" id="btn-real">
+          <span class="mode-choice-emoji">🔥</span>
+          <span class="mode-choice-name">real mode</span>
+        </button>
+        <span class="mode-or">or</span>
+        <button class="mode-choice mode-choice-boring" id="btn-boring">
+          <span class="mode-choice-emoji">📋</span>
+          <span class="mode-choice-name">boring mode</span>
+        </button>
+      </div>
+      <p class="mode-popup-note">you can switch anytime using the button in the corner. (we won't judge. much.)</p>
+    </div>
+  </div>
+
+  <!-- ── Persistent mode toggle pill ── -->
+  <button id="mode-toggle-btn" class="mode-toggle-btn" style="display:none"></button>
+
+  <script>
+  (function () {
+    var KEY = 'datadiary-mode';
+    var overlay   = document.getElementById('mode-overlay');
+    var toggleBtn = document.getElementById('mode-toggle-btn');
+
+    function getMode() { return localStorage.getItem(KEY); }
+    function saveMode(m) { localStorage.setItem(KEY, m); }
+
+    /* ── boring text swaps ── */
+    var swaps = [
+      ['.issue-badge',    null, 'RELEASE NOTES — Q1 FY2026'],
+      ['.hero-highlight-text', null, 'enterprise environments'],
+      ['.latest-title',   null, 'Recent documentation updates.'],
+      ['.latest-eyebrow', null, 'SECTION 01 — INDEX'],
+      ['.see-all-link',   null, 'view all documentation →'],
+    ];
+    var boringMoodQuotes = [
+      '“Validation error: xdm:namespace attribute missing from identityMap object.”',
+      '“DataSet row count exceeds expected cardinality threshold. Review ingestion.”',
+    ];
+    var boringMoodLabels  = ['Current status', 'Previous status'];
+    var boringMoodDebug   = [' error code: 400-BAD_FIELD', ' pending investigation'];
+    var boringFooterMarquee = [
+      '■ REPORT SUITE MIGRATION GUIDE',   '■ SCHEMA FIELD GROUP REFERENCE',
+      '■ IDENTITY NAMESPACE SPEC',         '■ DERIVED METRICS DOCUMENTATION',
+      '■ PROFILE MERGE RULES v3.0',        '■ BATCH INGESTION ERROR CODES',
+      '■ REPORT SUITE MIGRATION GUIDE',   '■ SCHEMA FIELD GROUP REFERENCE',
+      '■ IDENTITY NAMESPACE SPEC',         '■ DERIVED METRICS DOCUMENTATION',
+      '■ PROFILE MERGE RULES v3.0',        '■ BATCH INGESTION ERROR CODES',
+    ];
+    var boringCoralMarquee = [
+      '□ REPORTING_SUITE', '□ IDENTITY_GRAPH', '□ FIELD_GROUPS',
+      '□ PROFILE_RECORDS', '□ DATA_VIEWS',     '□ XDM_SCHEMAS',
+      '□ REPORTING_SUITE', '□ IDENTITY_GRAPH', '□ FIELD_GROUPS',
+      '□ PROFILE_RECORDS', '□ DATA_VIEWS',     '□ XDM_SCHEMAS',
+    ];
+
+    /* capture originals once */
+    var orig = { captured: false, swaps: [], moodQ: [], moodL: [], moodD: [], footerM: [], coralM: [] };
+
+    function capture() {
+      if (orig.captured) return;
+      swaps.forEach(function (s) {
+        var el = document.querySelector(s[0]);
+        s[1] = el ? el.textContent.trim() : '';
+      });
+      document.querySelectorAll('.mood-quote').forEach(function (el) { orig.moodQ.push(el.textContent.trim()); });
+      document.querySelectorAll('.mood-label').forEach(function (el) { orig.moodL.push(el.textContent.trim()); });
+      document.querySelectorAll('.mood-debug').forEach(function (el) {
+        var tn = Array.from(el.childNodes).find(function (n) { return n.nodeType === 3 && n.textContent.trim(); });
+        orig.moodD.push(tn ? tn.textContent : '');
+      });
+      document.querySelectorAll('.marquee-track span').forEach(function (el) { orig.footerM.push(el.textContent); });
+      document.querySelectorAll('.coral-marquee-track span').forEach(function (el) { orig.coralM.push(el.textContent); });
+      orig.captured = true;
+    }
+
+    function applyBoringTexts() {
+      capture();
+      swaps.forEach(function (s) { var el = document.querySelector(s[0]); if (el) el.textContent = s[2]; });
+      document.querySelectorAll('.mood-quote').forEach(function (el, i) { if (boringMoodQuotes[i]) el.textContent = boringMoodQuotes[i]; });
+      document.querySelectorAll('.mood-label').forEach(function (el, i) { if (boringMoodLabels[i]) el.textContent = boringMoodLabels[i]; });
+      document.querySelectorAll('.mood-debug').forEach(function (el, i) {
+        var tn = Array.from(el.childNodes).find(function (n) { return n.nodeType === 3 && n.textContent.trim(); });
+        if (tn && boringMoodDebug[i]) tn.textContent = boringMoodDebug[i];
+      });
+      document.querySelectorAll('.marquee-track span').forEach(function (el, i) { if (boringFooterMarquee[i]) el.textContent = boringFooterMarquee[i]; });
+      document.querySelectorAll('.coral-marquee-track span').forEach(function (el, i) { if (boringCoralMarquee[i]) el.textContent = boringCoralMarquee[i]; });
+    }
+
+    function restoreRealTexts() {
+      if (!orig.captured) return;
+      swaps.forEach(function (s) { var el = document.querySelector(s[0]); if (el && s[1]) el.textContent = s[1]; });
+      document.querySelectorAll('.mood-quote').forEach(function (el, i) { if (orig.moodQ[i] != null) el.textContent = orig.moodQ[i]; });
+      document.querySelectorAll('.mood-label').forEach(function (el, i) { if (orig.moodL[i] != null) el.textContent = orig.moodL[i]; });
+      document.querySelectorAll('.mood-debug').forEach(function (el, i) {
+        var tn = Array.from(el.childNodes).find(function (n) { return n.nodeType === 3 && n.textContent.trim(); });
+        if (tn && orig.moodD[i] != null) tn.textContent = orig.moodD[i];
+      });
+      document.querySelectorAll('.marquee-track span').forEach(function (el, i) { if (orig.footerM[i] != null) el.textContent = orig.footerM[i]; });
+      document.querySelectorAll('.coral-marquee-track span').forEach(function (el, i) { if (orig.coralM[i] != null) el.textContent = orig.coralM[i]; });
+    }
+
+    function updateToggleBtn(mode) {
+      if (!toggleBtn) return;
+      toggleBtn.textContent = mode === 'boring' ? '🔥 go real' : '📋 go boring';
+      toggleBtn.style.display = '';
+    }
+
+    function applyMode(mode, withTexts) {
+      if (mode === 'boring') {
+        document.documentElement.classList.add('boring-mode');
+        if (withTexts) applyBoringTexts();
+      } else {
+        document.documentElement.classList.remove('boring-mode');
+        if (withTexts) restoreRealTexts();
+      }
+      updateToggleBtn(mode);
+    }
+
+    /* toggle pill */
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', function () {
+        var next = (getMode() || 'real') === 'real' ? 'boring' : 'real';
+        saveMode(next);
+        applyMode(next, true);
+      });
+    }
+
+    var saved = getMode();
+    if (saved) {
+      /* returning visitor — mode already applied by early <head> script; just wire up texts + toggle */
+      if (saved === 'boring') applyBoringTexts();
+      updateToggleBtn(saved);
+      if (overlay) overlay.style.display = 'none';
+    } else {
+      /* first visit — show popup */
+      if (overlay) overlay.style.display = 'flex';
+      document.getElementById('btn-real').addEventListener('click', function () {
+        saveMode('real'); overlay.style.display = 'none'; applyMode('real', false);
+      });
+      document.getElementById('btn-boring').addEventListener('click', function () {
+        saveMode('boring'); overlay.style.display = 'none'; applyMode('boring', true);
+      });
+    }
+  })();
+  </script>
 
 </body>
 </html>
