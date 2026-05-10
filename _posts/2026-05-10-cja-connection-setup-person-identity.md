@@ -1,13 +1,13 @@
 ---
 layout: post
 title: "It starts with the Person: Why CJA Connection Setup Is Your Most Important Architecture Decision"
-subtitle: "In Customer Journey Analytics, every configuration choice in a Connection echoes through every report, every segment, and every business decision that follows. I tried diving into why, starting from the one thing that truly matters: the person."
+subtitle: "Every configuration choice in a CJA Connection echoes through every report, every segment, and every business decision that follows. I tried to map out why — starting from the one thing that truly matters: the person."
 tags: [CJA, AEP]
 read_time: 20
 emoji: "👤"
 ---
 
-## The Question Behind Every Analytics Project
+## The question behind every analytics project
 
 When working with Customer Journey Analytics, it is tempting to think of the Connection as a technical step in the setup. Something that needs to be configured correctly, but ultimately sits in the background while the real work happens in analysis and reporting.
 
@@ -19,177 +19,187 @@ At first glance, nothing was broken. The data was flowing, dashboards were popul
 
 At the center of the issue was a deceptively simple question: **who is the person in this dataset?**
 
-## Start Here: What Is a "Person" in CJA?
+---
 
-Defining what it means to be a person, as a unique individual, a nuanced and complex being. Sounds deep. And it is. In CJA, the ✨Person ID✨ is the anchor of everything. It is the field that tells CJA: "These events, these page views, these transactions all belong to the same human being."
+## What is a CJA Connection, actually?
 
-When you configure a Connection, you add datasets from the Adobe Experience Platform. For each dataset, you select one field as the Person ID. This might be an email address, a CRM ID or an Experience Cloud ID (ECID). That seems straightforward… until you realize the choice has direct effects on:
+Before we get into the interesting stuff, a quick grounding.
 
-- How sessions are constructed and how session metrics are counted
-- Whether cross-channel journeys can be assembled or remain siloed
-- Whether your segment definitions apply to real people or to anonymous identifiers
-- Whether your conversion rates reflect actual human behavior or are inflated by identity fragmentation
-- Whether attribution models credit the right touchpoints in a journey
-- and more…
+A CJA Connection is what links Adobe Experience Platform (AEP) to Customer Journey Analytics (CJA). You pick which datasets from AEP you want to analyse, configure a few key settings, and CJA starts pulling that data into a unified view you can query.
 
-A Connection combines your datasets into one view, where events are tied together using the Person ID.
+A Connection defines five things:
 
-Then we can apply stitching to our dataset to connect a persistent ID (often the cookie id) with the Person ID. This is relevant when we want to identify anonymous behavior.
+1. **Which datasets are included.** Event, profile, and lookup datasets. Not every dataset needs to be in every connection. That is something the business needs to define the use case for.
+2. **The Person ID of each dataset.** The field that tells CJA which events belong to the same person. This is the most important decision.
+3. **The dataset type and its role.** Event datasets provide the behavioral stream. Profile datasets enrich people with attributes. Lookup datasets add classification and context.
+4. **The backfill window.** How far back in history CJA ingests data — more on this later.
+5. **Whether stitching is enabled.** The mechanism that connects anonymous sessions to known customers. It does not happen automatically.
 
-## Specific ID or Identity Map?
-
-This is one of those decisions that looks simple in the UI, but has surprisingly big consequences.
-
-When you configure the Person ID in a CJA Connection, you're essentially choosing between two approaches: picking a single identifier and sticking to it, or allowing multiple identities to exist together.
-
-On paper, choosing one ID (like a CRM ID) feels like the cleanest option. One person, one identifier. Should be simple. But in practice, it quickly raises a question: what happens when that ID isn't there?
-
-Before login, after logout, on a new device… a lot of user activity happens without that one "perfect" identifier. And if you've told CJA to only recognize that one ID, then all of that behavior sits outside your definition of a person.
-
-This is where identityMap starts to make more sense.
-
-The first time it really clicked for me, it wasn't because of documentation. It was because I stopped thinking about "which ID is correct" and started thinking about "what do we actually know at this moment?". IdentityMap is essentially a structure (typically populated via the Web SDK) that allows you to send multiple identifiers with each event. You can think of it as a container holding everything you know about that user at that point in time: a device ID (ECID), maybe a CRM ID after login, and potentially other identifiers depending on your setup.
-
-Instead of forcing everything into a single field, you're preserving the full identity context.
-
-Now, it's important to be precise here. Selecting identityMap doesn't magically define how people are counted in CJA: that still depends on your Person ID choice. When you select identityMap in the Connection UI, you also have to pick a specific namespace from it (like ECID, email, or a custom ID). So you are still anchoring on one primary identifier, just drawn from within the map rather than a flat schema field. What identityMap does do is give CJA access to more identity signals on each event, because the map can carry multiple namespaces simultaneously. And that becomes especially valuable when stitching enters the picture.
-
-Technically, stitching can work without identityMap. But in practice, identityMap makes it more robust. Because multiple identifiers can coexist on the same event, the relationship between them becomes clearer, and CJA has a stronger foundation for connecting behavior over time.
-
-This matters in real-world setups, where identity is rarely clean. Sometimes the "main" Person ID isn't present. Sometimes another identifier appears first. Sometimes they overlap in messy ways. IdentityMap doesn't solve identity by itself, but it ensures that you don't lose information before you even begin resolving it.
-
-So in the end, the choice is less about configuration and more about mindset. Selecting a single ID is like saying: "a person only exists when this identifier exists." Using identityMap is more like saying: "I'll keep all the signals, and decide how to connect them."
-
-And in a world where identity is messy, that flexibility tends to matter more than simplicity.
+And then we can define more specifically the dimensions, metrics and other things in the data views: attribution, persistence, transformations, formatting etc. But I will not go through data views in this article.
 
 ---
 
-The impact of this choice between selecting an ID or using identity map becomes even more significant when you look at this together with stitching, because now we're not just deciding which identities we use, but also whether they are connected into one person over time.
+## What is a "person" in CJA?
 
-**No stitching:** If we have a connection without stitching, even if you use identityMap, CJA will not actively connect identities across events. Each event will simply use whatever ID is present at that moment. In practice, this means the same user can appear as multiple "people" within the same journey. For example, a person can appear anonymous before login (ECID) and as a known customer after login (CRM ID). This means that the continuity of the journey is broken. Funnels will look shorter, attribution will be skewed toward later touchpoints, and we lose visibility into what actually led up to a conversion.
+Defining what it means to be a person, as a unique individual, a nuanced and complex being. Sounds deep. And it is.
 
-**With stitching:** When you enable stitching, you allow CJA to connect identities across events and over time, but only where a relationship between those identities has been established (for example through co-occurrence). This is where identityMap unlocks its value, as it allows multiple identities (such as ECID, CRM ID, or call center IDs) to be captured together and linked more effectively.
+In CJA, the ✨Person ID✨ is the anchor of everything. It is the field that tells CJA: "These events, these page views, these transactions all belong to the same human being."
 
-## The Connection: Your Analytics Foundation
+When you add a dataset to a Connection, you select one field as the Person ID. This might be:
 
-A CJA Connection is a configured link between CJA and one or more datasets in AEP. I think of it as the pipeline through which AEP data flows into the CJA analytical engine. But it is also more than a pipeline: it is a definition. Because a connection defines:
+- A **CRM ID** (a unique customer number from your customer database, only present when someone is logged in)
+- An **ECID** (Experience Cloud ID, the cookie-based identifier Adobe assigns to every browser and device, present even for anonymous visitors)
+- An email address, a loyalty ID, or any other stable identifier
 
-1. **Which datasets are included.** You choose which AEP datasets (event, profile, or lookup) to bring into this analytical context. This is important to understand from a business perspective. Not every dataset needs to be in every connection. That is something the business needs to define the use case for.
-2. **The Person ID of each dataset.** This is where identity is anchored. The field you choose here determines how CJA stitches events into person-level journeys.
-3. **The dataset type and its role.** Event datasets provide the behavioral stream. Profile datasets enrich people with attributes. Lookup datasets add classification and context to events.
-4. **The timestamp field and data backfill window.** CJA ingests data within a defined window. The backfill configuration determines how much history is available for trend analysis, forecasting and cohort building.
-5. **Whether Stitching (Identity Resolution) is enabled.** Field-based or graph-based stitching allows CJA to connect anonymous sessions to authenticated persons. This does not happen automatically. You need to enable stitching in the connection UI.
+That seems straightforward… until you realize the choice has direct effects on:
 
-And then we can define more specifically the dimensions, metrics and other things in the data views. Attribution, persistence, transformations, formatting etc. But I will not go through data views in this article.
+- How sessions are constructed and how session metrics are counted
+- Whether cross-channel journeys can be assembled or remain siloed
+- Whether your conversion rates reflect actual human behavior or are inflated by identity fragmentation
+- Whether attribution models credit the right touchpoints in a journey
 
-## The Identity Problem: Why One Person Looks Like Many
+---
 
-Without deliberate configuration, a single real customer might appear as multiple "persons" in your data. Which is not only super frustrating, but it also devalues the decision framework.
+## One ID or identityMap?
 
-Consider this scenario:
+This is one of those decisions that looks simple in the UI, but has surprisingly big consequences.
 
-**Monday:** A customer visits your website. They are not logged in. Their web analytics event carries an ECID: a randomly generated device identifier.
+**Picking a single ID** (like a CRM ID) feels like the cleanest option. One person, one identifier. But in practice, a lot of user activity happens without that identifier present: before login, after logout, on a new device. If you've told CJA to only recognize that one ID, all of that behavior sits outside your definition of a person.
 
-**Wednesday:** they return and log in. A CRM ID is now associated.
+**identityMap** is an alternative approach. Rather than a single flat field, identityMap is a structure (typically populated via the Web SDK) that holds multiple identifiers at once. Think of it as a container: one event might carry an ECID, a CRM ID after login, and potentially other identifiers, all stored together.
 
-**Friday:** they call your support center. Now we have a phone number and a different internal customer ID.
+One thing to be precise about: selecting identityMap in the Connection UI still requires you to pick a specific namespace from within it (like ECID or email). So you are still anchoring on one primary identifier, but drawn from within a richer structure that can carry multiple identities simultaneously. That richness becomes especially valuable when stitching enters the picture.
 
-**Saturday:** they buy in-store. A loyalty card ID is captured at POS.
+The mindset shift is this: selecting a single ID is like saying "a person only exists when this identifier exists." Using identityMap is like saying "I'll keep all the signals, and decide how to connect them."
 
-These are four touchpoints reached by one human. But CJA might view these as four separate "persons" in your Connection. And this is not just a tiny inconvenience. It becomes a real issue when you have invested heavily in these tools like CJA and AEP (and others if you have more), expecting some return of investment.
+In a world where identity is messy, that flexibility tends to matter more than simplicity.
 
-If you selected CRM ID as person ID in this connection, with these datasets, then CJA will count one person based on the CRM ID. Without stitching enabled, we cannot link it to the other touchpoints. We would get a "No Value" for those events if we used a person ID dimension and an event metric in a freeform table. The row exists in the dataset with some other ID but the CRM ID (the selected person ID) was never populated for that record.
+---
 
-| Person ID | Events | Persons | Sessions | |
+## Why one real person can look like many
+
+Without deliberate configuration, a single customer can appear as multiple "persons" in your data. Which is not only super frustrating, but it also quietly breaks every analysis that follows.
+
+Consider a real journey:
+
+- **Monday:** A customer visits your website. They are not logged in. Their events carry an ECID, Adobe's anonymous device identifier.
+- **Wednesday:** They return and log in. A CRM ID is now associated with their events.
+- **Friday:** They call your support center. A different internal customer ID appears.
+- **Saturday:** They buy in-store. A loyalty card ID is captured at the point of sale.
+
+One human. Four touchpoints. And without the right configuration, CJA may treat these as four separate people.
+
+This is not just an inconvenience. It becomes a real business problem when you have invested heavily in tools like CJA and AEP and are expecting a return on that investment.
+
+| Dimension: Person ID | Events | Persons | Sessions | Notes |
 |---|---|---|---|---|
 | Total | 4 | 1 | 1 | |
 | CRM-4821 | 1 | 1 | 1 | Wednesday login |
-| (No Value) | 3 | 0 | 0 | Mon · Fri · Sat events |
+| (No Value) | 3 | — | — | Mon · Fri · Sat events |
 
-In this example, the "No Value" is actually a useful diagnostic signal in practice. Sometimes it is expected, when you combine certain dimensions with certain events. While other times, it can be used to validate if data is configured correctly. If you see a large proportion of your events sitting there, it tells you directly that your Person ID field is not being populated consistently across your datasets, which can be a sign of identity fragmentation.
+If CRM ID is selected as the Person ID, CJA counts one person correctly. But the three events where no CRM ID was present sit under "No Value" — disconnected from the known customer entirely.
 
-### THE BUSINESS COST OF IDENTITY FRAGMENTATION
+The "(No Value)" row is actually a useful diagnostic signal. If you see a large proportion of your events sitting there, your Person ID field is not being populated consistently. In the example above, it is expected. But in many real setups, it is a warning sign worth investigating.
 
-These are just a few examples. A bit generic, but still extremely relevant.
+### The business cost of identity fragmentation
 
-**CONVERSION RATES**
-Journeys that cross authentication events appear broken. Conversion is understated because the anonymous session and the authenticated purchase are counted as separate persons.
+**Conversion rates**
+Journeys that cross an authentication event appear broken. The anonymous session and the authenticated purchase are counted as separate persons, so conversion is understated.
 
-**ATTRIBUTION**
-The touchpoint that drove the decision (often an early anonymous visit) gets no credit. Your attribution model tells a story that's factually incorrect, leading to misallocated marketing budgets.
+**Attribution**
+The touchpoint that drove the decision (often an early anonymous visit) gets no credit. Your attribution model tells a factually incorrect story, which leads to misallocated marketing budgets.
 
-**SEGMENT ACCURACY**
-A segment defined as "customers who viewed product X and did not convert in 7 days" will be inflated because most of those "non-converters" actually did convert, just under a different ID.
+**Segment accuracy**
+A segment defined as "customers who viewed product X and did not convert in 7 days" will be inflated. Most of those apparent non-converters actually did convert, just under a different ID.
 
-**LTV CALCULATION**
-Lifetime value calculations that don't stitch across channels will severely undercount individual customer value, making the best customers look like average ones.
+**LTV calculation**
+Lifetime value calculations that do not connect across channels will severely undercount individual customer value, making the best customers look like average ones.
 
-## Stitching: The Configuration That Changes Everything
+---
 
-CJA offers two stitching approaches, and choosing between them, or choosing not to stitch at all, is one of the highest-impact decisions in a Connection setup. I strongly believe that stitching is not a reporting feature but a data quality investment. Because as a business, we can much better connect the journey and make better business decisions. I even dare to say that planning for stitching from day one as part of the implementation of or migration to CJA would be key to really get the value of the tool. Because introducing it retroactively makes historical data unreliable and may ruffle the current data trust in the organization.
+## Stitching: the configuration that changes everything
 
-### Field-Based Stitching
+Stitching is the mechanism that connects anonymous sessions to known customers over time. I strongly believe it is not a reporting feature but a data quality investment.
 
-Field-based stitching is available with CJA Select. This method uses a persistent ID (like an ECID or cookie ID, always present even for anonymous visitors) and a transient ID (like a CRM ID or customer login ID, only present when authenticated) within the same event dataset. CJA uses a lookback window to retroactively assign the transient ID to previously anonymous events. The result: pre-login sessions are linked to the authenticated customer, and the journey is reconstructed end-to-end.
+I even dare to say: planning for stitching from day one, as part of your CJA implementation, is key to getting real value from the tool. Introducing it retroactively makes historical data unreliable, and that tends to shake data trust across the whole organization.
 
-### Graph-Based Stitching
+CJA offers two stitching approaches.
 
-Graph-based stitching is only available with CJA Prime. Here the stitching goes further. It leverages the AEP Identity Graph, which may know, for example, that ECID-A, email-B, and loyalty-ID-C all belong to the same person based on matches across datasets and applies that cross-dataset identity resolution at query time. This is the most powerful form of identity resolution in the platform, and it enables analytics that span channels even when no single dataset carries all identifiers.
+### Field-based stitching (CJA Select)
 
-### Enabling Stitching
+Field-based stitching works within a single event dataset. It uses two identifiers:
 
-When you enable field-based stitching on a dataset, you might picture it as a single process that links anonymous behavior to known customers. In reality, stitching operates in two distinct phases, and understanding the difference between them is essential for interpreting your data correctly.
+- **Persistent ID:** Always present, even for anonymous visitors. Typically the ECID.
+- **Transient ID:** Only present when the user is authenticated. Typically a CRM ID or customer login ID.
+
+When a login happens and the transient ID appears, CJA looks back across all events that share the same persistent ID and retroactively assigns the transient ID to them. Anonymous behavior before login is now linked to the known customer.
+
+### Graph-based stitching (CJA Prime)
+
+Graph-based stitching goes further. It leverages the AEP Identity Graph, which may already know that ECID-A, email-B, and loyalty-ID-C all belong to the same person based on matches across datasets. This cross-dataset identity resolution is applied at query time. It is the most powerful form of identity resolution in the platform, and it enables analytics that span channels even when no single dataset carries all identifiers.
+
+### How stitching actually runs
+
+When you enable field-based stitching, it operates in two distinct phases, and understanding both is essential for reading your data correctly.
 
 **Phase 1: Live stitching**
-Runs in real time as events arrive. Stitches anonymous events on already known devices immediately. New, never-seen devices remain unstitched until replay.
+Runs in real time as events arrive. For devices that have already authenticated, CJA can immediately apply the known identity to new events. Brand new, never-seen devices remain unstitched until replay runs.
 
 **Phase 2: Replay stitching**
-Runs periodically (daily or weekly). Goes back in time and retroactively stitches events from devices that have since authenticated within the lookback window.
+Runs periodically (daily or weekly). CJA goes back in time and retroactively stitches events from devices that have since authenticated, up to the length of the lookback window.
 
-I think of live stitching as an immediate, best-effort picture. While replay stitching gives us the corrected, more complete picture. So the data improves over time as replays run, which is exactly why recent data should be treated as provisional.
+I think of live stitching as the immediate, best-effort picture. Replay stitching is the corrected, more complete picture. The data improves over time as replays run — which is exactly why recent data should be treated as provisional.
 
-### The Replay Window
+### The replay window
 
-CJA reprocesses events for all ECIDs that have since been linked to a Customer ID, and retroactively updates the stitched identity. The replay window defines how far back that reprocessing reaches.
+The replay window defines how far back replay stitching can reach.
 
-| | DAILY REPLAY (24H WINDOW) | WEEKLY REPLAY (7D WINDOW) |
+| | Daily replay (24h) | Weekly replay (7 days) |
 |---|---|---|
-| Speed | Fast (data updates daily) | Slower (data updates weekly) |
-| Stitching coverage | Less (must authenticate same day) | More (captures multi-day journeys) |
-| Data stability | Stable (numbers don't change much) | Changing (numbers shift after each replay) |
-| Journey length | Short journeys only | Longer journeys reconstructed |
-| Attribution impact | Early touchpoints often missed | Attribution is more complete and fair |
-| Typical risk | Checkout looks like first step | Reports are not final until replay completes |
+| How often data updates | Every day | Once a week |
+| Stitching coverage | Less — user must authenticate within the same day | More — captures multi-day journeys |
+| Data stability | Stable, numbers don't change much | Numbers shift after each replay |
+| Journey length captured | Short journeys | Longer journeys reconstructed |
+| Attribution accuracy | Early touchpoints often missed | Attribution is more complete and fair |
+| Main risk | Checkout looks like the first step | Reports are not final until replay completes |
 
-This means that the replay window has direct consequences for how we read our data.
+A practical example: a customer researches a product on Monday and logs in on Wednesday.
 
-A 24-hour window means that if a customer researches our product on Monday and logs in on Wednesday, the Monday session will never be stitched. It stays in "(No Value)."
+- With a **24-hour window**, the Monday session is never stitched. It stays in "(No Value)."
+- With a **7-day window**, the full arc is captured and Monday is connected to the conversion.
 
-A 7-day window captures that full arc and connects the research to the conversion.
+With a 7-day window, numbers you see today may look different in 7 days once replay has run. This is not a data quality problem. It is stitching working correctly. But it requires people to understand that recent data is provisional and that week-old data is more reliable than yesterday's.
 
-With a 7-day window, numbers we see today may be different in 7 days once the replay has run. This is not a data quality problem, it is stitching working correctly. But it requires people to understand that recent data is provisional, and that week-old data is more reliable than yesterday's.
+---
 
-## Three Connections, Three Definitions of a Person
+## Three connections, three definitions of a person
 
-Maybe this is mostly for my own sake, but in this section I want to dive into the impact of the connection setup based on three different scenarios. Because the definition of a "person" means something inside every report, every funnel, and every business decision that follows.
+Maybe this is mostly for my own sake, but this is where I want to make it concrete. Because the way you configure a connection defines what "a person" actually means inside every report, every funnel, and every business decision that follows.
 
-To make this concrete, let's use the same underlying data, three different configurations and observe exactly what CJA sees in each one.
+Same underlying data. Three different configurations. Three very different analytical realities.
 
-The dataset foundation is the same throughout: web behavioral data collected via Adobe's Web SDK (carrying an ECID for every visitor) and call center interaction data (carrying a customer ID when a caller is identified). Both datasets live in AEP, ready to be connected.
+**The data foundation throughout:**
+- Web behavioral data collected via Adobe's Web SDK (carrying an ECID for every visitor, anonymous or not)
+- Call center interaction data (carrying a Customer ID when the caller is identified)
 
-## Scenario A: Connection with No Stitching
+---
 
-The first connection is a common starting point. Two datasets, a sensible-looking Person ID choice, no stitching. It feels reasonable. The gaps only become visible when you look at what the data actually shows.
+### Scenario A: No stitching, CRM ID as Person ID
 
-**Connection settings:**
-- Dataset 1: Web data
-- Dataset 2: Call center data
-- Person ID: Customer ID (CRM ID, populated on login and authenticated calls)
-- Stitching: Not enabled
+The most common starting point. Two datasets, a sensible Person ID choice, no stitching. It feels reasonable. The gaps only become visible when you look at what the data actually shows.
 
-The Customer ID is a logical choice. It is a stable, unique identifier that appears in both datasets when a customer is known. The problem is not the ID itself, but what happens to all the events where the customer is not yet known.
+**Connection settings**
 
-**What CJA shows in a freeform table:**
+| Setting | Value |
+|---|---|
+| Dataset 1 | Web data |
+| Dataset 2 | Call center data |
+| Person ID | Customer ID (CRM ID — present on login and authenticated calls) |
+| Stitching | Not enabled |
+
+The Customer ID is a logical choice. It is stable and unique. The problem is not the ID itself, but what happens to all the events where the customer is not yet identified.
+
+**What CJA shows**
 
 | Customer ID | Events | People | Sessions |
 |---|---|---|---|
@@ -198,67 +208,70 @@ The Customer ID is a logical choice. It is a stable, unique identifier that appe
 | CRM-1187 | 3 | 1 | 1 |
 | CRM-2291 | 4 | 1 | 1 |
 | … | … | … | … |
-| (No Value) | 7,200 | 1,100 | 1,700 |
+| (No Value) | 7,200 | — | — |
 
-One person equals one Customer ID. That part works correctly. But notice the "(No Value)" row: 7,200 events. That is a huge part of all traffic, sitting in a bucket with no known customer ID. But a lot of activities.
+One person equals one Customer ID. That part works. But notice the "(No Value)" row: 7,200 events. That is a large portion of all traffic sitting in a bucket with no known Customer ID.
 
-This doesn't mean that we cannot use this connection at all. It means that we need to be aware of some limitations:
+**What you can and cannot see**
 
-**What you can and cannot see:**
+| | |
+|---|---|
+| ❌ | First visits and pre-login browsing |
+| ❌ | Full campaign traffic picture (most ad clicks land on anonymous sessions) |
+| ❌ | Product discovery and research before login |
+| ❌ | The actual entry into the funnel |
+| ✅ | Cross-channel analysis between web and call center (when both carry a Customer ID) |
+| ✅ | Cross-device analysis (when the same person logs in on a second device) |
 
-❌ First visits and pre-login browsing behavior  
-❌ Full picture of campaign traffic: most ad clicks land on anonymous sessions  
-❌ Product discovery before login: the research phase is invisible  
-❌ The actual entry into the funnel: you only see from login onwards  
-❌ Anonymous browsing journeys of any kind  
+The cross-channel capability is real and valuable. A customer who logs in on the website, places an order, and then calls support can be followed across both touchpoints. That is exactly what this connection is designed for.
 
-✅ Cross-channel analysis: you can follow a known customer from a web interaction to a call center interaction, because both carry the Customer ID when authenticated  
-✅ Cross-device analysis: if the same person logs in on a second device, that session is correctly linked to the same Customer ID  
+But any behavior that happens without authentication is invisible. And in most digital experiences, that unauthenticated phase is the majority of the journey.
 
-The cross-channel capability is real and valuable. If a customer logs in on the website, orders something and later calls support, CJA can join those interactions into a single journey. That is the connection doing exactly what it is designed to do.
+**A real journey under this setup:**
 
-Any behavior that happens without authentication (before login, after logout, on a new device before the first login) is unknown. And in most digital experiences, that unknown phase is most of the journey:
+| Step | Event | Visible in CJA? |
+|---|---|---|
+| 1 | Visits product page (not logged in) | ❌ No — unknown |
+| 2 | Visits Contact page (not logged in) | ❌ No — unknown |
+| 3 | Logs in and places order | ✅ Yes — known |
+| 4 | Returns to FAQ page (not logged in) | ❌ No — unknown again |
+| 5 | Calls customer service | ✅ Yes — known |
 
-| Event | Timestamp | Person Identifier | Cookie ID |
+We would be missing the nuances of the journey entirely. Consider the cost of customer service calls. Did we need to provide more information in the FAQ section? We cannot tell.
+
+**What the raw data looks like — why stitching is needed:**
+
+The table below shows the same customer's events. Even though we have both the cookie ID (ECID) and the Customer ID on some events, CJA will not connect them without stitching enabled.
+
+| Event | Time | Customer ID | Cookie ID (ECID) |
 |---|---|---|---|
-| 1 | 12:01 | ❌ | 246 |
-| 2 | 12:02 | ❌ | 246 |
-| 3 | 12:03 | ❌ | 246 |
-| 4 | 12:04 | ❌ | 246 |
-| 5 | 12:05 | ❌ | 246 |
-| 6 | 12:06 | ❌ | 246 |
-| 7 | 12:03 | ❌ | 246 |
-| 8 | 12:09 | Bob | 246 |
-| 9 | 12:02 | Bob | 246 |
-| 10 | 12:05 | Bob | 246 |
-| 11 | 12:12 | Bob | 246 |
+| Page view | 12:01 | — | 246 |
+| Page view | 12:02 | — | 246 |
+| Page view | 12:03 | — | 246 |
+| Login + Order | 12:09 | Bob | 246 |
+| Page view | 12:11 | — | 246 |
 
-In this example, even when we have the person ID AND the cookie ID, CJA will not connect the cookie ID to the person. That would require enabling stitching.
+Without stitching, Bob's pre-login events and post-login events are treated as different people.
 
-Consider a real journey might look like this:
+---
 
-- A customer visits the website to view a specific product page (unknown traffic)
-- Then they visit the Contact page (unknown traffic)
-- Then they login and order (known traffic)
-- However, they need to change something in the order and visit the FAQ (unknown traffic)
-- The customer ends up contacting customer service for support (known traffic)
+### Scenario B: Field-based stitching enabled
 
-In this scenario, we would be missing the nuances of the journey. Consider the costs of customer service calls. Did we need to provide more information in the FAQ section?
+Same two datasets, same Customer ID as the anchor, but now we enable field-based stitching on the web dataset. This is where CJA starts doing detective work.
 
-## Scenario B: Connection with Field-Based Stitching
+**Connection settings**
 
-The second connection uses the same two datasets and the same Customer ID as the anchor, but now we enable field-based stitching on the web dataset. This is where CJA starts doing detective work.
+| Setting | Value |
+|---|---|
+| Dataset 1 | Web data — field-based stitching enabled |
+| Persistent ID | ECID (always present, even for anonymous visitors) |
+| Transient ID | Customer ID (present only when logged in) |
+| Dataset 2 | Call center data — Customer ID as Person ID |
+| Stitching | Field-based, enabled on web dataset |
 
-**Connection settings:**
-- Dataset 1: Web data, field-based stitching enabled
-  - Persistent ID: ECID (always present, even for anonymous visitors)
-  - Transient ID: Customer ID (present only when logged in)
-- Dataset 2: Call center data, with Customer ID as Person ID
-- Stitching: Field-based, enabled on web dataset
+The mechanism: every web event already carries an ECID, always. When a login happens and a Customer ID appears, CJA looks back across all events sharing that ECID and retroactively assigns the Customer ID. Anonymous behavior before login is now linked to the known person.
 
-The mechanism: every web event already carries an ECID, a persistent device-level identifier that is always present, even for anonymous visitors. When a login happens and a Customer ID appears, CJA looks back in time across all events sharing that ECID and retroactively assigns the Customer ID to them. Anonymous behavior before the login is now linked to the known person.
-
-**What CJA shows after stitching:**
+**What CJA shows after stitching**
 
 | Customer ID | Events | People | Sessions |
 |---|---|---|---|
@@ -267,82 +280,94 @@ The mechanism: every web event already carries an ECID, a persistent device-leve
 | CRM-1187 | 7 | 1 | 5 |
 | CRM-2291 | 5 | 1 | 5 |
 | … | … | … | … |
-| (No Value) | 2,100 | 300 | 500 |
+| (No Value) | 2,100 | — | — |
 
-The metrics in the "no value" bucket have decreased significantly. We see fewer events, sessions and people without a customer ID. So the "no value" bucket shrinks, but it does not disappear. The remaining "no value" rows are genuine unknowns: visitors who never authenticated within the replay window, or real anonymous traffic who are not customers at all.
+The "no value" bucket shrinks significantly. The remaining unknowns are genuine: visitors who never authenticated within the replay window, or real anonymous traffic who are not customers.
 
-So now anonymous behavior is stitched to the person because they have at some point logged in. Then if they browse again later on without logging in, we can still identify them.
+**How the stitching actually works — live stitch vs. replay:**
 
-| Event | Timestamp | Persistent ID | After Live Stitch | After Replay |
+| Event | Time | ECID | After live stitch | After replay |
 |---|---|---|---|---|
-| 1 | 12:01 | 246 | 246 | Bob (retroactively stitched) |
-| 2 | 12:02 | 246 | Bob | Bob |
-| 3 | 12:03 | 246 | Bob | Bob |
-| 4 | 12:04 | 246 | Bob | Bob |
-| 5 | 12:05 | 246 | Bob | Bob |
-| 6 | 12:06 | 246 | Bob | Bob |
-| 7 | 12:03 | 3579 | 3579 | 3579 (never authenticated) |
-| 8 | 12:09 | 3579 | 3579 | 3579 (never authenticated) |
-| 9 | 12:02 | 81911 | 81911 | Bob (retroactively stitched) |
-| 10 | 12:05 | 81911 | Bob | Bob |
-| 11 | 12:12 | 81911 | Bob | Bob |
+| Page view | 12:01 | 246 | 246 (unknown) | Bob |
+| Page view | 12:02 | 246 | Bob | Bob |
+| Page view | 12:03 | 246 | Bob | Bob |
+| Login | 12:04 | 246 | Bob | Bob |
+| Page view | 12:05 | 246 | Bob | Bob |
+| Page view | 12:03 | 3579 | 3579 | 3579 (never logged in) |
+| Page view | 12:09 | 3579 | 3579 | 3579 (never logged in) |
+| Page view | 12:02 | 81911 | 81911 (unknown) | Bob |
+| Login | 12:05 | 81911 | Bob | Bob |
+| Page view | 12:12 | 81911 | Bob | Bob |
 
-## Scenario C: Connection with No Stitching and ECID as Person ID
+Live stitching works forward from the login event immediately. Replay stitching goes back in time retroactively. ECID 3579 never logged in, so it stays unknown. ECIDs 246 and 81911 are eventually connected to Bob through different sessions, and replay stitches their earlier anonymous events retroactively.
 
-The third connection is maybe the most common setup for teams focused purely on web analytics. One dataset, no call center data, and ECID as the Person ID. It is clean, simple, and entirely valid for a specific analytical purpose.
+---
 
-**Connection settings:**
-- Dataset: Web data only
-- Person ID: ECID
-- Stitching: Not enabled
+### Scenario C: No stitching, ECID as Person ID
 
-With ECID as the Person ID, every event belongs to a "person." Person counts look complete. Session counts look complete. Funnels close properly.
+The setup that looks the most complete — but is actually the most limited for customer analysis.
 
-But this is where a critical distinction must be made: in this connection, a "person" is a device and browser combination, not a human being.
+**Connection settings**
 
-**What this means in practice:**
-- Same person on mobile and desktop = two different "people", two different ECIDs
-- Same person after clearing cookies = a brand new "person"
-- Cross-channel analysis is impossible, no call center, no store, no CRM linkage
-- Customer-centric metrics (LTV, repeat purchase rate, churn) are meaningless
-- On-site behavior analysis is clean and complete
-- Device-level funnels and drop-off analysis are reliable
+| Setting | Value |
+|---|---|
+| Dataset | Web data only |
+| Person ID | ECID |
+| Stitching | Not enabled |
 
-**Where this connection excels... and doesn't:**
+With ECID as the Person ID, every single event belongs to a "person." Person counts look complete. Sessions look complete. Funnels close. Nothing falls into "(No Value)."
 
-If you're only interested in understanding what happens on the website: which pages perform, where funnels break, how content drives engagement, then this is a strong and reliable setup. The data is dense, complete, and clean at the device level. It breaks down the moment you ask any question about the person behind the device. But then, having CJA is a bit much innit?
+But there is a critical distinction: in this connection, a "person" is a device and browser combination, not a human being.
 
-Also note that person counts in this setup will be inflated compared to your actual customer base. This can have a bigger or smaller impact depending on how often your audience switches devices or clears cookies. If an executive looks at "3.2 million people visited this month" and interprets that as 3.2 million unique human beings, the analytical foundation has already misled the business.
+**What this actually means:**
 
-## The Backfill Window: History Has Value
+| Situation | Result |
+|---|---|
+| Same person on mobile and desktop | Two different "people" — two different ECIDs |
+| Same person clears cookies | A brand new "person" from CJA's perspective |
+| Cross-channel analysis (web + call center) | Not possible — no shared identifier |
+| Customer-centric metrics (LTV, churn) | Meaningless at this level |
+| On-site behavior and funnel analysis | Clean and reliable |
+| Device-level drop-off analysis | Reliable |
 
-I don't want to skip the importance of the backfill window. When you configure a dataset in a Connection, you set a backfill window. That basically means how far back in history CJA will ingest data. There are some considerations to make when selecting the backfill window.
+If you are purely interested in on-site behavior — which pages perform, where funnels break, how content drives engagement — this is a strong and clean setup. It breaks down the moment you ask any question about the actual person behind the device.
 
-A 3-month backfill gives you enough history for recent trend analysis, but not for annual cohort comparisons. A 13-month backfill enables year-over-year comparison from day one of your CJA rollout. A 3-year backfill supports long-term customer behavior analysis.
+But then, having CJA for that purpose is a bit much innit?
 
-The cost of a short backfill is invisible at first. You launch your CJA rollout, dashboards look fine, and executives start consuming reports. Six months later, someone asks: "How does this compare to last year?". The data simply is not there. It's not the end of the world, but that be quite inconvenient when you want to show how great CJA is at answering people's questions.
+Also worth noting: person counts here will be inflated compared to your actual customer base. If an executive looks at "3.2 million people visited this month" and interprets that as 3.2 million unique human beings, the analytical foundation has already misled the business.
 
-## Summary: The Setup Choices and What They Control
+---
 
-**PERSON ID SELECTION**
-Controls whether analytics are at the person level or the device/session level. Determines cross-channel journey completeness.
+## The backfill window: history has value
 
-**STITCHING CONFIGURATION**
-Determines whether pre-login behavior is connected to authenticated identity. Directly impacts conversion, attribution, and segment accuracy.
+I do not want to skip this. When you configure a dataset in a Connection, you also set a backfill window — how far back in history CJA ingests data.
 
-**DATASET TYPE MIX**
-Determines the richness of analysis, whether you can segment journeys by profile attributes and enrich events with lookup context.
+| Backfill window | What it enables |
+|---|---|
+| 3 months | Recent trend analysis |
+| 13 months | Year-over-year comparison from day one |
+| 3 years | Long-term cohort and LTV analysis |
 
-**BACKFILL WINDOW**
-Determines historical depth available for trend analysis, cohort comparison, and LTV modeling from the moment of launch.
+The cost of a short backfill is invisible at first. You launch, dashboards look fine, and executives start consuming reports. Six months later, someone asks: "How does this compare to last year?" The data simply is not there.
 
-**CONNECTION SCOPE**
-Determines which analytical questions can be answered in a single workspace and how data governance requirements are enforced.
+It's not the end of the world, but it be quite inconvenient when you want to show how great CJA is at answering people's questions.
 
-**IDENTITY GRAPH ALIGNMENT**
-Determines whether CJA analysis can be connected back to RTCDP activations, enabling closed-loop measurement of paid media and personalization.
+---
 
-## The Closing Argument
+## What each choice actually controls
+
+| Setting | What it controls |
+|---|---|
+| **Person ID selection** | Whether analytics are at the person level or the device level. Determines cross-channel journey completeness. |
+| **Stitching configuration** | Whether pre-login behavior is connected to authenticated identity. Directly impacts conversion rates, attribution, and segment accuracy. |
+| **Dataset type mix** | Whether you can segment journeys by profile attributes and enrich events with lookup context. |
+| **Backfill window** | How much historical data is available for trend analysis, cohort comparison, and LTV modeling. |
+| **Connection scope** | Which analytical questions can be answered in a single workspace. |
+| **Identity Graph alignment** | Whether CJA analysis can connect back to RTCDP activations, enabling closed-loop measurement. |
+
+---
+
+## The closing argument
 
 In Customer Journey Analytics, architecture is not a technical responsibility that can be delegated to implementation teams alone. The choices inside a Connection (who is the person, which data is included, how identity is resolved, how far back history goes) are business decisions dressed in technical clothing.
 
