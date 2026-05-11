@@ -388,6 +388,40 @@ a { color: inherit; }
 }
 .post-content pre code { background: none; padding: 0; }
 
+/* tables */
+.post-content .table-wrap {
+  overflow-x: auto;
+  margin: 1.75rem 0;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-zine-sm);
+}
+.post-content table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .875rem;
+  line-height: 1.55;
+}
+.post-content thead th {
+  background: var(--ink);
+  color: var(--cream);
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: .6rem .9rem;
+  text-align: left;
+}
+.post-content tbody td {
+  padding: .55rem .9rem;
+  border-top: 1px solid var(--border);
+  vertical-align: top;
+}
+.post-content tbody tr:nth-child(even) td {
+  background: oklch(18% .04 270 / .04);
+}
+
 .post-content pre[data-lang]::before {
   content: attr(data-lang);
   display: block;
