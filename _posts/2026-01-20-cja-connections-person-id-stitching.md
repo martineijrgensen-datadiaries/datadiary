@@ -23,7 +23,7 @@ Instead:
 
 If multiple datasets use a Person ID (even if the field names differ), CJA merges them into one Person ID column. This column is used to identify unique people. Then it builds sessions and attribution on top of it.
 
-This means you can already report on unique people across datasets and answer some business questions from this. No stitching required yet, as long as the Person ID is present and consistent — which is not always the case.
+This means you can already report on unique people across datasets and answer some business questions from this. No stitching required yet, as long as the Person ID is present and consistent... but that is not always the case.
 
 ## The gap: when Person ID is missing
 
