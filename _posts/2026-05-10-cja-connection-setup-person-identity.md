@@ -25,11 +25,15 @@ So at the center of the issue was a very simple question: **who is the person in
 
 ---
 
-## What is a CJA Connection, actually?
+## What exactly is a CJA Connection?
 
 Before we get into the interesting stuff, a quick grounding.. I need that sometimes.
 
 A CJA Connection is what links Adobe Experience Platform (AEP) to Customer Journey Analytics (CJA). You pick which datasets from AEP you want to analyse, configure a few key settings, and CJA starts pulling that data into a unified view you can query.
+
+<br>
+<img class="datadiaryimage" src="{{ "/whatisit.png" | relative_url }}" alt="stitching">
+<br>
 
 A Connection defines five things:
 
@@ -47,6 +51,10 @@ And then we can define more specifically the dimensions, metrics and other thing
 
 Defining what it means to be a person, as a unique individual, a nuanced and complex being. Sounds deep. And it is. 
 
+<br>
+<img class="datadiaryimage" src="{{ "/existential.png" | relative_url }}" alt="person">
+<br>
+
 In CJA, the ✨Person ID✨ is the anchor of everything. It is the one thing that tells CJA: these events, these page views, these transactions all belong to the same unique person.
 
 When you add a dataset to a Connection, you select one field as the Person ID. This might be:
@@ -54,6 +62,10 @@ When you add a dataset to a Connection, you select one field as the Person ID. T
 - A **CRM ID** (a unique customer number from your customer database, only present when someone is logged in)
 - An **ECID** (Experience Cloud ID, the cookie-based identifier Adobe assigns to every browser and device, present even for anonymous visitors)
 - An email address, a loyalty ID, or any other stable identifier..
+
+<br>
+<img class="datadiaryimage" src="{{ "/theperson.png" | relative_url }}" alt="person">
+<br>
 
 That seems straightforward… until you realize the choice has direct effects on:
 
@@ -66,21 +78,32 @@ That seems straightforward… until you realize the choice has direct effects on
 
 ## One ID or identityMap?
 
-This is one of those decisions that looks simple in the UI, but has surprisingly big consequences.
+I haven't really payed much attention to this before. Now I realised that it actually good to know. 
 
-**Picking a single ID** (like a CRM ID) feels like the cleanest option. One person, one identifier. But in practice (and without stitching), a lot of user activity happens without that identifier present: before login, after logout, on a new device. If you've told CJA to only recognize that one ID, all behavior that does not have that exact ID will sit outside your definition of a person.
+When a connection has been created, a lot of decisions have been made in the connection UI. Including whether to define a person by a single ID or by using the IdentityMap.   
 
-**Using <code>identityMap</code>** is an alternative approach. Rather than a single flat field, identityMap is a structure (typically populated via the Web SDK) that holds multiple identifiers at once. I thhink of it as a container: one event might carry an ECID, a CRM ID after login, and potentially other identifiers, all stored together. 
+**Picking a single ID** (like a CRM ID) feels like the cleanest option. One person, one identifier. But in practice (and without stitching), a lot of user activity happens without that identifier present: before login, after logout, on a new device. This why I think it's important to understand the impact of selecting the single ID. You have basically told CJA to only recognize that one ID. So all behavior that does not have that exact ID will sit outside your definition of a person.
+
+**Using <code>identityMap</code>** is an alternative approach. Rather than a single flat field, identityMap is a structure (typically populated via the Web SDK) that holds multiple identifiers at once. 
 
 <br>
-<img class="datadiaryimage" src="{{ "/Enablestitching.png" | relative_url }}" alt="EvenDriven">
+<img class="datadiaryimage" src="{{ "/Container.png" | relative_url }}" alt="stitching">
+<br>
+
+
+I think of it as a container: one event might carry an ECID, a CRM ID after login, and potentially other identifiers, all stored together. 
+
+This is how fun it looks in the UI:
+
+<br>
+<img class="datadiaryimage" src="{{ "/Enablestitching.png" | relative_url }}" alt="stitching">
 <br>
 
 This is how I see it:
 
 <p>Selecting a specific field as your Person ID works well when your dataset has one clean ID column, like customer_id. You select your persistent and transient IDs, and you're done.</p>
 
-<p><code>identityMap</code> makes more sense when data comes through AEP Web SDK or Mobile SDK. Here, identities are stored in a shared <code>identityMap</code> field containing multiple IDs tied to the same person, such as ECID, CRM ID, email, etc.</p>
+<p><code>identityMap</code> makes sense when data comes through AEP Web SDK or Mobile SDK. Here, identities are stored in a shared <code>identityMap</code> field containing multiple IDs tied to the same person, such as ECID, CRM ID, email, etc.</p>
 
 <p>I think in practice, use a simple flat ID field when your dataset has one clean ID. Use <code>identityMap</code> when your SDK/AEP setup contains multiple identities and you need more flexible cross-channel identity handling and stitching.</p>
 
@@ -114,17 +137,13 @@ The "(No Value)" row is actually a useful signal. If you see a large proportion 
 
 ### The business cost of identity fragmentation
 
-**Conversion rates**
-Journeys that cross an authentication event appear broken. The anonymous session and the authenticated purchase are counted as separate persons, so conversion is understated.
+**Conversion rates**: Journeys that cross an authentication event appear broken. The anonymous session and the authenticated purchase are counted as separate persons, so conversion is understated.
 
-**Attribution**
-The touchpoint that drove the decision (often an early anonymous visit) gets no credit. Since you didn't get the full picture. Your attribution model tells a factually incorrect story, which leads to misallocated marketing budgets.
+**Attribution**: The touchpoint that drove the decision (often an early anonymous visit) gets no credit. Since you didn't get the full picture. Your attribution model tells a factually incorrect story, which leads to misallocated marketing budgets.
 
-**Segment accuracy**
-A segment defined as "customers who viewed product X and did not convert in 7 days" will be inflated. Most of those apparent non-converters actually did convert, just under a different ID.
+**Segment accuracy**: A segment defined as "customers who viewed product X and did not convert in 7 days" will be inflated. Most of those apparent non-converters actually did convert, just under a different ID.
 
-**LTV calculation**
-Lifetime value calculations that do not connect across channels will severely undercount individual customer value, making the best customers look like average ones.
+**LTV calculation**: Lifetime value calculations that do not connect across channels will severely undercount individual customer value, making the best customers look like average ones.
 
 ---
 
@@ -189,9 +208,9 @@ Recent data should be treated as more provisional, while week-old data is genera
 
 ## Three connections, three definitions of a person (this is the fun part!)
 
-Maybe this is mostly for my own sake, but this is where I want to make it concrete. Because the way you configure a connection defines what "a person" actually means inside every report, every funnel, and every business decision that follows.
+Maybe this is mostly for my own sake, but this is where I want to make it concrete. Because the way you configure a connection will define what "a person" actually means inside every report, every funnel, and every business decision that follows.
 
-Same underlying data. Three different configurations. Three very different analytical realities.
+So I explored three different scenarios using the same underlying data across three separate connections, each resulting in a very different analytical reality.
 
 **The data foundation throughout:**
 - Web behavioral data collected via Adobe's Web SDK (carrying an ECID for every visitor, anonymous or not)
@@ -238,23 +257,23 @@ One person equals one Customer ID. That part works. But notice the "(No Value)" 
 | ✅ | Cross-channel analysis between web and call center (when both carry a Customer ID) |
 | ✅ | Cross-device analysis (when the same person logs in on a second device) |
 
-The cross-channel capability is real and valuable. A customer who logs in on the website, places an order, and then calls support can be followed across both touchpoints. That is exactly what this connection is designed for.
+The cross-channel capability is kinda possible. A customer who logs in on the website, places an order, and then calls support can be followed across both touchpoints. That is exactly what this connection is designed for.
 
-But any behavior that happens without authentication is invisible. And in most digital experiences, that unauthenticated phase is the majority of the journey.
+But any behavior that happens without authentication is invisible. And in most digital experiences, that unauthenticated phase is the majority of the journey. Same applies to any other dataset where the CRM ID is not populated consistently.
 
 **A real journey under this setup:**
 
 | Step | Event | Visible in CJA? |
 |---|---|---|
-| 1 | Visits product page (not logged in) | ❌ No — unknown |
-| 2 | Visits Contact page (not logged in) | ❌ No — unknown |
-| 3 | Logs in and places order | ✅ Yes — known |
-| 4 | Returns to FAQ page (not logged in) | ❌ No — unknown again |
-| 5 | Calls customer service | ✅ Yes — known |
+| 1 | Visits product page (not logged in) | ❌ No : unknown |
+| 2 | Visits Contact page (not logged in) | ❌ No : unknown |
+| 3 | Logs in and places order | ✅ Yes : known |
+| 4 | Returns to FAQ page (not logged in) | ❌ No : unknown again |
+| 5 | Calls customer service | ✅ Yes : known |
 
 We would be missing the nuances of the journey entirely. Consider the cost of customer service calls. Did we need to provide more information in the FAQ section? We cannot tell.
 
-**What the raw data looks like — why stitching is needed:**
+**What the raw data looks like: why stitching is needed:**
 
 The table below shows the same customer's events. Even though we have both the cookie ID (ECID) and the Customer ID on some events, CJA will not connect them without stitching enabled.
 
@@ -266,7 +285,7 @@ The table below shows the same customer's events. Even though we have both the c
 | Login + Order | 12:09 | Bob | 246 |
 | Page view | 12:11 | — | 246 |
 
-Without stitching, Bob's pre-login events and post-login events are treated as different people.
+Without stitching, Bob's pre-login events and post-login events are treated as different people. Now I am using Bob as an example. But that is still the CRM ID.. 
 
 ---
 
@@ -278,10 +297,10 @@ Same two datasets, same Customer ID as the anchor, but now we enable field-based
 
 | Setting | Value |
 |---|---|
-| Dataset 1 | Web data — field-based stitching enabled |
+| Dataset 1 | Web data: field-based stitching enabled |
 | Persistent ID | ECID (always present, even for anonymous visitors) |
 | Transient ID | Customer ID (present only when logged in) |
-| Dataset 2 | Call center data — Customer ID as Person ID |
+| Dataset 2 | Call center data: Customer ID as Person ID |
 | Stitching | Field-based, enabled on web dataset |
 
 The mechanism: every web event already carries an ECID, always. When a login happens and a Customer ID appears, CJA looks back across all events sharing that ECID and retroactively assigns the Customer ID. Anonymous behavior before login is now linked to the known person.
@@ -299,13 +318,15 @@ The mechanism: every web event already carries an ECID, always. When a login hap
 
 The "no value" bucket shrinks significantly. The remaining unknowns are genuine: visitors who never authenticated within the replay window, or real anonymous traffic who are not customers.
 
-**How the stitching actually works — live stitch vs. replay:**
+**How the stitching actually works: live stitch vs. replay:**
+
+This is still a bit new for me. I haven't seen much of this stitching stuff applied in the real world...yet. But that is changing now. 
 
 | Event | Time | ECID | After live stitch | After replay |
 |---|---|---|---|---|
 | Page view | 12:01 | 246 | 246 (unknown) | Bob |
-| Page view | 12:02 | 246 | Bob | Bob |
-| Page view | 12:03 | 246 | Bob | Bob |
+| Page view | 12:02 | 246 | 246 (unknown) | Bob |
+| Page view | 12:03 | 246 | 246 (unknown) | Bob |
 | Login | 12:04 | 246 | Bob | Bob |
 | Page view | 12:05 | 246 | Bob | Bob |
 | Page view | 12:03 | 3579 | 3579 | 3579 (never logged in) |
@@ -320,7 +341,7 @@ Live stitching works forward from the login event immediately. Replay stitching 
 
 ### Scenario C: No stitching, ECID as Person ID
 
-The setup that looks the most complete — but is actually the most limited for customer analysis.
+The setup that looks the most complete. But is actually the most limited for customer analysis.
 
 **Connection settings**
 
@@ -338,9 +359,9 @@ But there is a critical distinction: in this connection, a "person" is a device 
 
 | Situation | Result |
 |---|---|
-| Same person on mobile and desktop | Two different "people" — two different ECIDs |
+| Same person on mobile and desktop | Two different "people": two different ECIDs |
 | Same person clears cookies | A brand new "person" from CJA's perspective |
-| Cross-channel analysis (web + call center) | Not possible — no shared identifier |
+| Cross-channel analysis (web + call center) | Not possible: no shared identifier |
 | Customer-centric metrics (LTV, churn) | Meaningless at this level |
 | On-site behavior and funnel analysis | Clean and reliable |
 | Device-level drop-off analysis | Reliable |
