@@ -32,7 +32,7 @@ Before we get into the interesting stuff, a quick grounding.. I need that someti
 A CJA Connection is what links Adobe Experience Platform (AEP) to Customer Journey Analytics (CJA). You pick which datasets from AEP you want to analyse, configure a few key settings, and CJA starts pulling that data into a unified view you can query.
 
 <br>
-<img class="datadiaryimage" src="{{ "/whatisit.png" | relative_url }}" alt="stitching">
+<img class="datadiaryimage" src="{{ "/Whatisit.png" | relative_url }}" alt="cja">
 <br>
 
 A Connection defines five things:
