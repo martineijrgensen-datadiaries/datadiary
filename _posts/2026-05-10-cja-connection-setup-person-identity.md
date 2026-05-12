@@ -87,7 +87,7 @@ When a connection has been created, a lot of decisions have been made in the con
 **Using <code>identityMap</code>** is an alternative approach. Rather than a single flat field, identityMap is a structure (typically populated via the Web SDK) that holds multiple identifiers at once. 
 
 <br>
-<img class="datadiaryimage" src="{{ "/Container.png" | relative_url }}" alt="stitching">
+<img class="datadiaryimage" src="{{ "/Container.png" | relative_url }}"  alt="container">
 <br>
 
 
