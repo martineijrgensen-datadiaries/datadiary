@@ -99,6 +99,7 @@ This is how fun it looks in the UI:
 <img class="datadiaryimage" src="{{ "/Enablestitching.png" | relative_url }}" alt="stitching">
 <br>
 
+
 This is how I see it:
 
 <p>Selecting a specific field as your Person ID works well when your dataset has one clean ID column, like customer_id. You select your persistent and transient IDs, and you're done.</p>
