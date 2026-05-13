@@ -102,11 +102,11 @@ This is how fun it looks in the UI:
 
 This is how I see it:
 
-<p>Selecting a specific field as your Person ID works well when your dataset has a clean stable field, like customer_id or ECID. You select your persistent and transient IDs, and you're done.</p>
+Selecting a specific field as your Person ID works well when your dataset has a clean stable field, like customer_id or ECID. You select your persistent and transient IDs, and you're done.
 
-<p><code>identityMap</code> makes sense If your datasets use different identifiers. Example: on web you collect ECID and sometimes hashed email. In identityMap, identities are stored in a shared <code>identityMap</code> field containing multiple IDs tied to the same person, such as ECID, CRM ID, email, etc. 
+<code>identityMap</code> makes sense If your datasets use different identifiers. Example: on web you collect ECID and sometimes hashed email. In identityMap, identities are stored in a shared <code>identityMap</code> field containing multiple IDs tied to the same person, such as ECID, CRM ID, email, etc. 
 
-<p>I think in practice, use a simple flat ID field when your datasets have clean ID's. Use <code>identityMap</code> when your SDK/AEP setup contains multiple identities and you need more flexible cross-channel identity handling and stitching.</p>
+I think in practice, use a simple flat ID field when your datasets have clean ID's. Use <code>identityMap</code> when your SDK/AEP setup contains multiple identities and you need more flexible cross-channel identity handling and stitching. 
 
 
 ---
@@ -181,7 +181,7 @@ Runs periodically (daily or weekly). CJA goes back in time and retroactively sti
 
 To me live stitching is the immediate, best-effort picture. While replay stitching is the corrected, more complete picture. 
 
-The data improves over time as replays run .. which is exactly why recent data should be treated as provisional. 
+The data improves over time as replays run .. which is exactly why recent data should be treated as provisional.  
 
 ### The replay window is important!
 
