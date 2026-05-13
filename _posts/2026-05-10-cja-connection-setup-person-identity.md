@@ -102,11 +102,11 @@ This is how fun it looks in the UI:
 
 This is how I see it:
 
-<p>Selecting a specific field as your Person ID works well when your dataset has one clean ID column, like customer_id. You select your persistent and transient IDs, and you're done.</p>
+<p>Selecting a specific field as your Person ID works well when your dataset has a clean stable field, like customer_id or ECID. You select your persistent and transient IDs, and you're done.</p>
 
-<p><code>identityMap</code> makes sense when data comes through AEP Web SDK or Mobile SDK. Here, identities are stored in a shared <code>identityMap</code> field containing multiple IDs tied to the same person, such as ECID, CRM ID, email, etc.</p>
+<p><code>identityMap</code> makes sense If your datasets use different identifiers. Example: on web you collect ECID and sometimes hashed email. In identityMap, identities are stored in a shared <code>identityMap</code> field containing multiple IDs tied to the same person, such as ECID, CRM ID, email, etc. 
 
-<p>I think in practice, use a simple flat ID field when your dataset has one clean ID. Use <code>identityMap</code> when your SDK/AEP setup contains multiple identities and you need more flexible cross-channel identity handling and stitching.</p>
+<p>I think in practice, use a simple flat ID field when your datasets have clean ID's. Use <code>identityMap</code> when your SDK/AEP setup contains multiple identities and you need more flexible cross-channel identity handling and stitching.</p>
 
 
 ---
