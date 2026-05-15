@@ -1,60 +1,72 @@
 ---
 layout: post
 title: "The Pareto Principle in Adobe Analytics: When Workspace Wasn't Enough"
-subtitle: "A small reminder that sometimes the best analytics workflow is not all inside one tool."
-tags: [Adobe Analytics]
+subtitle: "Applying the Classic 80/20 Rule to Analytics data and Limitations of Workspace."
+tags: [Adobe Analytics, CJA]
 read_time: 7
 emoji: "📊"
 ---
 
-I like the idea of the Pareto Principle.  
+
+![pareto definition](/assets/images/ParetoUpdated.png)
+
+
+I like the idea of the Pareto Principle and its simplicity. 
+
 The thought that a relatively small number of things often drive the majority of outcomes.
 
 - 20% of products driving 80% of revenue  
 - 20% of customers driving 80% of value  
-- A handful of pages driving most engagement  
+- A handful of pages driving most engagement
 
-It is one of those concepts that sounds almost *too simple*, but somehow keeps appearing everywhere in analytics.
-
-So I wanted to test it properly in Adobe Analytics.
-
-Not just theoretically.  
+It is one of those concepts that sounds almost a lil *too simple* 👀, but somehow keeps appearing everywhere in analytics. So of course I wanted to try this out properly in Adobe Analytics.
+ 
 I wanted to actually identify which products were driving most of the revenue and then use that knowledge operationally inside Adobe Analytics.
 
-And honestly… this ended up being a small reminder that sometimes the best analytics workflow is not "all inside one tool".
+This ended up being a small reminder that analysis sometimes takes a brief detour outside Adobe Analytics before finding its way back.
+
+
+![pareto bar](/ParetoBar.png)
 
 ---
 
-## The Initial Idea
+## Step 1: The Basics
 
-The setup sounded straightforward.
+I wanted to make this as simple as possible. So I started with a table. As you do.
 
 I created a Freeform Table in Adobe Analytics with:
 
 - `Product ID`
 - `Online Revenue`
 
-Then I sorted the table descending by revenue.
+Then I sorted the table descending by revenue. 
 
-At that point I wanted to create the classic Pareto view:
+<img class="datadiaryimage" src="{{ "/assets/images/Paretotable.png" | relative_url }}" alt="paretotable">
 
-- Bars = revenue contribution per product  
+Now I had the foundation.
+
+Next I really wanted to create the classic Pareto chart:
+
+- Bars = revenue per product  
 - Line = cumulative % of total revenue  
 - Identify where cumulative revenue hits 80%  
 
-Simple.
+The cumulative percentage is the core part of the Pareto analysis because it shows how revenue accumulates across products when they are sorted from highest to lowest contribution. Without the cumulative view, you only see isolated product performance.
 
-At least in theory.
+With cumulative percentage, you start seeing the distribution of value across the business. So that part is pretty important. 
+
+And all of this which would be fairly simple to create. At least in my head and in theory. But now I started to meet some limitations within the analysis workspace. 
 
 ---
 
-## The First Confusing Part
+## Step 2: The First Confusing Part
 
-I started experimenting with cumulative functions inside Workspace.
-
-At first glance it looked correct.
+I started creating a revenue metric with the cumulative function inside Workspace. At first glance it looked correct.
 
 Then suddenly I noticed things that made absolutely no sense.
+
+![pareto not working](/assets/images/paretonotworking.png)
+
 
 A product with very low revenue suddenly appeared associated with a very high cumulative percentage.
 
@@ -64,35 +76,24 @@ Something like this:
 |---|---|---|
 | prd1036 | High revenue | 7% |
 | ... | ... | ... |
-| prd1026 | $68 | 100% |
+| prd1026 | Low Revenue | 100% |
 
-My first instinct was:
+My first thougth was:
 
 > "Why does a tiny product contribute to 100% of revenue?"
 
-But that was not actually what the metric meant.
+Adn I realised using cumualtive function and sorting revenue by products in the table does not influence the cumulative behavior as I hoped. It's still tied to time-based dimensions. 
 
-The cumulative percentage was not saying:
+Not shaming cumulative functions. They work perfectly over time-based dimensions (like Day, Week, Month), because the data has a natural sequential order.
+But for non-time dimensions, like Product, AA or CJA doesn’t handle those values in the way that I want it to. 
 
-> "This product generated 100%."
-
-It was saying:
-
-> "By the time we reach this row, we have accumulated 100% of total revenue."
-
-Which is technically correct.
-
-But another issue appeared.
-
-The cumulative logic inside Workspace is heavily dependent on row order and table structure. Once I started experimenting with breakdowns and different table setups, the logic became difficult to fully trust for this type of analysis.
-
-That was the moment I realized:
+That was the moment I realized..
 
 > I probably needed Excel.
 
 ---
 
-## Exporting the Data
+## Step 3: Exporting the Data
 
 So I exported the table from Adobe Analytics into Excel.
 
@@ -101,108 +102,121 @@ Just:
 - `Product ID`
 - `Revenue`
 
-Nothing fancy.
+Yeah, that's all. 
 
-Then the process became much easier and much more transparent.
+(You could also use report builder. Do whatever. Just get the data) 
 
 ---
 
-## Building the Pareto Analysis in Excel
+## Step 4: Formatting in Excel
 
-First step: sort products descending by revenue.
+I did some formatting to prepare the table.
 
-Then I added three calculated columns.
+![pareto not working](/assets/images/paretoexcelformatting.png)
 
-### 1. Percentage of Total Revenue
+
+Then I sorted products to be descending by revenue.
+
+Now the next step was just adding the two calculated columns.
+
+### Step 5: Percentage of Total Revenue
 
 ```excel
 =Revenue / Total Revenue
 ```
+![percentageoftotal](/assets/images/ofTotalRevenue.png)
 
 This showed how much each individual product contributed to overall revenue.
 
-### 2. Cumulative Percentage of Total Revenue
+### Step 6: Cumulative Percentage of Total Revenue
 
 ```excel
 =SUM($C$2:C2)
 ```
 
-Now the cumulative logic became completely transparent.
+![cumulativepercentage](/assets/images/CumulativeofTotalRevenue.png)
 
-The line started low and gradually climbed toward 100%.
+Now the cumulative logic became completely transparent. This one tells us how much of the total revenue has been accumulated up to and including this row in the table. 
 
-Exactly how a Pareto curve should behave.
+The percentage starts low and gradually climbs toward 100%.
 
-### 3. Product Grouping Logic
+To me, that is how a Pareto curve should behave. 
 
-Then came the important part.
+### Step 7: Product Grouping Logic
 
-I created a formula that classified products based on whether they belonged to the products contributing to the first 80% of revenue.
+Then came the important part. We can now apply the principle. 
+
+I created a formula that classified products based on whether they belonged to the group contributing to the first 80% of total revenue. In practice, this meant identifying the point where the cumulative percentage of revenue reached ≥80% (less than or equal to). 
+
+The products included up until that threshold represented the small subset of products driving the majority of revenue. Essentially the classic Pareto principle, where roughly 20% of products contribute to 80% of revenue.
+
 
 ```excel
 =IF(D2<=0,8; "Top 20% Products"; "Long Tail")
 ```
+![grouping](/assets/images/Findthe80percent.png)
+
+
 
 This separated the dataset into two groups:
-
 - Top Products  
 - Long Tail Products  
 
-Simple. But very actionable.
+We could stay here in excel. That is possible. But does anyone really want to do that? 
 
 ---
 
-## The Visualization
+## Step 8: The Visualization
 
-Once the formulas were in place, I created a combo chart.
+Getting back home is nice. I am not going to compete at The Microsoft Excel World Championship. So why spend more time in Excel. But you can [sign up here](https://excel-esports.com/) if that is what you truly want. 
+
+Things can look nice in AA and CJA. So once the excel-formulas were in place, I could go into the analytics tools again and create a combo chart.
 
 - Bars = revenue per product  
 - Line = cumulative percentage  
 - Horizontal reference line = 80%  
 
-This immediately made the distribution visible.
-
-You could literally see:
-
+This would allow me to see the discribution. 
 - where the "vital few" products ended  
 - where the long tail began  
 
-And honestly, this was the part I liked the most.
+But… wait. How do we actually get those calculations back into AA? Didn’t I just storm out of Workspace the moment I realized it couldn’t give me what I needed? That maybe I just wanted someone who would finally listen to me and understand my cumulative percentage problems? 🙄 🎀
 
-Because the analysis suddenly stopped being abstract.
-
-It became visual.
+So maybe this wasn't an actionable real 'step 8'..
 
 ---
 
-## Bringing It Back Into Adobe Analytics
+## Step 8 (for real): Bringing It Back into Adobe Analytics
 
-This was where the exercise became genuinely useful.
+Now we're here. Where the exercise becomes useful.
 
-Now that I knew which products belonged to the "Top 20%" group, I could operationalize it inside Adobe Analytics. I knew the revenue threshold at which the products reached the 80% mark.
+I'll try to stay simple. I knew which products belonged to the "Top 20%" group. So I could operationalize it inside Adobe Analytics. I knew the revenue threshold at which the products reached the 80% mark.
 
-I created:
+I created two calculated metrics. 
 
-- segments  
-- calculated metrics  
-- product groupings  
+- `Top 20% Products`: If the product revenue is greater than or equal to the revenue at the 80% mark, then it can be categorized as Top 20 % Products
 
-For example:
+![grouping](/assets/images/topproducts.png)
 
-- `Top Revenue Products`
-- `Long Tail Products`
+- `Long Tail Products`: This is just the opposite logic. If the product revenue is less than the revenue at the 80% mark, then it can be categorized as Long Tail Products.
 
-Now I could start comparing:
+![grouping](/assets/images/longtail.png)
 
-- conversion rate  
+With these calculated metrics, I could finally create the bar graph vizualisation (combo).
+
+![grouping](/assets/images/combopareto.png)
+
+And now I had the foundation needed to explore the nuanced differences between the high-value products and the long tail.
+
 - traffic sources  
 - entry pages  
 - device behavior  
 - customer journeys  
 
-between high-value products and the long tail.
+![grouping](/assets/images/paretofun.png)
 
-And this is where the real analysis starts.
+And this is where the real analysis starts. 
+
 
 ---
 
@@ -237,4 +251,6 @@ I initially thought this would be a pure Analytics exercise.
 
 Instead, it became a good reminder that analysis work can sometimes live between tools.
 
-That's alright. I got the analysis to work. The only thing to keep in mind with this approach is that you get a snapshot of the real world. It does not automatically update. You could probably set that up. I haven't been able to go even further with that yet.
+That's alright. I got the analysis to work. The only thing to keep in mind with this approach is that you get a snapshot of the real world. It does not automatically update. You could probably set that up. 
+
+
