@@ -154,7 +154,7 @@ The products included up until that threshold represented the small subset of pr
 ```excel
 =IF(D2<=0,8; "Top 20% Products"; "Long Tail")
 ```
-![grouping](/assets/images/Findthe80percent.png)
+![findthe80](/assets/images/Findthe80percent.png)
 
 
 
@@ -196,15 +196,15 @@ I created two calculated metrics.
 
 - `Top 20% Products`: If the product revenue is greater than or equal to the revenue at the 80% mark, then it can be categorized as Top 20 % Products
 
-![grouping](/assets/images/topproducts.png)
+![top20](/assets/images/topproducts.png)
 
 - `Long Tail Products`: This is just the opposite logic. If the product revenue is less than the revenue at the 80% mark, then it can be categorized as Long Tail Products.
 
-![grouping](/assets/images/longtail.png)
+![longtail](/assets/images/Longtail.png)
 
 With these calculated metrics, I could finally create the bar graph vizualisation (combo).
 
-![grouping](/assets/images/combopareto.png)
+![combo](/assets/images/combopareto.png)
 
 And now I had the foundation needed to explore the nuanced differences between the high-value products and the long tail. Such as:
 
