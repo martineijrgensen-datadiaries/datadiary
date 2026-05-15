@@ -82,7 +82,7 @@ My first thougth was:
 
 > "Why does a tiny product contribute to 100% of revenue?"
 
-Adn I realised using cumualtive function and sorting revenue by products in the table does not influence the cumulative behavior as I hoped. It's still tied to time-based dimensions. 
+And I realised using cumulative function and sorting revenue by products in the table does not influence the cumulative behavior as I hoped. It's still tied to time-based dimensions. 
 
 Not shaming cumulative functions. They work perfectly over time-based dimensions (like Day, Week, Month), because the data has a natural sequential order.
 But for non-time dimensions, like Product, AA or CJA doesn’t handle those values in the way that I want it to. 
@@ -176,7 +176,7 @@ Things can look nice in AA and CJA. So once the excel-formulas were in place, I 
 - Line = cumulative percentage  
 - Horizontal reference line = 80%  
 
-This would allow me to see the discribution. 
+This would allow me to see the distribution. 
 - where the "vital few" products ended  
 - where the long tail began  
 
@@ -206,7 +206,7 @@ With these calculated metrics, I could finally create the bar graph vizualisatio
 
 ![grouping](/assets/images/combopareto.png)
 
-And now I had the foundation needed to explore the nuanced differences between the high-value products and the long tail.
+And now I had the foundation needed to explore the nuanced differences between the high-value products and the long tail. Such as:
 
 - traffic sources  
 - entry pages  
