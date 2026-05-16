@@ -2,16 +2,18 @@
 layout: post
 title: "The Pareto Principle in Adobe Analytics: When Workspace Wasn't Enough"
 subtitle: "Applying the Classic 80/20 Rule to Analytics data and Limitations of Workspace."
+
 tags: [Adobe Analytics, CJA]
 read_time: 7
 emoji: "📊"
 ---
 
-
-![pareto definition](/assets/images/ParetoUpdated.png)
-
-
 I like the idea of the Pareto Principle and its simplicity. 
+
+
+
+![pareto definition](/assets/images/paretofixed.png)
+
 
 The thought that a relatively small number of things often drive the majority of outcomes.
 
