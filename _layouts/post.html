@@ -2,17 +2,17 @@
 layout: default
 ---
 
-{% assign tag = page.tags | first %}
-{% assign color = "none" %}
-{% if tag == "CJA" %}{% assign color = "coral" %}{% endif %}
-{% if tag == "AEP" %}{% assign color = "lime" %}{% endif %}
-{% if tag == "Field Notes" %}{% assign color = "sky" %}{% endif %}
-
 <div class="post-wrap">
   <a href="{{ '/posts/' | relative_url }}" class="back-link">← all posts</a>
 
   <div class="post-meta-row">
-    <span class="tag-pill {{ color }}">{{ tag }}</span>
+    {% for tag in page.tags %}
+      {% assign color = "none" %}
+      {% if tag == "CJA" %}{% assign color = "coral" %}{% endif %}
+      {% if tag == "AEP" %}{% assign color = "lime" %}{% endif %}
+      {% if tag == "Field Notes" %}{% assign color = "sky" %}{% endif %}
+      <span class="tag-pill {{ color }}">{{ tag }}</span>
+    {% endfor %}
     <span>{{ page.date | date: "%b %-d, %Y" }}</span>
     {% if page.read_time %}<span>· {{ page.read_time }} min</span>{% endif %}
   </div>
