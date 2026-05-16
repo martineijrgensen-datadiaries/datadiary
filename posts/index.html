@@ -20,16 +20,18 @@ title: Posts
 
 <div class="post-grid" id="post-grid">
   {% for post in site.posts %}
-    {% assign tag = post.tags | first %}
-    {% assign color = "none" %}
-    {% if tag == "CJA" %}{% assign color = "coral" %}{% endif %}
-    {% if tag == "AEP" %}{% assign color = "lime" %}{% endif %}
-    {% if tag == "Field Notes" %}{% assign color = "sky" %}{% endif %}
-
     <a href="{{ post.url | relative_url }}" class="post-card" data-tags="{{ post.tags | join: ',' }}">
       <div class="card-tape"></div>
       <div class="card-top-row">
-        <span class="tag-pill {{ color }}">{{ tag }}</span>
+        <div class="card-tags">
+          {% for tag in post.tags %}
+            {% assign color = "none" %}
+            {% if tag == "CJA" %}{% assign color = "coral" %}{% endif %}
+            {% if tag == "AEP" %}{% assign color = "lime" %}{% endif %}
+            {% if tag == "Field Notes" %}{% assign color = "sky" %}{% endif %}
+            <span class="tag-pill {{ color }}">{{ tag }}</span>
+          {% endfor %}
+        </div>
         {% if post.read_time %}<span class="card-read-time">{{ post.read_time }} min</span>{% endif %}
       </div>
       {% if post.emoji %}<div class="card-emoji">{{ post.emoji }}</div>{% endif %}

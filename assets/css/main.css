@@ -251,6 +251,12 @@ a { color: inherit; }
 .tag-pill.sky   { background: var(--sky); }
 .tag-pill.none  { background: transparent; }
 
+.card-tags {
+  display: flex;
+  gap: .375rem;
+  flex-wrap: wrap;
+}
+
 .card-read-time {
   font-family: var(--font-mono);
   font-size: .7rem;
