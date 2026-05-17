@@ -253,6 +253,6 @@ I initially thought this would be a pure Analytics exercise.
 
 Instead, it became a good reminder that analysis work can sometimes live between tools.
 
-That's alright. I got the analysis to work. The only thing to keep in mind with this approach is that you get a snapshot of the real world. It does not automatically update. You could probably set that up. 
+That's alright. I got the analysis to work. The main thing to keep in mind with this approach is that it gives you a snapshot of the real world at a specific point in time. This is not really meant for a dashboard. This is an analyst setting up for a one-time analysis. The data does not automatically update, although you could probably build a setup that does.
 
 
