@@ -29,6 +29,7 @@ A Tag Manager is a small piece of code that loads on every page of your website.
 The most common Tag Manager in the Adobe world is **Adobe Experience Platform Tags** (often called Launch, because that was its original name). But you might also come across Google Tag Manager if you're working in a different environment.
 
 The Tag Manager itself doesn't do much on its own. Think of it as a control panel. The actual instructions live inside **rules**. A Tag Manager can collect some browser and page context automatically without requiring a business-specific implementation. But for richer and more reliable tracking, it often relies on a data layer available on the website. It can then read those values and send them to analytics and marketing platforms such as AA or CJA.. or GA.. 
+
 The Tag Manager makes the bridge between the data on the website and the tools that consume and process that data.
 
 ![tagmanager](/assets/images/tagfixed.png)
