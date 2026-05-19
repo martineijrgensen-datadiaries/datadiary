@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1300 840" font-family="'Helvetica Neue', Arial, sans-serif">
+<defs>
+  <marker id="arr" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <polygon points="0 0, 10 3.5, 0 7" fill="#7B52AB"/>
+  </marker>
+  <filter id="sh">
+    <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#00000018"/>
+  </filter>
+</defs>
+<rect width="1300" height="840" fill="white"/>
+<text x="180" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="#1A1A2E" letter-spacing="1">WHAT HAPPENS</text>
+<text x="180" y="44" text-anchor="middle" font-size="13" font-weight="700" fill="#1A1A2E" letter-spacing="1">ON YOUR WEBSITE</text>
+<text x="180" y="60" text-anchor="middle" font-size="11" fill="#888888">All events &amp; interactions</text>
+<rect x="100" y="68" width="240" height="178" rx="8" fill="white" stroke="#CCCCCC" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="100" y="68" width="240" height="24" rx="8" fill="#E0E0E0"/>
+<rect x="100" y="84" width="240" height="8" fill="#E0E0E0"/>
+<circle cx="113" cy="80" r="4" fill="#FF5F57"/>
+<circle cx="126" cy="80" r="4" fill="#FEBC2E"/>
+<circle cx="139" cy="80" r="4" fill="#28C840"/>
+<rect x="154" y="75" width="176" height="10" rx="3" fill="#F5F5F5" stroke="#DDDDDD" stroke-width="0.5"/>
+<rect x="100" y="92" width="240" height="154" fill="#D4E8F5"/>
+<polygon points="100,246 155,146 210,246" fill="#B8D5E8"/>
+<polygon points="145,246 220,120 295,246" fill="#9EC5DC"/>
+<polygon points="220,246 280,130 340,246" fill="#AACCE0"/>
+<rect x="100" y="224" width="240" height="22" fill="#C8DFE8"/>
+<rect x="188" y="206" width="84" height="24" rx="4" fill="#4A7FE8"/>
+<text x="230" y="222" text-anchor="middle" font-size="10.5" fill="white" font-weight="600">Learn more</text>
+<rect x="14" y="94" width="14" height="17" rx="2" fill="#EEE8F8" stroke="#7B52AB" stroke-width="1.2"/>
+<line x1="17" y1="99" x2="25" y2="99" stroke="#7B52AB" stroke-width="1.2"/>
+<line x1="17" y1="103" x2="25" y2="103" stroke="#7B52AB" stroke-width="1.2"/>
+<line x1="17" y1="107" x2="22" y2="107" stroke="#7B52AB" stroke-width="1.2"/>
+<text x="36" y="102" font-size="11" fill="#333333" font-weight="500">Page</text>
+<text x="36" y="115" font-size="11" fill="#333333" font-weight="500">load</text>
+<circle cx="88" cy="103" r="5" fill="#7B9DE8"/>
+<line x1="93" y1="103" x2="100" y2="103" stroke="#7B9DE8" stroke-width="1.5" stroke-dasharray="4,3"/>
+<path d="M14,157 L14,143 L23,152 L19,152 L21,157 L19,158 L17,153 L14,157Z" fill="#7B52AB"/>
+<text x="36" y="150" font-size="11" fill="#333333" font-weight="500">Button</text>
+<text x="36" y="163" font-size="11" fill="#333333" font-weight="500">click</text>
+<circle cx="88" cy="151" r="5" fill="#64C8A8"/>
+<line x1="93" y1="151" x2="100" y2="151" stroke="#64C8A8" stroke-width="1.5" stroke-dasharray="4,3"/>
+<rect x="14" y="191" width="16" height="14" rx="2" fill="#EEE8F8" stroke="#7B52AB" stroke-width="1.2"/>
+<line x1="17" y1="195" x2="27" y2="195" stroke="#7B52AB" stroke-width="1.2"/>
+<line x1="17" y1="199" x2="27" y2="199" stroke="#7B52AB" stroke-width="1.2"/>
+<rect x="14" y="203" width="8" height="4" rx="1" fill="#7B52AB"/>
+<text x="36" y="198" font-size="11" fill="#333333" font-weight="500">Form</text>
+<text x="36" y="211" font-size="11" fill="#333333" font-weight="500">submit</text>
+<circle cx="88" cy="199" r="5" fill="#7B9DE8"/>
+<line x1="93" y1="199" x2="100" y2="199" stroke="#7B9DE8" stroke-width="1.5" stroke-dasharray="4,3"/>
+<line x1="21" y1="239" x2="21" y2="253" stroke="#7B52AB" stroke-width="2"/>
+<polyline points="17,248 21,254 25,248" fill="none" stroke="#7B52AB" stroke-width="1.5"/>
+<text x="36" y="246" font-size="11" fill="#333333" font-weight="500">Scroll</text>
+<text x="36" y="259" font-size="11" fill="#333333" font-weight="500">depth</text>
+<circle cx="88" cy="247" r="5" fill="#F0A040"/>
+<line x1="93" y1="247" x2="100" y2="247" stroke="#F0A040" stroke-width="1.5" stroke-dasharray="4,3"/>
+<circle cx="21" cy="295" r="9" fill="#EEE8F8" stroke="#7B52AB" stroke-width="1.2"/>
+<polygon points="18,291 27,295 18,299" fill="#7B52AB"/>
+<text x="36" y="294" font-size="11" fill="#333333" font-weight="500">Video</text>
+<text x="36" y="307" font-size="11" fill="#333333" font-weight="500">play</text>
+<circle cx="88" cy="295" r="5" fill="#E84A4A"/>
+<line x1="93" y1="295" x2="100" y2="295" stroke="#E84A4A" stroke-width="1.5" stroke-dasharray="4,3"/>
+<rect x="22" y="335" width="306" height="180" rx="6" fill="#F8F0FF" stroke="#C4A8E8" stroke-width="1.5" stroke-dasharray="6,4"/>
+<text x="175" y="353" text-anchor="middle" font-size="10" font-weight="700" fill="#7B52AB" letter-spacing="0.5">DATA LAYER (on the website)</text>
+<text x="34" y="371" font-size="10" fill="#444444" font-family="'Courier New', monospace">window.adobeDataLayer.push({</text>
+<text x="34" y="389" font-size="10" fill="#444444" font-family="'Courier New', monospace">  pageName: "datadiary:home",</text>
+<text x="34" y="407" font-size="10" fill="#444444" font-family="'Courier New', monospace">  contentType: "blog",</text>
+<text x="34" y="425" font-size="10" fill="#444444" font-family="'Courier New', monospace">  author: "Martine Jørgensen",</text>
+<text x="34" y="443" font-size="10" fill="#444444" font-family="'Courier New', monospace">  category: "Analytics",</text>
+<text x="34" y="461" font-size="10" fill="#444444" font-family="'Courier New', monospace">  ...</text>
+<text x="34" y="479" font-size="10" fill="#444444" font-family="'Courier New', monospace">});</text>
+<text x="175" y="505" text-anchor="middle" font-size="10" fill="#9B7BC8" font-style="italic">Business data &amp; context</text>
+<line x1="340" y1="195" x2="375" y2="195" stroke="#7B52AB" stroke-width="2.5" marker-end="url(#arr)"/>
+<rect x="382" y="18" width="490" height="482" rx="10" fill="#F8F0FF" stroke="#9B7BC8" stroke-width="2"/>
+<rect x="597" y="30" width="60" height="48" rx="12" fill="#7B52AB"/>
+<polygon points="657,58 649,46 649,70" fill="#F8F0FF"/>
+<circle cx="615" cy="48" r="5.5" fill="white" opacity="0.9"/>
+<line x1="609" y1="62" x2="637" y2="62" stroke="white" stroke-width="2"/>
+<line x1="609" y1="70" x2="631" y2="70" stroke="white" stroke-width="2"/>
+<text x="627" y="104" text-anchor="middle" font-size="16" font-weight="700" fill="#7B52AB" letter-spacing="1">TAG MANAGER</text>
+<text x="627" y="120" text-anchor="middle" font-size="11" fill="#7B52AB" font-weight="600">The control center</text>
+<text x="627" y="140" text-anchor="middle" font-size="11" fill="#555555">Loads on every page</text>
+<text x="627" y="154" text-anchor="middle" font-size="11" fill="#555555">Sees everything in the browser</text>
+<line x1="396" y1="168" x2="858" y2="168" stroke="#D4BAF0" stroke-width="1"/>
+<rect x="392" y="178" width="225" height="250" rx="8" fill="white" stroke="#D4BAF0" stroke-width="1.2"/>
+<text x="504" y="196" text-anchor="middle" font-size="9.5" font-weight="700" fill="#7B52AB" letter-spacing="0.5">AUTOMATIC CONTEXT</text>
+<circle cx="408" cy="221" r="10" fill="#EEE8F8"/>
+<path d="M403,224 a5,5 0 0,1 10,0" fill="none" stroke="#7B52AB" stroke-width="1.5"/>
+<line x1="408" y1="219" x2="408" y2="229" stroke="#7B52AB" stroke-width="1.2"/>
+<text x="423" y="225" font-size="11" fill="#333333">Page URL</text>
+<circle cx="408" cy="254" r="10" fill="#EEE8F8"/>
+<rect x="403" y="249" width="10" height="12" rx="1" fill="none" stroke="#7B52AB" stroke-width="1.2"/>
+<line x1="405" y1="253" x2="411" y2="253" stroke="#7B52AB" stroke-width="1"/>
+<line x1="405" y1="256" x2="411" y2="256" stroke="#7B52AB" stroke-width="1"/>
+<text x="423" y="258" font-size="11" fill="#333333">Page Title</text>
+<circle cx="408" cy="287" r="10" fill="#EEE8F8"/>
+<path d="M402,287 L414,287" stroke="#7B52AB" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="423" y="291" font-size="11" fill="#333333">Referrer</text>
+<circle cx="408" cy="320" r="10" fill="#EEE8F8"/>
+<rect x="402" y="316" width="12" height="9" rx="1" fill="none" stroke="#7B52AB" stroke-width="1.2"/>
+<line x1="408" y1="325" x2="408" y2="328" stroke="#7B52AB" stroke-width="1.5"/>
+<text x="423" y="324" font-size="11" fill="#333333">Device / Browser</text>
+<circle cx="408" cy="353" r="10" fill="#EEE8F8"/>
+<circle cx="408" cy="351" r="4" fill="none" stroke="#7B52AB" stroke-width="1.2"/>
+<line x1="408" y1="355" x2="408" y2="360" stroke="#7B52AB" stroke-width="1.5"/>
+<text x="423" y="357" font-size="11" fill="#333333">Location</text>
+<circle cx="408" cy="386" r="10" fill="#EEE8F8"/>
+<circle cx="408" cy="386" r="5" fill="none" stroke="#7B52AB" stroke-width="1.2"/>
+<line x1="408" y1="386" x2="408" y2="382" stroke="#7B52AB" stroke-width="1.2"/>
+<line x1="408" y1="386" x2="411" y2="388" stroke="#7B52AB" stroke-width="1.2"/>
+<text x="423" y="390" font-size="11" fill="#333333">Date &amp; Time</text>
+<rect x="637" y="178" width="217" height="250" rx="8" fill="white" stroke="#D4BAF0" stroke-width="1.2"/>
+<text x="745" y="196" text-anchor="middle" font-size="9.5" font-weight="700" fill="#7B52AB" letter-spacing="0.5">RULES &amp; CONDITIONS</text>
+<text x="649" y="223" font-size="11" font-weight="700" fill="#333333">If</text>
+<rect x="645" y="230" width="201" height="30" rx="6" fill="#EEE8F8" stroke="#C4A8E8" stroke-width="1"/>
+<text x="745" y="250" text-anchor="middle" font-size="11" fill="#333333">Page Type = Home</text>
+<line x1="745" y1="260" x2="745" y2="280" stroke="#9B7BC8" stroke-width="1.5"/>
+<text x="649" y="277" font-size="11" font-weight="700" fill="#333333">and</text>
+<rect x="645" y="284" width="201" height="30" rx="6" fill="#EEE8F8" stroke="#C4A8E8" stroke-width="1"/>
+<text x="745" y="304" text-anchor="middle" font-size="11" fill="#333333">Event = Page Load</text>
+<line x1="745" y1="314" x2="745" y2="334" stroke="#9B7BC8" stroke-width="1.5"/>
+<text x="649" y="331" font-size="11" font-weight="700" fill="#333333">then</text>
+<rect x="645" y="338" width="201" height="30" rx="6" fill="#C4A8E8" stroke="#9B7BC8" stroke-width="1.2"/>
+<text x="745" y="358" text-anchor="middle" font-size="11" fill="#333333" font-weight="600">Fire Tag</text>
+<polygon points="627,440 613,458 641,458" fill="#9B7BC8"/>
+<rect x="392" y="456" width="470" height="54" rx="8" fill="#C4A8E8" stroke="#9B7BC8" stroke-width="1.5"/>
+<text x="627" y="474" text-anchor="middle" font-size="10" font-weight="700" fill="#3D1F6E" letter-spacing="0.5">TAGS (ACTIONS)</text>
+<text x="627" y="491" text-anchor="middle" font-size="11" fill="#3D1F6E">Send data to analytics, marketing</text>
+<text x="627" y="505" text-anchor="middle" font-size="11" fill="#3D1F6E">or other tools</text>
+<text x="1081" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="#1A1A2E" letter-spacing="1">DESTINATIONS</text>
+<text x="1081" y="44" text-anchor="middle" font-size="11" fill="#888888">Your data, your tools</text>
+<rect x="898" y="60" width="370" height="90" rx="8" fill="white" stroke="#DDDDDD" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="910" y="72" width="58" height="58" rx="10" fill="#E8302A"/>
+<text x="939" y="112" text-anchor="middle" font-size="30" font-weight="700" fill="white">A</text>
+<text x="978" y="93" font-size="13" font-weight="700" fill="#1A1A2E">Adobe Analytics</text>
+<text x="978" y="113" font-size="11" fill="#666666">Collect &amp; analyze</text>
+<text x="978" y="129" font-size="11" fill="#666666">behavior data</text>
+<line x1="872" y1="105" x2="895" y2="105" stroke="#7B52AB" stroke-width="2" marker-end="url(#arr)"/>
+<rect x="898" y="164" width="370" height="90" rx="8" fill="white" stroke="#DDDDDD" stroke-width="1.5" filter="url(#sh)"/>
+<circle cx="939" cy="205" r="29" fill="#7B52AB"/>
+<path d="M927,205 a12,12 0 1,1 18,10" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M945,215 a6,6 0 1,0 -6,-10" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+<text x="978" y="189" font-size="13" font-weight="700" fill="#1A1A2E">Adobe Customer</text>
+<text x="978" y="207" font-size="13" font-weight="700" fill="#1A1A2E">Journey Analytics</text>
+<text x="978" y="227" font-size="11" fill="#666666">Cross-channel</text>
+<text x="978" y="243" font-size="11" fill="#666666">analysis &amp; insights</text>
+<line x1="872" y1="209" x2="895" y2="209" stroke="#7B52AB" stroke-width="2" marker-end="url(#arr)"/>
+<rect x="898" y="268" width="370" height="90" rx="8" fill="white" stroke="#DDDDDD" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="910" y="280" width="58" height="58" rx="10" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<rect x="918" y="295" width="10" height="35" rx="2" fill="#F5C242"/>
+<rect x="930" y="282" width="10" height="48" rx="2" fill="#E8A020"/>
+<rect x="942" y="308" width="10" height="22" rx="2" fill="#F0B030"/>
+<rect x="954" y="288" width="10" height="42" rx="2" fill="#E8A020"/>
+<text x="978" y="301" font-size="13" font-weight="700" fill="#1A1A2E">Google Analytics</text>
+<text x="978" y="321" font-size="11" fill="#666666">Collect &amp; analyze</text>
+<text x="978" y="337" font-size="11" fill="#666666">website data</text>
+<line x1="872" y1="313" x2="895" y2="313" stroke="#7B52AB" stroke-width="2" marker-end="url(#arr)"/>
+<rect x="898" y="372" width="370" height="90" rx="8" fill="white" stroke="#DDDDDD" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="910" y="384" width="58" height="58" rx="10" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<ellipse cx="939" cy="400" rx="20" ry="7" fill="#AAAAAA"/>
+<rect x="919" y="400" width="40" height="25" fill="#BBBBBB"/>
+<ellipse cx="939" cy="425" rx="20" ry="7" fill="#999999"/>
+<ellipse cx="939" cy="400" rx="20" ry="7" fill="#CCCCCC"/>
+<text x="978" y="405" font-size="13" font-weight="700" fill="#1A1A2E">And more...</text>
+<text x="978" y="425" font-size="11" fill="#666666">CRM, Ads, A/B testing,</text>
+<text x="978" y="441" font-size="11" fill="#666666">Heatmaps, etc.</text>
+<line x1="872" y1="417" x2="895" y2="417" stroke="#7B52AB" stroke-width="2" marker-end="url(#arr)"/>
+<rect x="20" y="545" width="195" height="82" rx="8" fill="white" stroke="#DDDDDD" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="30" y="557" width="32" height="22" rx="3" fill="none" stroke="#7B52AB" stroke-width="1.5"/>
+<rect x="30" y="557" width="32" height="7" rx="3" fill="#EEE8F8"/>
+<circle cx="36" cy="560.5" r="2" fill="#7B52AB"/>
+<circle cx="42" cy="560.5" r="2" fill="#7B52AB"/>
+<circle cx="48" cy="560.5" r="2" fill="#7B52AB"/>
+<line x1="46" y1="579" x2="46" y2="585" stroke="#7B52AB" stroke-width="1.5"/>
+<line x1="40" y1="585" x2="52" y2="585" stroke="#7B52AB" stroke-width="1.5"/>
+<text x="70" y="569" font-size="12" font-weight="700" fill="#1A1A2E">Website</text>
+<text x="70" y="586" font-size="10" fill="#666666">User interactions</text>
+<text x="70" y="600" font-size="10" fill="#666666">&amp; business data</text>
+<rect x="1085" y="545" width="195" height="82" rx="8" fill="white" stroke="#DDDDDD" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="1095" y="575" width="10" height="35" rx="2" fill="#28A063" opacity="0.85"/>
+<rect x="1107" y="560" width="10" height="50" rx="2" fill="#28A063" opacity="0.85"/>
+<rect x="1119" y="582" width="10" height="28" rx="2" fill="#28A063" opacity="0.85"/>
+<rect x="1131" y="566" width="10" height="44" rx="2" fill="#28A063" opacity="0.85"/>
+<text x="1149" y="569" font-size="12" font-weight="700" fill="#1A1A2E">Insights</text>
+<text x="1149" y="586" font-size="10" fill="#666666">Better understanding,</text>
+<text x="1149" y="600" font-size="10" fill="#666666">decisions &amp; growth</text>
+<line x1="221" y1="726" x2="1079" y2="726" stroke="#7B52AB" stroke-width="3.5"/>
+<line x1="221" y1="736" x2="1079" y2="736" stroke="#9B7BC8" stroke-width="1.5"/>
+<rect x="392" y="606" width="14" height="120" fill="#7B52AB"/>
+<rect x="387" y="596" width="24" height="12" rx="3" fill="#5C3D8F"/>
+<rect x="385" y="641" width="28" height="10" rx="2" fill="#5C3D8F"/>
+<rect x="385" y="681" width="28" height="10" rx="2" fill="#5C3D8F"/>
+<rect x="894" y="606" width="14" height="120" fill="#7B52AB"/>
+<rect x="889" y="596" width="24" height="12" rx="3" fill="#5C3D8F"/>
+<rect x="887" y="641" width="28" height="10" rx="2" fill="#5C3D8F"/>
+<rect x="887" y="681" width="28" height="10" rx="2" fill="#5C3D8F"/>
+<path d="M 221,716 Q 301,686 399,601" fill="none" stroke="#5C3D8F" stroke-width="2.5"/>
+<path d="M 399,601 Q 650.0,704 901,601" fill="none" stroke="#5C3D8F" stroke-width="2.5"/>
+<path d="M 901,601 Q 999,686 1079,716" fill="none" stroke="#5C3D8F" stroke-width="2.5"/>
+<line x1="455" y1="642" x2="455" y2="726" stroke="#9B7BC8" stroke-width="1.3"/>
+<line x1="511" y1="672" x2="511" y2="726" stroke="#9B7BC8" stroke-width="1.3"/>
+<line x1="566" y1="693" x2="566" y2="726" stroke="#9B7BC8" stroke-width="1.3"/>
+<line x1="622" y1="703" x2="622" y2="726" stroke="#9B7BC8" stroke-width="1.3"/>
+<line x1="678" y1="703" x2="678" y2="726" stroke="#9B7BC8" stroke-width="1.3"/>
+<line x1="734" y1="693" x2="734" y2="726" stroke="#9B7BC8" stroke-width="1.3"/>
+<line x1="789" y1="672" x2="789" y2="726" stroke="#9B7BC8" stroke-width="1.3"/>
+<line x1="845" y1="642" x2="845" y2="726" stroke="#9B7BC8" stroke-width="1.3"/>
+<line x1="215" y1="586" x2="221" y2="726" stroke="#9B7BC8" stroke-width="1.5" stroke-dasharray="5,4"/>
+<line x1="1079" y1="726" x2="1085" y2="586" stroke="#9B7BC8" stroke-width="1.5" stroke-dasharray="5,4"/>
+<line x1="175" y1="515" x2="117" y2="545" stroke="#9B7BC8" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arr)"/>
+<text x="650" y="764" text-anchor="middle" font-size="14" font-weight="700" fill="#7B52AB" letter-spacing="1">THE BRIDGE</text>
+<text x="650" y="783" text-anchor="middle" font-size="11" fill="#444444">Tag Manager connects what happens on your website</text>
+<text x="650" y="799" text-anchor="middle" font-size="11" fill="#444444">with the tools that turn data into insights.</text>
+</svg>
