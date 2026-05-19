@@ -108,7 +108,7 @@ Adobe's servers receive that message, process it, and a few seconds later the nu
 For **Adobe Analytics**, this beacon is a classic, lightweight request. It has been working this way since the early days of digital analytics, and it's remarkably simple under the hood. Illustrated below as cute as possible:
 
 
-![edgenetwork](/assets/images/beaconcute.png)
+![beacon](/assets/images/Beaconcute.png)
 
 
 For **Adobe Experience Platform (AEP) and CJA**, the setup is a bit more modern. Data is sent through something called the **Edge Network**, which is Adobe's way of receiving data and routing it to the right places -> your dataset in AEP, Adobe Analytics, Journey Optimizer.. all from one single signal. Think of it as a smarter post office that knows where each package should go: 
