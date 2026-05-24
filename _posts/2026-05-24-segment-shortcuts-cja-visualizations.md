@@ -7,7 +7,7 @@ read_time: 6
 emoji: "✂️"
 ---
 
-I think most Analytics users tend create sequences and logic by starting in an empty segment builder. It's like a primal instinct. 
+I think most Analytics users tend to create sequences and logic by starting in an empty segment builder. It's like a primal instinct. 
 
 
 Or a reflex I just cannot seem to shake. Something interesting appears in the data. A hunch. A vague theory. A weird smell. Someone started a BBQ at the office? Anyways, before I've even finished the thought, I've already opened the Segment Builder and started typing conditions into it like a person who definitely knows what they're doing. 
@@ -35,7 +35,7 @@ Here are the ones I find most useful (so far).
 
 This is a classic. 
 
-And I still think the Histogram is one of the more underused panels in Workspace. It's great for many differnet purposes.  It has a built-in segmentation behavior that I think is genuinely good. 
+And I still think the Histogram is one of the more underused panels in Workspace. It's great for many different purposes.  It has a built-in segmentation behavior that I think is genuinely good. 
 
 You locate it under the visualisation tabs in your workspace project. 
 
@@ -59,7 +59,7 @@ From there, you can hover over any segment, open the preview, and save it direct
 
 ## Guided Analysis: Frequency
 
-Now this is a tip I remember from one of the Summit sessions. I'll link it. right here when I find it again, because it as awesome and super practical.
+Now this is a tip I remember from one of the Summit sessions. I'll link it right here when I find it again, because it was awesome and super practical.
 
 Guided Analysis has a **Frequency** view that shows the same kind of distribution from a slightly different angle. 
 
@@ -83,7 +83,7 @@ Journey Canvas is primarily a path analysis tool, but it has a segmentation shor
 
 <img class="datadiaryimage--rounded" src="{{ "/assets/images/journey-canvas-segment.png" | relative_url }}" alt="Journey Canvas showing Create segment from node context menu">
 
-Right-click any node in the canvas and you get a context menu. **Create segment from node** generates a segment for users who reached that specific point in the journey. **Create audience from node** does the same but publishes it to AEP for activation. So here you get two differnet ways of creating an segment depending on your goal. 
+Right-click any node in the canvas and you get a context menu. **Create segment from node** generates a segment for users who reached that specific point in the journey. **Create audience from node** does the same but publishes it to AEP for activation. So here you get two different ways of creating an segment depending on your goal. 
 
 This is the fast path for questions like:
 
@@ -98,19 +98,19 @@ The segment definition matches the path logic you already configured in the canv
 
 ## Using the Next/Previous Page Panel
 
-The Next/Previous Page analysis also creates a segment built around sequential behavior.. what page came before or after a given point.
+The Next/Previous Page analysis also creates a segment built around sequential behavior... what page came before or after a given point.
 
 <img class="datadiaryimage--rounded" src="{{ "/assets/images/flow-sequential-segment.png" | relative_url }}" alt="Next Page URL analysis showing sequential segment definition">
 
-The segment definition created reflects the sequence logic: `Page URL = X, THEN within 1 page, Page URL exists`. That is a sequential segment. It basically lets us see the specific page views that come immediately after a specific page was visited.So not just any page that came after it at some point, but the very next one.
+The segment definition created reflects the sequence logic: `Page URL = X, THEN within 1 page, Page URL exists`. That is a sequential segment. It basically lets us see the specific page views that come immediately after a specific page was visited. So not just any page that came after it at some point, but the very next one.
 
-The "Non-repeating instance"
+#### The "Non-repeating instance"
 
-I think this is the smart thing about this segment. Even though it was automatically created, it contains a solid logic. The "Non-repeating instance" part means it ignores consecutive duplicate URLs. By that, I mean if someone refreshes the same page it doesn't count as a new step. It's often a segment configutaiton that can be missed. 
+I think this is the smart thing about this segment. Even though it was automatically created, it contains a solid logic. The "Non-repeating instance" part means it ignores consecutive duplicate URLs. By that, I mean if someone refreshes the same page it doesn't count as a new step. It's often a segment configuration that can be missed. 
 
-The "THEN EXCLUDE Page URL exists" 
+#### The "THEN EXCLUDE Page URL exists" 
 
-If you open up the segment, you'll see "THEN EXCLUDE Page URL exists" (the red one at the bottom)
+If you open up the segment, you'll see "THEN EXCLUDE Page URL exists" (the red one at the bottom).
 This is also clever. Without this, the segment would match any page that ever came after the chosen page URL in a session. It means that there is no further page URL after this one in the sequence. That's what makes the table show the immediate next page only and not a page from three steps later. Nice. 
 
 
@@ -129,7 +129,7 @@ If you're working through a funnel analysis and realize one step has unusually h
 
 Auto-generated segments are project-scoped by default. 
 
-There's a banner at the bottom of the preview panel when you open the segment with a check-mark to make them available across all projects. Easy to miss, easy to fix. 
+There's a banner with a check-mark when you open the segment. Click on it to make the segment available across all projects. Easy to miss, easy to fix. 
 
 
 <img class="datadiaryimage--rounded" src="{{ "/assets/images/Saveacrossprojects.png" | relative_url }}" alt="saveacrossprojects">
