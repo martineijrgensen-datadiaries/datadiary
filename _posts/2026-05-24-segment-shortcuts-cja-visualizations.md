@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Stop Always Using the Segment Builder First"
-subtitle: "How CJA visualizations build precise segments for you, directly from what you're already looking at."
+subtitle: "How CJA and AA visualizations build precise segments for you, directly from what you're already looking at."
 tags: [CJA, Adobe Analytics]
 read_time: 6
 emoji: "✂️"
