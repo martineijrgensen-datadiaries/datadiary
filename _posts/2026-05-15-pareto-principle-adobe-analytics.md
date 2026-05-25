@@ -82,9 +82,24 @@ Something like this:
 
 My first thougth was:
 
-> "Why does a tiny product contribute to 100% of revenue?"
+> "Why does the cumulative percentages look kinda random?"
 
-And I realised using cumulative function and sorting revenue by products in the table does not influence the cumulative behavior as I hoped. It's still tied to time-based dimensions. 
+And I realized using cumulative function and sorting revenue by products in the table does not actually apply the cumulative behavior the way I expected. It's still tied to time-based dimensions. While I expected the percentages in the rows to increase - starting from 7% and accumulating the percentage of the total revenue onto each row (each product).
+
+Imagine you're ranking your grocery items by price... like most expensive at the top and you want a running total column that shows "how much of my total grocery bill is accounted for so far."
+
+This would require the list of groceries to be sorted so the most expensive item is first. But the cash register calculated the running total in the order they scanned things at checkout, which was completely random. Maybe something like that was happening here.
+
+So what you really wanted what something like this:
+
+| Item | Price | Running total % |
+|---|---|---|
+| Steak | €25 | 8% |
+| Salmon | €18 | 	15% |
+| ... | ... | ... |
+| Chewing gum | €0.50 | 100% |
+
+Chewing gum shows 100%. not because it's the most expensive, but because it happened to be the last thing you scanned. That's when the running total hit 100%.
 
 Not shaming cumulative functions. They work perfectly over time-based dimensions (like Day, Week, Month), because the data has a natural sequential order.
 But for non-time dimensions, like Product, AA or CJA doesn’t handle those values in the way that I want it to. 
@@ -92,6 +107,7 @@ But for non-time dimensions, like Product, AA or CJA doesn’t handle those valu
 That was the moment I realized..
 
 > I probably needed Excel.
+
 
 ---
 
