@@ -79,7 +79,7 @@ Imagine you're ranking your grocery items by price... like most expensive at the
 
 This would require the list of groceries to be sorted so the most expensive item is first. But the cash register calculated the running total in the order they scanned things at checkout, which was completely random. Maybe something like that was happening here.
 
-So what you really wanted what something like this:
+So what you really wanted was something like this:
 
 | Item | Price | Running total % |
 |---|---|---|
