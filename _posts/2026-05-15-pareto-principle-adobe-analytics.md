@@ -63,24 +63,13 @@ And all of this which would be fairly simple to create. At least in my head and 
 
 ## Step 2: The First Confusing Part
 
-I started creating a revenue metric with the cumulative function inside Workspace. At first glance it looked correct.
+I started creating a revenue metric with the cumulative function inside Workspace. At first glance it looked correct. Like a table with numbers. 
 
 Then suddenly I noticed things that made absolutely no sense.
 
 ![pareto not working](/assets/images/paretonotworking.png)
 
-
-A product with very low revenue suddenly appeared associated with a very high cumulative percentage.
-
-Something like this:
-
-| Product | Revenue | Cumulative % |
-|---|---|---|
-| prd1036 | High revenue | 7% |
-| ... | ... | ... |
-| prd1026 | Low Revenue | 100% |
-
-My first thougth was:
+My first thought was:
 
 > "Why does the cumulative percentages look kinda random?"
 
