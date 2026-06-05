@@ -119,7 +119,7 @@ Instead of a nightly batch job, a source connector syncs changes on a configurab
 
 ## More Than Just Freshness: Relational Data in AEP
 
-It is worth pausing on something Adobe emphasizes in their documentation that is easy to miss.
+It is worth considering something Adobe emphasizes in their documentation that is easy to miss.
 
 Data Mirror is not only about keeping data up to date. CDC pipelines have existed for a long time. Many teams already run them. What is new here is that AEP now *understands* relational data structures natively.
 
