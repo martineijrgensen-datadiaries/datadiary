@@ -183,7 +183,7 @@ If it **creates a new row** for each state change, your data is append-only. The
 
 So yeah… I am not technical. But understanding how things are running behind the scenes is extremely valuable when numbers suddenly look off and there are possible solutions to these problems. I don't think Data Mirror magic, but it can definitely be a great way of handling certain types of data and remove some frustration.  
 
-Basically: if your data is constantly changing state and you’re still feeding it in like a daily photo, things will drift And you end up debugging numbers consuming liters of coffee, doing millions of queries, and feeling a slight sense of betrayal.
+Basically, if your data is constantly changing state and you're only treating it like a daily photo, things will drift. Then you end up debugging numbers, consuming liters of coffee, running millions of queries, and feeling a slight sense of betrayal. 
 
 **Anyway, I made a great solution over the weekend. So if you click here, all your data problems will disappear. For real.**
 
