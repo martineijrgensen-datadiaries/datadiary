@@ -83,15 +83,21 @@ The technical term for this is **Change Data Capture** aka CDC. Your source syst
 
 ![CDC — How Data Mirror works](/assets/images/cdc-data-mirror.svg)
 
-Going back to the warehouse analogy: instead of a nightly photograph, imagine a **live logbook**. Every time something changes on the floor, it gets written down immediately. "Order #101 moved to Returned at 10:32am." "Customer ID 8844 upgraded to Gold at 14:15pm." The analytics team doesn't work from a photo anymore... they have a live, running record of the current state.
+Going back to the warehouse analogy: instead of a nightly photograph, imagine a **live logbook**. Every time something changes on the floor, it gets written down immediately. 
 
-The result: AEP always reflects what your warehouse actually looks like right now. Not what it looked like at 2am.
+Order #101 moved to Returned at 10:32am.
+
+Customer ID 8844 upgraded to Gold at 14:15pm.
+
+The analytics team doesn't work from a photo anymore... they have a live, running record of the current state.
+
+So the data in CJA will reflect what your warehouse actually looks like right now. Not what it looked like at 2am.
 
 ---
 
 ## How It Works in AEP
 
-This is still new. But from what I've gathered so far is this:
+This is still quite new, but here's what I've gathered so far:
 
 **1. Your source tracks its own changes**
 
