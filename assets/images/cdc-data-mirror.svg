@@ -1,0 +1,281 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 740" width="1280" height="740" font-family="'SF Pro Display', 'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="5" dy="5" stdDeviation="0" flood-color="#C4BEAA" flood-opacity="1"/>
+    </filter>
+    <filter id="shadow-sm" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="3" dy="3" stdDeviation="0" flood-color="#C4BEAA" flood-opacity="1"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1280" height="740" fill="#F7F3EA"/>
+
+  <!-- ── HEADER ──────────────────────────────────────────── -->
+  <rect x="0" y="0" width="1280" height="58" fill="#1C1A2A" rx="0"/>
+  <text x="640" y="30" text-anchor="middle" font-size="20" font-weight="700" fill="white" dy="0.35em">Change Data Capture · How Data Mirror works</text>
+
+  <!-- ── COLUMN LABELS ───────────────────────────────────── -->
+  <text x="190" y="82" text-anchor="middle" font-size="11" font-weight="600" fill="#8A8799" letter-spacing="1.5">SOURCE SYSTEM</text>
+  <text x="540" y="82" text-anchor="middle" font-size="11" font-weight="600" fill="#8A8799" letter-spacing="1.5">CHANGE LOG</text>
+  <text x="1005" y="82" text-anchor="middle" font-size="11" font-weight="600" fill="#8A8799" letter-spacing="1.5">AEP DATA LAKE</text>
+
+  <!-- ══════════════════════════════════════════════════════
+       BOX 1 — Source System
+  ══════════════════════════════════════════════════════════ -->
+  <rect x="45" y="96" width="290" height="560" rx="14" fill="#C4BEAA" filter="none"/>
+  <rect x="40" y="91" width="290" height="560" rx="14" fill="#FDFAF4" stroke="#1C1A2A" stroke-width="2.5"/>
+
+  <!-- box 1 header -->
+  <rect x="40" y="91" width="290" height="40" rx="14" fill="#1C1A2A"/>
+  <rect x="40" y="111" width="290" height="20" fill="#1C1A2A"/>
+  <text x="185" y="115" text-anchor="middle" font-size="13" font-weight="600" fill="white">orders_table</text>
+
+  <!-- column headers -->
+  <text x="58" y="148" font-size="10" fill="#8A8799">order_id</text>
+  <text x="148" y="148" font-size="10" fill="#8A8799">status</text>
+  <text x="248" y="148" font-size="10" fill="#8A8799">updated_at</text>
+  <line x1="52" y1="156" x2="318" y2="156" stroke="#D4CEBC" stroke-width="1"/>
+
+  <!-- row 1 — returned (highlight) -->
+  <rect x="44" y="160" width="282" height="24" rx="4" fill="#FDECEA"/>
+  <text x="58" y="176" font-size="12" fill="#1C1A2A">#101</text>
+  <text x="148" y="176" font-size="12" fill="#E84747">returned</text>
+  <text x="248" y="176" font-size="12" fill="#8A8799">14:33</text>
+
+  <!-- row 2 -->
+  <rect x="44" y="188" width="282" height="24" rx="4" fill="#EAF4FD"/>
+  <text x="58" y="204" font-size="12" fill="#1C1A2A">#102</text>
+  <text x="148" y="204" font-size="12" fill="#7BBFD4">shipped</text>
+  <text x="248" y="204" font-size="12" fill="#8A8799">11:20</text>
+
+  <!-- row 3 -->
+  <rect x="44" y="216" width="282" height="24" rx="4" fill="#EDF9E6"/>
+  <text x="58" y="232" font-size="12" fill="#1C1A2A">#103</text>
+  <text x="148" y="232" font-size="12" fill="#4CAF7D">confirmed</text>
+  <text x="248" y="232" font-size="12" fill="#8A8799">09:55</text>
+
+  <!-- row 4 -->
+  <rect x="44" y="244" width="282" height="24" rx="4" fill="#FFFBEA"/>
+  <text x="58" y="260" font-size="12" fill="#1C1A2A">#104</text>
+  <text x="148" y="260" font-size="12" fill="#F5A623">placed</text>
+  <text x="248" y="260" font-size="12" fill="#8A8799">08:10</text>
+
+  <!-- row 5 -->
+  <rect x="44" y="272" width="282" height="24" rx="4" fill="#FFFBEA"/>
+  <text x="58" y="288" font-size="12" fill="#1C1A2A">#105</text>
+  <text x="148" y="288" font-size="12" fill="#F5A623">placed</text>
+  <text x="248" y="288" font-size="12" fill="#8A8799">08:02</text>
+
+  <!-- mutable note -->
+  <text x="58" y="318" font-size="11" fill="#8A8799">↑  rows update in place</text>
+
+  <!-- cute divider -->
+  <line x1="60" y1="332" x2="310" y2="332" stroke="#D4CEBC" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <!-- what batch misses -->
+  <text x="58" y="358" font-size="13" font-weight="600" fill="#1C1A2A">What batch ingestion misses:</text>
+
+  <rect x="52" y="368" width="270" height="30" rx="8" fill="#FDECEA"/>
+  <text x="68" y="388" font-size="12" fill="#E84747">✗  Returns and cancellations</text>
+
+  <rect x="52" y="404" width="270" height="30" rx="8" fill="#FDECEA"/>
+  <text x="68" y="424" font-size="12" fill="#E84747">✗  Status changes mid-day</text>
+
+  <rect x="52" y="440" width="270" height="30" rx="8" fill="#FDECEA"/>
+  <text x="68" y="460" font-size="12" fill="#E84747">✗  Deleted rows stay forever</text>
+
+  <!-- photo metaphor note -->
+  <rect x="44" y="492" width="282" height="56" rx="10" fill="#F7F3EA" stroke="#D4CEBC" stroke-width="1.5"/>
+  <text x="185" y="514" text-anchor="middle" font-size="13" fill="#8A8799">📸  taken at 2am</text>
+  <text x="185" y="534" text-anchor="middle" font-size="12" fill="#8A8799">stale for the rest of the day</text>
+
+  <!-- ══════════════════════════════════════════════════════
+       ARROW — Source → Change Log
+  ══════════════════════════════════════════════════════════ -->
+  <line x1="336" y1="360" x2="388" y2="360" stroke="#E86A47" stroke-width="2.5" stroke-dasharray="5,3"/>
+  <polygon points="388,354 400,360 388,366" fill="#E86A47"/>
+  <text x="362" y="348" text-anchor="middle" font-size="10" fill="#E86A47" font-weight="600">mutations</text>
+  <text x="362" y="376" text-anchor="middle" font-size="10" fill="#E86A47" font-weight="600">tracked →</text>
+
+  <!-- ══════════════════════════════════════════════════════
+       BOX 2 — Change Log
+  ══════════════════════════════════════════════════════════ -->
+  <rect x="408" y="96" width="310" height="560" rx="14" fill="#C4BEAA"/>
+  <rect x="403" y="91" width="310" height="560" rx="14" fill="#FDFAF4" stroke="#1C1A2A" stroke-width="2.5"/>
+
+  <!-- box 2 header -->
+  <rect x="403" y="91" width="310" height="40" rx="14" fill="#E86A47"/>
+  <rect x="403" y="111" width="310" height="20" fill="#E86A47"/>
+  <text x="558" y="115" text-anchor="middle" font-size="13" font-weight="600" fill="white">change_log  (CDC)</text>
+
+  <!-- log entries -->
+  <!-- entry helper: time | badge | description -->
+
+  <!-- 14:33 UPDATE #101 returned -->
+  <text x="418" y="152" font-size="10" fill="#8A8799">14:33</text>
+  <rect x="460" y="138" width="58" height="18" rx="5" fill="#F5A623"/>
+  <text x="489" y="151" text-anchor="middle" font-size="10" font-weight="700" fill="#1C1A2A">UPDATE</text>
+  <text x="526" y="152" font-size="11" fill="#1C1A2A">#101  status → <tspan font-weight="700" fill="#E84747">returned</tspan></text>
+
+  <!-- 13:10 UPDATE #101 shipped -->
+  <text x="418" y="186" font-size="10" fill="#8A8799">13:10</text>
+  <rect x="460" y="172" width="58" height="18" rx="5" fill="#F5A623"/>
+  <text x="489" y="185" text-anchor="middle" font-size="10" font-weight="700" fill="#1C1A2A">UPDATE</text>
+  <text x="526" y="186" font-size="11" fill="#1C1A2A">#101  status → shipped</text>
+
+  <!-- 11:20 UPDATE #102 shipped -->
+  <text x="418" y="220" font-size="10" fill="#8A8799">11:20</text>
+  <rect x="460" y="206" width="58" height="18" rx="5" fill="#F5A623"/>
+  <text x="489" y="219" text-anchor="middle" font-size="10" font-weight="700" fill="#1C1A2A">UPDATE</text>
+  <text x="526" y="220" font-size="11" fill="#1C1A2A">#102  status → shipped</text>
+
+  <!-- 10:45 UPDATE #101 confirmed -->
+  <text x="418" y="254" font-size="10" fill="#8A8799">10:45</text>
+  <rect x="460" y="240" width="58" height="18" rx="5" fill="#F5A623"/>
+  <text x="489" y="253" text-anchor="middle" font-size="10" font-weight="700" fill="#1C1A2A">UPDATE</text>
+  <text x="526" y="254" font-size="11" fill="#1C1A2A">#101  status → confirmed</text>
+
+  <!-- 10:05 INSERT #105 -->
+  <text x="418" y="288" font-size="10" fill="#8A8799">10:05</text>
+  <rect x="460" y="274" width="52" height="18" rx="5" fill="#4CAF7D"/>
+  <text x="486" y="287" text-anchor="middle" font-size="10" font-weight="700" fill="white">INSERT</text>
+  <text x="520" y="288" font-size="11" fill="#1C1A2A">#105  status = placed</text>
+
+  <!-- 09:55 UPDATE #103 -->
+  <text x="418" y="322" font-size="10" fill="#8A8799">09:55</text>
+  <rect x="460" y="308" width="58" height="18" rx="5" fill="#F5A623"/>
+  <text x="489" y="321" text-anchor="middle" font-size="10" font-weight="700" fill="#1C1A2A">UPDATE</text>
+  <text x="526" y="322" font-size="11" fill="#1C1A2A">#103  status → confirmed</text>
+
+  <!-- 09:12 INSERT #104 -->
+  <text x="418" y="356" font-size="10" fill="#8A8799">09:12</text>
+  <rect x="460" y="342" width="52" height="18" rx="5" fill="#4CAF7D"/>
+  <text x="486" y="355" text-anchor="middle" font-size="10" font-weight="700" fill="white">INSERT</text>
+  <text x="520" y="356" font-size="11" fill="#1C1A2A">#104  status = placed</text>
+
+  <!-- 08:30 DELETE #099 -->
+  <text x="418" y="390" font-size="10" fill="#8A8799">08:30</text>
+  <rect x="460" y="376" width="52" height="18" rx="5" fill="#E84747"/>
+  <text x="486" y="389" text-anchor="middle" font-size="10" font-weight="700" fill="white">DELETE</text>
+  <text x="520" y="390" font-size="11" fill="#1C1A2A">#099  order cancelled</text>
+
+  <!-- 08:10 INSERT #103 -->
+  <text x="418" y="424" font-size="10" fill="#8A8799">08:10</text>
+  <rect x="460" y="410" width="52" height="18" rx="5" fill="#4CAF7D"/>
+  <text x="486" y="423" text-anchor="middle" font-size="10" font-weight="700" fill="white">INSERT</text>
+  <text x="520" y="424" font-size="11" fill="#1C1A2A">#103  status = placed</text>
+
+  <!-- 08:02 INSERT #102 -->
+  <text x="418" y="458" font-size="10" fill="#8A8799">08:02</text>
+  <rect x="460" y="444" width="52" height="18" rx="5" fill="#4CAF7D"/>
+  <text x="486" y="457" text-anchor="middle" font-size="10" font-weight="700" fill="white">INSERT</text>
+  <text x="520" y="458" font-size="11" fill="#1C1A2A">#102  status = placed</text>
+
+  <!-- 07:41 INSERT #101 -->
+  <text x="418" y="492" font-size="10" fill="#8A8799">07:41</text>
+  <rect x="460" y="478" width="52" height="18" rx="5" fill="#4CAF7D"/>
+  <text x="486" y="491" text-anchor="middle" font-size="10" font-weight="700" fill="white">INSERT</text>
+  <text x="520" y="492" font-size="11" fill="#1C1A2A">#101  status = placed</text>
+
+  <!-- logbook note -->
+  <rect x="411" y="508" width="294" height="34" rx="10" fill="#F7F3EA" stroke="#D4CEBC" stroke-width="1.5"/>
+  <text x="558" y="529" text-anchor="middle" font-size="12" fill="#8A8799">📓  complete history of every change</text>
+
+  <!-- ══════════════════════════════════════════════════════
+       DATA MIRROR PILL
+  ══════════════════════════════════════════════════════════ -->
+  <rect x="725" y="318" width="90" height="82" rx="14" fill="#1C1A2A" filter="url(#shadow-sm)"/>
+  <text x="770" y="348" text-anchor="middle" font-size="14" font-weight="700" fill="white">Data</text>
+  <text x="770" y="367" text-anchor="middle" font-size="14" font-weight="700" fill="#E86A47">Mirror</text>
+  <text x="770" y="384" text-anchor="middle" font-size="10" fill="#AAA8B8">reads log →</text>
+
+  <!-- ══════════════════════════════════════════════════════
+       BOX 3 — AEP Data Lake
+  ══════════════════════════════════════════════════════════ -->
+  <rect x="828" y="96" width="410" height="560" rx="14" fill="#C4BEAA"/>
+  <rect x="823" y="91" width="410" height="560" rx="14" fill="#FDFAF4" stroke="#1C1A2A" stroke-width="2.5"/>
+
+  <!-- box 3 header -->
+  <rect x="823" y="91" width="410" height="40" rx="14" fill="#7DB840"/>
+  <rect x="823" y="111" width="410" height="20" fill="#7DB840"/>
+  <text x="1028" y="115" text-anchor="middle" font-size="13" font-weight="600" fill="white">AEP  ·  Relational Dataset</text>
+
+  <!-- current state label -->
+  <text x="840" y="148" font-size="11" fill="#8A8799">Current state  ·  deduplicated  ·  always up to date</text>
+  <line x1="832" y1="156" x2="1224" y2="156" stroke="#D4CEBC" stroke-width="1"/>
+
+  <!-- aep column headers -->
+  <text x="848" y="170" font-size="10" fill="#8A8799">order_id</text>
+  <text x="950" y="170" font-size="10" fill="#8A8799">status</text>
+  <text x="1090" y="170" font-size="10" fill="#8A8799">updated_at</text>
+  <line x1="832" y1="178" x2="1224" y2="178" stroke="#D4CEBC" stroke-width="1"/>
+
+  <!-- aep row 1 — highlighted (latest mutation applied) -->
+  <rect x="827" y="182" width="402" height="26" rx="5" fill="#FDECEA" stroke="#E86A47" stroke-width="1.5"/>
+  <text x="848" y="199" font-size="12" fill="#1C1A2A">#101</text>
+  <text x="950" y="199" font-size="12" font-weight="600" fill="#E84747">returned</text>
+  <text x="1090" y="199" font-size="12" fill="#8A8799">14:33</text>
+  <text x="1185" y="197" font-size="10" fill="#E86A47">← latest</text>
+
+  <!-- aep row 2 -->
+  <rect x="827" y="212" width="402" height="26" rx="5" fill="#EAF4FD"/>
+  <text x="848" y="229" font-size="12" fill="#1C1A2A">#102</text>
+  <text x="950" y="229" font-size="12" fill="#7BBFD4">shipped</text>
+  <text x="1090" y="229" font-size="12" fill="#8A8799">11:20</text>
+
+  <!-- aep row 3 -->
+  <rect x="827" y="242" width="402" height="26" rx="5" fill="#EDF9E6"/>
+  <text x="848" y="259" font-size="12" fill="#1C1A2A">#103</text>
+  <text x="950" y="259" font-size="12" fill="#4CAF7D">confirmed</text>
+  <text x="1090" y="259" font-size="12" fill="#8A8799">09:55</text>
+
+  <!-- aep row 4 -->
+  <rect x="827" y="272" width="402" height="26" rx="5" fill="#FFFBEA"/>
+  <text x="848" y="289" font-size="12" fill="#1C1A2A">#104</text>
+  <text x="950" y="289" font-size="12" fill="#F5A623">placed</text>
+  <text x="1090" y="289" font-size="12" fill="#8A8799">08:10</text>
+
+  <!-- aep row 5 -->
+  <rect x="827" y="302" width="402" height="26" rx="5" fill="#FFFBEA"/>
+  <text x="848" y="319" font-size="12" fill="#1C1A2A">#105</text>
+  <text x="950" y="319" font-size="12" fill="#F5A623">placed</text>
+  <text x="1090" y="319" font-size="12" fill="#8A8799">08:02</text>
+
+  <!-- cute divider -->
+  <line x1="840" y1="342" x2="1220" y2="342" stroke="#D4CEBC" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <!-- checkmarks -->
+  <text x="840" y="368" font-size="13" font-weight="600" fill="#1C1A2A">What Data Mirror gives you:</text>
+
+  <rect x="832" y="378" width="394" height="30" rx="8" fill="#EDF9E6"/>
+  <text x="852" y="398" font-size="12" fill="#4CAF7D">✓  One row per order — no duplicates</text>
+
+  <rect x="832" y="414" width="394" height="30" rx="8" fill="#EDF9E6"/>
+  <text x="852" y="434" font-size="12" fill="#4CAF7D">✓  Always reflects the latest status</text>
+
+  <rect x="832" y="450" width="394" height="30" rx="8" fill="#EDF9E6"/>
+  <text x="852" y="470" font-size="12" fill="#4CAF7D">✓  Deletions propagate automatically</text>
+
+  <rect x="832" y="486" width="394" height="30" rx="8" fill="#EDF9E6"/>
+  <text x="852" y="506" font-size="12" fill="#4CAF7D">✓  No custom ETL required</text>
+
+  <!-- live note -->
+  <rect x="832" y="528" width="394" height="34" rx="10" fill="#F7F3EA" stroke="#7DB840" stroke-width="1.5"/>
+  <text x="1029" y="549" text-anchor="middle" font-size="12" fill="#4A8A20">🟢  live · synced · deduplicated</text>
+
+  <!-- ══════════════════════════════════════════════════════
+       LEGEND
+  ══════════════════════════════════════════════════════════ -->
+  <rect x="40" y="670" width="64" height="22" rx="6" fill="#4CAF7D"/>
+  <text x="72" y="685" text-anchor="middle" font-size="11" font-weight="700" fill="white">INSERT</text>
+
+  <rect x="116" y="670" width="66" height="22" rx="6" fill="#F5A623"/>
+  <text x="149" y="685" text-anchor="middle" font-size="11" font-weight="700" fill="#1C1A2A">UPDATE</text>
+
+  <rect x="194" y="670" width="64" height="22" rx="6" fill="#E84747"/>
+  <text x="226" y="685" text-anchor="middle" font-size="11" font-weight="700" fill="white">DELETE</text>
+
+  <text x="275" y="684" font-size="11" fill="#8A8799">·  highlighted row (#101) shows the latest mutation applied to AEP</text>
+
+</svg>

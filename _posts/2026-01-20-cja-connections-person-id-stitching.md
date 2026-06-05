@@ -11,13 +11,14 @@ How does Customer Journey Analytics connection setup work? And can you already r
 
 When you create a Connection with different datasets, CJA does not keep those datasets separate.
 
-Instead:
+### Instead:
 
 - All included event datasets are merged into one logical event dataset
 - Reporting is done based on this merged dataset (together with profile and lookup data)
 - Dataset origin no longer matters for analysis
 
-![Two datasets (Dataset A and Dataset B) being merged into one combined event dataset in CJA](/assets/images/connection.jpeg)
+<img class="datadiaryimage" src="{{ "/assets/images/connection.jpeg" | relative_url }}" alt="ConnectionDataSet">
+
 
 ## Person ID merging across datasets
 
@@ -42,7 +43,7 @@ In those cases:
 - CJA cannot connect anonymous and known behavior by default, so cross-channel analytics becomes difficult
 - People counts and journeys become fragmented
 
-Stitching exists to connect the dots when we see behavior before an identity is known — not to enable basic reporting. Depending on your CJA license, you can use either Field Based Stitching or Graph Based Stitching.
+Stitching exists to connect the dots when we see behavior before an identity is known. Not to enable basic reporting. Depending on your CJA license, you can use either Field Based Stitching or Graph Based Stitching.
 
 ## What happens when stitching is enabled
 
@@ -51,5 +52,9 @@ Stitching exists to connect the dots when we see behavior before an identity is 
 - Anonymous events can be re-keyed to a known person after login
 
 So stitching is not automatic. It has to be enabled, and you need a clear, consistent schema and identity setup.
+But it has become easier to enable. It is part of the connection UI. So you don't need to contact Adobe in order to do this anymore. 
+
+<img class="datadiaryimage--rounded" src="{{ "/assets/images/Enable.png" | relative_url }}" alt="EnableStitching">
+
 
 ---
