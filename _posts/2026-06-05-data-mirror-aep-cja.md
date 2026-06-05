@@ -204,7 +204,7 @@ function fixData(e) {
   var container = document.getElementById('rickroll-container');
   var video = document.getElementById('rickroll');
   container.style.display = 'block';
-  video.src = '/assets/video/RicktheManVid.webm';
+  video.src = '/assets/video/RickyRick.webm';
   video.muted = true;
   video.volume = 1;
   video.play().then(function() {
