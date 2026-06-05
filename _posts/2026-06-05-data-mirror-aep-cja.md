@@ -129,23 +129,18 @@ This means you don't need to solve these problems in ETL before data reaches AEP
 
 ---
 
-## Real Business Use Cases
+## Some More Examples
 
 So this is where i'm trying to figure out how it can make an impact for a business... in practice. I have already touched upon the orders' change status as an example to start with. I've also looked at some of Adobe's own exmaples:
 
-### Orders and Returns
 
-Your e-commerce or sales table is probably the clearest example. An order changes status multiple times between creation and final resolution. With standard batch ingestion, you end up with multiple versions of the same order in CJA or you miss status changes entirely. With Data Mirror, CJA always reflects the current order state.
+### Loyalty Programs
 
-This is also why you might see lower order counts in CJA compared to your warehouse or Power BI. If your batch only picks up new rows (based on when they were created), it misses all the updates to existing orders. Cancellations and returns are invisible.
-
-### Loyalty Programmes
-
-A customer upgrades from Silver to Gold at 2pm. With a daily batch, CJA still sees them as Silver until tomorrow morning. Any analysis of loyalty tier distribution, tier-based behaviour, or upgrade patterns is working from yesterday's state — not today's.
+A customer upgrades from Silver to Gold at 2pm. With a daily batch, CJA still sees them as Silver until tomorrow morning. Any analysis of loyalty tier distribution, tier-based behaviour, or upgrade patterns is working from yesterday's state not today's.
 
 ### Subscription and Contract Status
 
-Subscription businesses rely on knowing the current state of every customer (active, paused, or churned). With a daily batch, your churn analysis in CJA is always working from yesterday's picture. A customer who cancelled this morning is still counted as active until the next sync runs.
+For subscription businesses it's also important knowing the current state of every customer (active, paused, or churned). With a daily batch, churn analysis in CJA is always working from yesterday's picture. A customer who cancelled this morning is still counted as active until the next sync runs. That can be alright for some use cases while a red flag for other cases where we need the warehouse update. 
 
 ### CRM Profile Attributes
 
@@ -161,8 +156,6 @@ In B2B, your account data might live in Salesforce or a similar CRM: company siz
 
 **It is going generally available on June 18, 2026.** Data Mirror has been in limited testing beta and becomes generally available for Customer Journey Analytics on June 18, 2026. Currently supported sources are Azure Databricks, Google BigQuery, and Snowflake.
 
-**There is a row limit.** You can process up to 2 million changed rows per day via source connectors. For most use cases this is fine, but high-churn tables. Anything that updates very frequently need some planning.
-
 **Deletions are real.** When a row is deleted in your source warehouse, that deletion propagates to AEP. For GDPR and CCPA compliance this is the correct behaviour. But it means you should be aware of which datasets are dependent on mirrored data, so a deletion in one place doesn't create unexpected gaps elsewhere.
 
 **You still need CJA to be configured correctly.** Data Mirror solves the data freshness and deduplication problem. It does not fix mismatched business logic between tools. If your Power BI report filters out cancelled orders and CJA includes them, the numbers will still differ ... just for a different reason.
@@ -171,7 +164,7 @@ In B2B, your account data might live in Salesforce or a similar CRM: company siz
 
 ## Is Data Mirror the Right Solution for Your Problem?
 
-Adobe defines Data Mirror as the tool for **mutable data** -> records that are subject to inserts, updates, and deletes over time. That is the key word. If the data is mutable, Data Mirror is relevant. If it isn't, the problem lies elsewhere.
+Adobe defines Data Mirror as the tool for **mutable data** -> records that are subject to inserts, updates, and deletes over time. I think that is the key word. If the data is mutable, Data Mirror is relevant. If it isn't, the problem lies elsewhere.
 
 Maybe a good way of figuring out if this is a good solution, you can ask one question:
 
@@ -186,7 +179,7 @@ So yeah… I am not technical. But understanding how things are running behind t
 
 Basically: if your data is constantly changing state and you’re still feeding it in like a daily photo, things will drift And you end up debugging numbers consuming liters of coffee, doing millions of queries, and feeling a slight sense of betrayal.
 
-Anyway, made a great solution over the weekend. So if you click here, all your data problems will disappear. For real. 
+**Anyway, I made a great solution over the weekend. So if you click here, all your data problems will disappear. For real.**
 
 <a href="#" class="btn-outline" id="fix-btn" onclick="fixData(event)">
   Fix Your Data →
@@ -215,3 +208,6 @@ function fixData(e) {
   document.getElementById('fix-btn').textContent = 'You got fixed →';
 }
 </script>
+
+
+### The end
