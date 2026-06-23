@@ -13,7 +13,7 @@ I was thinking. Sometimes I do that.
 
 Not about something new. Probably a very explored topic. So my idea is that when people start searching for something on Google, that curiosity doesn't hit all your channels at the same time. Web traffic shows up almost immediately. Online sales follow a week or two later. Store visits and sales agent conversions take a bit longer. Support contacts arrive last. Just assumptions. 
 
-<img class="datadiaryimage" style="width: 60%; max-width: 360px; margin: 1.5rem auto;" src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZWI3dzM4dWNhYm9qczhha2lyaWc0M2d1cGx1OGRpeXR4czQzOWFqdCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/HPA8CiJuvcVW0/giphy.gif" alt="domino effect">
+<img class="datadiaryimage" src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZWI3dzM4dWNhYm9qczhha2lyaWc0M2d1cGx1OGRpeXR4czQzOWFqdCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/HPA8CiJuvcVW0/giphy.gif" alt="domino effect">
 
 
 
