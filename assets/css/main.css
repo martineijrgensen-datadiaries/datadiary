@@ -394,6 +394,82 @@ a { color: inherit; }
 }
 .post-content pre code { background: none; padding: 0; }
 
+/* ── Rouge syntax highlighting ───────────────────────────────
+   Dark ink background is already set on pre.
+   Token colours use the datadiary palette on dark.
+   ---------------------------------------------------------- */
+
+/* Keywords — if, for, def, class, import, return, with */
+.post-content .highlight .k,
+.post-content .highlight .kd,
+.post-content .highlight .kn,
+.post-content .highlight .kp,
+.post-content .highlight .kr,
+.post-content .highlight .kt { color: var(--coral); font-weight: 600; }
+
+/* Keyword constants — True, False, None */
+.post-content .highlight .kc { color: var(--coral); font-style: italic; }
+
+/* Strings */
+.post-content .highlight .s,
+.post-content .highlight .s1,
+.post-content .highlight .s2,
+.post-content .highlight .sa,
+.post-content .highlight .sb,
+.post-content .highlight .sc,
+.post-content .highlight .sd,
+.post-content .highlight .se,
+.post-content .highlight .sh,
+.post-content .highlight .si,
+.post-content .highlight .sx { color: var(--lime); }
+
+/* Numbers */
+.post-content .highlight .m,
+.post-content .highlight .mb,
+.post-content .highlight .mf,
+.post-content .highlight .mh,
+.post-content .highlight .mi,
+.post-content .highlight .mo { color: var(--sky); }
+
+/* Comments */
+.post-content .highlight .c,
+.post-content .highlight .c1,
+.post-content .highlight .cm,
+.post-content .highlight .cs,
+.post-content .highlight .cp { color: oklch(60% .04 270); font-style: italic; }
+
+/* Function and class names */
+.post-content .highlight .nf,
+.post-content .highlight .nc,
+.post-content .highlight .nd { color: oklch(85% .12 230); }
+
+/* Builtins — print, len, range, etc. */
+.post-content .highlight .nb { color: var(--sky); }
+
+/* Self, cls */
+.post-content .highlight .bp { color: oklch(72% .08 28); font-style: italic; }
+
+/* Operators — =, +, -, *, /, %, ->, etc. */
+.post-content .highlight .o,
+.post-content .highlight .ow { color: oklch(80% .04 270); }
+
+/* Decorators */
+.post-content .highlight .nd { color: var(--coral); }
+
+/* Variables and names — default white */
+.post-content .highlight .n,
+.post-content .highlight .na,
+.post-content .highlight .nl,
+.post-content .highlight .nn,
+.post-content .highlight .nx { color: #e8e8e8; }
+
+/* Punctuation */
+.post-content .highlight .p { color: oklch(75% .04 270); }
+
+/* Shell prompt / bash — make $ and command distinct */
+.post-content .highlight .gp { color: var(--coral); user-select: none; }
+.post-content .highlight .go { color: oklch(70% .04 270); }
+
 /* tables */
 .post-content .table-wrap {
   overflow-x: auto;
@@ -854,6 +930,14 @@ a { color: inherit; }
   margin-bottom: 2rem;
   border-radius: 16px;
   box-shadow: 0 4px 16px oklch(0% 0 0 / .10);
+}
+
+.datadiaryimage--tall {
+  display: block;
+  width: 100%;
+  max-height: none;
+  object-fit: contain;
+  margin-bottom: 2rem;
 }
 
 /* ── Mode picker popup ───────────────────────── */
