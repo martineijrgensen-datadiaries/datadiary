@@ -508,14 +508,16 @@ Reminds me of an A/B tests that I once ran. The traffic / data was very low. But
 
 ### The correlogram: reading the chart
 
-The correlogram plots **r** on the **Y axis** and **lag (weeks)** on the **X axis**. Each bar is one lag value. The red bar is the peak.
+If you scroll further down, you'll see a correlogram that plots **r** on the **Y axis** and **lag (weeks)** on the **X axis**. Each bar is one lag value. The red bar is the peak.
 
-The script gives you one chart per keyword, and from it you read two things. First, how *tall* the peak is. That's the strength (r), and it comes with a p-value telling you whether it's real. This part is a calculated number. Second, how *sharp* the peak is. That's just you looking at the shape to judge whether the lag is pinned to one specific week or smeared across several. This part is a judgment call you make by looking, not a statistic the script calculates for you.
+The script gives you one chart per keyword, and from it you read two things. First, how *tall* the peak is. That's the strength (r), which is what the height of every bar shows. Second, how *sharp* the peak is. That's just you looking at the shape to judge whether the lag is pinned to one specific week or smeared across several. This part is a judgment call you make by looking, not a statistic the script calculates for you.
+
+The p-value (the "can I trust this" number from earlier) is also visible. Furthermore, a solid blue bar is statistically significant (p < 0.05). A faded bar is not. The red peak bar also gets a small label telling you whether it met the p < 0.05 requirement or not (shown as "n.s." for not significant). So the *colour* carries the significance, and the *height* carries the strength. The full p-values for every pairing are also printed in the terminal table when you run the script.
 
 So here's my interpretation:
 
-- **Sharp single peak**: the lead time is precise. The channel follows Trends at one identifiable lag, and I can trust the specific number of weeks. High confidence.
-- **Broad plateau**: there's a relationship, but it's spread across several weeks. so the exact lag is less trustworthy even if r is high.
+- **Sharp single peak**: the lead time is precise. The channel follows Trends at one identifiable lag, and I can trust the specific number of weeks. High confidence if it meets p < 0.05.
+- **Broad plateau**: there's a relationship, but it's spread across several weeks.
 - **Flat across all lags**: no relationship at any lag. This keyword doesn't predict this channel. 
 - **Peak at a negative lag**: the CJA channel is moving *before* the Trends signal. The channel is a leading indicator, not a lagging one.
 
@@ -541,11 +543,11 @@ The channel lag ranking is the business output. One bar per channel, length = we
 
 <img class="datadiaryimage" src="{{ "/assets/images/trends-lag-ranking-iphone.png" | relative_url }}" alt="Channel lag ranking for iphone keyword">
 
-Here's what the `iphone` keyword actually showed with realistic dummy data. Note that a lag value is only meaningful when the correlation is strong enough to act on, a lag of 7 weeks with r = 0.19 is not a finding, it's noise with a number attached to it.
+Here's what the `iphone` keyword actually showed with **dummy data**. Note that a lag value is only meaningful when the correlation is strong enough to act on, a lag of 7 weeks with r = 0.19 is not a finding, it's noise with a number attached to it.
 
 | Channel | Lag | Correlation | Usable? |
 |---|---|---|---|
-| Web sessions | 1 week | r = 0.87 **strong** | ✓ Yes. Clear, consistent signal |
+| Web sessions | 1 week | r = 0.87 **strong** | ✓ Yes. consistent signal |
 | Online sales | 3 weeks | r = 0.50 **moderate** | ✓ Directionally useful maybe, but noisy |
 | Sales agent | 3 weeks | r = 0.39 **weak** | △ Faint signal: worth monitoring, not planning around |
 | Store | 3 weeks | r = 0.20 **weak** | ✗ No: physical visits don't follow search interest in this data |
@@ -579,7 +581,7 @@ Real data will problably be much noisier. Some pairings that look strong with du
 
 ## The CJA angle worth highlighting
 
-What this project demonstrates is that cross-channel CJA data isn't only useful for journey analysis and attribution. It can serve as the input to any time-series comparison, demand forecasting, channel lag modelling, seasonality decomposition, anomaly detection.
+What this project demonstrates is that cross-channel CJA data isn't only useful for journey analysis and attribution within Workspace. It can serve as the input to any time-series comparison, demand forecasting, channel lag modelling, seasonality decomposition, anomaly detection.
 
 The data is already connected. The question is what you do with it.
 
