@@ -11,15 +11,15 @@ I think you can come up a bunch of nice activities to spend your precious weeken
 
 I was thinking. Sometimes I do that. 
 
-Not about something new. Probably a very explored topic. So my idea is that when people start searching for something on Google, that curiosity doesn't hit all your channels at the same time. Web traffic shows up almost immediately. Online sales follow a week or two later. Store visits and sales agent conversions take a bit longer. Support contacts arrive last. Just assumptions. 
+Not about something new. Probably a very explored topic. So my idea is that when people start searching for something on Google, that curiosity doesn't hit all your channels at the same time. In most cases, web traffic shows up almost immediately. Then online sales follow a week or two later. Store visits and sales agent conversions take a bit longer. Support contacts arrive last. Just assumptions. 
 
 <img class="datadiaryimage" src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZWI3dzM4dWNhYm9qczhha2lyaWc0M2d1cGx1OGRpeXR4czQzOWFqdCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/HPA8CiJuvcVW0/giphy.gif" alt="domino effect">
 
 
 
-But! If that pattern is consistent and measurable, then maybe Google Trends becomes a free forecasting tool. Kinda.
+But! If that pattern is consistent and measurable, then maybe we can look at Google Trends + CJA cross-channel data as a way of forecasting. Kinda.
 
-This post walks through exactly how to test that hypothesis using CJA data and a local Python analysis. No external APIs, no dashboards, no data pipeline. Just a CJA export, some public search data, and about 100 lines of code (that claude helped me with #ThankGodforThat).
+This post walks through exactly how to test that hypothesis using CJA data and a local Python analysis. I'm not using external APIs, no dashboards, no data pipeline. Just a CJA export, some public search data, and about 100 lines of code (that claude helped me with #ThankGodforThat).
 
 ---
 
@@ -65,9 +65,9 @@ So these are the building stones of my analysis.
 
 ## Why CJA makes this cross-channel analysis possible
 
-A standard analytics setup has separate systems for web, ecommerce, outbound sales, retail, and support. They don't share a common key in one connection. You can't compare them weekly without building a data pipeline. But CJA can handle that.
+A standard analytics setup has separate systems for web, ecommerce, outbound sales, retail, and support. They often don't share a common key in one connection. You can't compare them weekly without building a data pipeline. But CJA can handle that.
 
-When you create a Connection with multiple datasets such as web events, sales transactions, call center records, retail touchpoints...CJA merges them into a single logical dataset using **Person ID**. If your authenticated web users, your CRM, and your retail POS all share a customer identifier, CJA joins them automatically. (Just keep in mind that this connection will provide answers to questions about logged in customers and not anonymous behavior unless you have stitching enabled).
+When you create a CJA Connection with multiple datasets such as web events, sales transactions, call center records, retail touchpoints...CJA merges them into a single logical dataset using **Person ID**. If your authenticated web users, your CRM, and your retail POS all share a customer identifier, CJA joins them automatically. (Just keep in mind that this connection will provide answers to questions about logged in customers and not anonymous behavior unless you have stitching enabled).
 
 That means one Workspace export gives you a weekly breakdown of sessions, online sales, agent sales, support contacts, store transactions, and retention offers. 
 
@@ -172,7 +172,7 @@ The obvious starting point was **pytrends**, a Python library that wraps Google 
 pytrends.exceptions.ResponseError: The request failed: Google returned a response with code 400
 ```
 
-Fine. I tried adding retries and other stuff. Still 400. Tried a newer alternative called **trendspyg**. That one installed fine, but the moment I called it:
+Fine. I tried adding retries and other stuff. Still got error 400. Tried a newer alternative called **trendspyg**. That one installed fine, but the moment I called it:
 
 ```
 trendspyg.exceptions.RateLimitError: Google Trends did not return Explore data
@@ -273,7 +273,7 @@ python extract_trends.py
 
 ### `analysis.py`: cross-correlation and plots
 
-This is the main script. It loads both datasets, runs a cross-correlation for every keyword × channel pair across lags of -4 to +8 weeks, and produces three types of visualisation. Why is -4 part of this? So I actually want the negative values to included here to see if a channel might actually drive demand before google trends shows anything. I asked Claude to make sure the script is written to work with any keywords and any channel names. So nothing is hardcoded.
+This is the main script. It loads both datasets, runs a cross-correlation for every keyword × channel pair across lags of -4 to +8 weeks, and produces three types of visualisation. Why is -4 part of this? So I actually want the negative values to included here to see if a channel might actually drive demand before google trends shows anything. Then I also asked Claude to make sure the script is written to work with any keywords and any channel names. So nothing is hardcoded.
 
 
 ```python
@@ -463,15 +463,17 @@ The lag where the match is strongest is the lead time, how many weeks in advance
 
 ### Pearson r: the correlation coefficient
 
+Now time for some fundamentals. 
 Pearson r measures the strength of a linear relationship between two series. It runs from -1 to +1:
 
 It's a well known method of understanding if a relationship is meaningful. 
 
 - **r = 1.0** : perfect positive relationship. When Trends goes up, the channel goes up by the same proportion, every time.
 - **r = 0.0** : no linear relationship. The two series move independently.
-- **r = -1.0** : perfect inverse relationship. When Trends goes up, the channel goes down.
+- **r = -1.0** : perfect negative relationship. When Trends goes up, the channel goes down.
 
-In practice you never see 1.0 or -1.0 in real data. For this type of weekly time series analysis, a rough guide:
+In practice you'd probably never see 1.0 or -1.0 in real data. 
+For this type of weekly time series analysis, I have based a rough guide on standards in marketing and behavioral data:
 
 | r value | Signal label | Practical meaning |
 |---|---|---|
@@ -480,7 +482,7 @@ In practice you never see 1.0 or -1.0 in real data. For this type of weekly time
 | 0.2 – 0.4 | Weak | Faint pattern (interesting to note, don't act on alone) |
 | < 0.2 | None | Too weak to rely on |
 
-A big caveat here: these thresholds are **not universal laws**. What counts as "strong" is completely field-dependent. In physics or engineering, r = 0.6 would be considered weak. In marketing and behavioural data, it's genuinely strong. So these bands are my interpretation for *this kind of data* (messy, behavioural, weekly), not a rule you can lift into another domain. Two more things worth remembering: r only measures *linear* relationships (two series can be tightly linked in a curved way and still show a low r), and r on its own says nothing about significance, which is what the p-value is for.
+
 
 ### The p-value: statistical significance
 
@@ -489,14 +491,14 @@ Every correlation also has a p-value. This answers a *different* question than r
 - **Pearson r asks: how strong is the relationship?** (the size of the pattern)
 - **The p-value asks: can I trust that the relationship is real?** (the odds it isn't just luck)
 
-So r is strength, p is trust. A p-value below 0.05 means there's less than a 5% probability the result appeared by random chance.
+So r is strength, p is trust. A p-value below 0.05 means there's less than a 5% probability the result appeared by random chance. So a low value indicates a real relationship.
 
-The reason you need both is that **they can disagree** and the disagreement is where people get fooled:
+The reason we need both is that **they can disagree**.
 
 | What you see | r | p | Verdict |
 |---|---|---|---|
 | Strong and trustworthy | 0.80 | 0.001 | Real *and* meaningful |
-| Strong but untrustworthy | 0.80 | 0.30 | Looks impressive, probably a coincidence (usually too little data) |
+| Strong but untrustworthy | 0.80 | 0.30 | probably a coincidence (usually too little data) |
 | Weak but trustworthy | 0.25 | 0.01 | A real relationship, but too faint to be useful |
 | Weak and untrustworthy | 0.15 | 0.60 | I'd just ignore this tbh |
 
