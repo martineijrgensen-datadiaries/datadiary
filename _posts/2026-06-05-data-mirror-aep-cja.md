@@ -105,7 +105,7 @@ Your data warehouse (BigQuery, Snowflake, Databricks, etc.) needs to be set up t
 
 **2. AEP uses a special schema type**
 
-Normal AEP schemas are built around events — things that happened once and don't change or Profile schemas, the more static information. Data Mirror requires a **Relational Schema**, a different type specifically designed for data that evolves. It has three important rules built in:
+Normal AEP schemas are built around events (things that happened once and don't change) or Profile schemas (the more static information). Data Mirror requires a **Relational Schema**, a different type specifically designed for data that evolves. It has three important rules built in:
 
 - **Primary Key** : makes sure you never end up with duplicate rows for the same record
 - **Version Descriptor** : tells AEP which version of a row is the most recent, even if updates arrive out of order
@@ -148,9 +148,6 @@ A customer upgrades from Silver to Gold at 2pm. With a daily batch, CJA still se
 
 For subscription businesses it's also important knowing the current state of every customer (active, paused, or churned). With a daily batch, churn analysis in CJA is always working from yesterday's picture. A customer who cancelled this morning is still counted as active until the next sync runs. That can be alright for some use cases while a red flag for other cases where we need the warehouse update. 
 
-### CRM Profile Attributes
-
-In B2B, your account data might live in Salesforce or a similar CRM: company size, contract value, account tier, renewal date. That data changes. Data Mirror keeps those attributes current in AEP so your account-level analysis in CJA reflects the real state of your customer relationships.
 
 <a href="https://experienceleague.adobe.com/en/docs/analytics-platform/using/cja-data-mirror/relational" class="btn-outline" target="_blank" rel="noopener">
   Quickstart guide →
@@ -161,8 +158,6 @@ In B2B, your account data might live in Salesforce or a similar CRM: company siz
 ## A Few Things Worth Knowing
 
 **It is going generally available on June 18, 2026.** Data Mirror has been in limited testing beta and becomes generally available for Customer Journey Analytics on June 18, 2026. Currently supported sources are Azure Databricks, Google BigQuery, and Snowflake.
-
-**Deletions are real.** When a row is deleted in your source warehouse, that deletion propagates to AEP. For GDPR and CCPA compliance this is the correct behaviour. But it means you should be aware of which datasets are dependent on mirrored data, so a deletion in one place doesn't create unexpected gaps elsewhere.
 
 **You still need CJA to be configured correctly.** Data Mirror solves the data freshness and deduplication problem. It does not fix mismatched business logic between tools. If your Power BI report filters out cancelled orders and CJA includes them, the numbers will still differ ... just for a different reason.
 
@@ -178,10 +173,10 @@ Maybe a good way of figuring out if this is a good solution, you can ask one que
 
 If it **updates the existing row**, your data is mutable. Standard batch ingestion was never built to track those changes, and the updated state may never reach AEP correctly. This is the scenario Data Mirror addresses.
 
-If it **creates a new row** for each state change, your data is append-only. The problem is likely not a Data Mirror problem. It could probably be an ingestion issue: incremental logic that only picks up records by creation date, missing historical backfill, filtering in the source connector, or records failing schema validation. Those are worth investigating in your AEP ingestion monitoring before considering Data Mirror.
+If it **creates a new row** for each state change, your data is append-only. Then the problem is likely not a Data Mirror problem. It could probably be an ingestion issue: incremental logic that only picks up records by creation date, missing historical backfill, filtering in the source connector, or records failing schema validation. Those are worth investigating in your AEP ingestion monitoring before considering Data Mirror.
 
 
-So yeah… I am not technical. But understanding how things are running behind the scenes is extremely valuable when numbers suddenly look off and there are possible solutions to these problems. I don't think Data Mirror magic, but it can definitely be a great way of handling certain types of data and remove some frustration.  
+I really think understanding how these things are running behind the scenes is essential for most data-users, when numbers suddenly look off. I don't think Data Mirror magic, but it can definitely be a great way of handling certain types of data and remove some frustration.  
 
 Basically, if your data is constantly changing state and you're only treating it like a daily photo, things will drift. Then you end up debugging numbers, consuming liters of coffee, running millions of queries, and feeling a slight sense of betrayal. 
 
