@@ -545,14 +545,16 @@ The channel lag ranking is the business output. One bar per channel, length = we
 
 Here's what the `iphone` keyword actually showed with **dummy data**. Note that a lag value is only meaningful when the correlation is strong enough to act on, a lag of 7 weeks with r = 0.19 is not a finding, it's noise with a number attached to it.
 
-| Channel | Lag | Correlation | Usable? |
-|---|---|---|---|
-| Web sessions | 1 week | r = 0.87 **strong** | ✓ Yes. consistent signal |
-| Online sales | 3 weeks | r = 0.50 **moderate** | ✓ Directionally useful maybe, but noisy |
-| Sales agent | 3 weeks | r = 0.39 **weak** | △ Faint signal: worth monitoring, not planning around |
-| Store | 3 weeks | r = 0.20 **weak** | ✗ No: physical visits don't follow search interest in this data |
-| Support | 7 weeks | r = 0.19 **weak** | ✗ No: not driven by iPhone searches |
-| Winback | no reliable lag | r = 0.19 **weak** | ✗ No: campaign calendar, not search-driven |
+| Channel | Lag | Correlation | p-value | Usable? |
+|---|---|---|---|---|
+| Web sessions | 1 week | r = 0.87 **strong** | < 0.001 | ✓ Yes. consistent signal |
+| Online sales | 3 weeks | r = 0.50 **moderate** | < 0.001 | ✓ Directionally useful maybe, but noisy |
+| Sales agent | 3 weeks | r = 0.39 **weak** | 0.001 | △ Faint signal: worth monitoring, not planning around |
+| Store | 3 weeks | r = 0.20 **weak** | 0.10 | ✗ No: physical visits don't follow search interest in this data |
+| Support | 7 weeks | r = 0.19 **weak** | 0.12 | ✗ No: not driven by iPhone searches |
+| Winback | no reliable lag | r = 0.19 **weak** | 0.11 | ✗ No: campaign calendar, not search-driven |
+
+See how the three "no" rows all have p-values above 0.05? That's the significance test agreeing with the eye test. Those aren't just weak correlations, they're not statistically distinguishable from random noise. The p-value and the r are telling the same story here, which is exactly what you want before trusting a result.
 
 The support channel is the most interesting finding. `iphone` barely predicts it. But switch the keyword to `internet`:
 
