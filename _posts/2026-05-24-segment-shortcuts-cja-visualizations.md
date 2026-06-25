@@ -28,6 +28,7 @@ So what I am rambling about is just this:
 Several visualizations let you create segments directly from the output. You don't have to manually create the segment logic. 
 
 The visualization does the configuration. You just have to save the result and do your analysis work from there. 
+😮‍💨🤌
 
 Here are the ones I find most useful (so far).
 
@@ -93,7 +94,7 @@ This is the fast path for questions like:
 - Who completed the form after the specific flow I defined?
 - Who dropped out exactly at this step? what did they do after? 
 
-The segment definition matches the path logic you already configured in the canvas.. so the sequence itself, the time constraints, the container level. You don't have to reconstruct that logic in the Segment Builder. The canvas already has it; you're just saving it. 
+The segment definition matches the path logic you already configured in the canvas... so the sequence itself and the container level. You don't have to reconstruct that logic in the Segment Builder. The canvas already built it. All you need to do is hit that save button 💾 
 
 
 ---
