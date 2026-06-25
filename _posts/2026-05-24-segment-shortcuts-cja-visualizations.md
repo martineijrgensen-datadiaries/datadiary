@@ -61,7 +61,7 @@ From there, you can hover over any segment, open the preview, and save it direct
 
 ## Guided Analysis: Frequency
 
-Now this is a tip I remember from one of the Summit sessions. I'll link it right here when I find it again, because it was awesome and super practical.
+Now this is a tip I remember from one of the Summit sessions. Here's the link: [Insights Beyond the Stars: Galactic Customer Journey Analytics Tips & Tricks](https://business.adobe.com/summit/2026/sessions/insights-beyond-the-stars-galactic-customer-journe-s103.html)
 
 Guided Analysis has a **Frequency** view that shows the same kind of distribution from a slightly different angle. 
 
