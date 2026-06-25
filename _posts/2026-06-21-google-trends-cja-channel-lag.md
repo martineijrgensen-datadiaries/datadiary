@@ -7,19 +7,20 @@ read_time: 10
 emoji: "📡"
 ---
 
-I think you can come up a bunch of nice activities to spend your precious weekend on. Go on a hike, visit an old friend, get a cold drink, sit in the sun, go to the cinema. But what about analyzing why stuff happens in the dark...no sunlight getting through those curtains.
+I think you can come up a bunch of nice activities to spend your precious weekend on. Go on a hike, visit an old friend, get a cold drink, sit in the sun, go to the cinema. But what about staying inside and analyzing why stuff happens...no sunlight getting through those curtains.
 
 I was thinking. Sometimes I do that. 
 
-Not about something new. Probably a very explored topic. So my idea is that when people start searching for something on Google, that curiosity doesn't hit all your channels at the same time. In most cases, web traffic shows up almost immediately. Then online sales follow a week or two later. Store visits and sales agent conversions take a bit longer. Support contacts arrive last. Just assumptions. 
+Not about something new. Just a very explored topic. 
+Nonetheless my idea is that when people start searching for something on Google, that curiosity doesn't hit all your channels at the same time. In most cases, web traffic shows up almost immediately. Then online sales follow a week or two later. Store visits and sales agent conversions take a bit longer. Support contacts arrive last. Just assumptions. 
 
 <img class="datadiaryimage" src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZWI3dzM4dWNhYm9qczhha2lyaWc0M2d1cGx1OGRpeXR4czQzOWFqdCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/HPA8CiJuvcVW0/giphy.gif" alt="domino effect">
 
 
 
-But! If that pattern is consistent and measurable, then maybe we can look at Google Trends + CJA cross-channel data as a way of forecasting. Kinda.
+But! If that pattern is consistent and measurable, then maybe we can look at Google Trends together with CJA cross-channel data to find early indicators for demand. 
 
-This post walks through exactly how to test that hypothesis using CJA data and a local Python analysis. I'm not using external APIs, no dashboards, no data pipeline. Just a CJA export, some public search data, and about 100 lines of code (that claude helped me with #ThankGodforThat).
+This post walks through exactly how to test that hypothesis using CJA data and a local Python analysis. I'm not using external APIs, or dashboards, or data pipelines. Just a CJA export, some public search data, and about 100 lines of code (that claude helped me with #ThankGodforThat).
 
 ---
 
