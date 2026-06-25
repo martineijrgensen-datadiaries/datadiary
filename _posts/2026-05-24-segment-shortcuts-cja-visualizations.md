@@ -9,7 +9,6 @@ emoji: "✂️"
 
 I think most Analytics users tend to create sequences and logic by starting in an empty segment builder. Like a primal instinct. 
 
-
 For me it's like a reflex I just can't seem to shake. Something interesting appears in the data. A hunch. A vague theory. A weird smell. Someone started a BBQ at the office? Anyways, before I've even finished the thought, I've already opened the Segment Builder and started typing conditions into it like a person who definitely knows what they're doing. 
 
 I do not always know what I'm doing.
@@ -19,14 +18,12 @@ The **Segment Builder** and I have a complicated relationship. That's what it sa
 It's very powerful. It's also the place where I've spent genuine portions of my life carefully constructing logic that turned out to be wrong, slightly off, or something CJA had already built for me somewhere else entirely.
 
 So yeah, CJA and AA has made a lot of that unnecessary. 
-
 Actually It's been there for a while. 
 Have I used it? Not really. Have I told others to do it? Yes. Am I starting to use it for real now? Most certainly. 
 
-So what I am rambling about is just this: 
+**So what I am rambling about is just this:**
 
 Several visualizations let you create segments directly from the output. You don't have to manually create the segment logic. 
-
 The visualization does the configuration. You just have to save the result and do your analysis work from there. 
 😮‍💨🤌
 
