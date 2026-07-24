@@ -36,7 +36,8 @@ then:
 - **Server**: your AEP query host, e.g. `XXX.platform-query.adobe.io`
 - **Database**: `<your-database>?FLATTEN`
 
-Do not forget to add `?FLATTEN`. CJA's data schemas are nested XDM - that is basically how the data is structured, and this flag flattens it into plain columns that any BI tool can actually work with. Without it, you are staring at fields that Power BI cannot make sense of. I learned that the hard way (not having read the entire documentation). ¯\_(ツ)_/¯ 
+Do not forget to add `?FLATTEN`. CJA's data schemas are nested XDM - that is basically how the data is structured, and this flag flattens it into plain columns that any BI tool can actually work with. Without it, you are staring at fields that Power BI cannot make sense of. I learned that the hard way (not having read the entire documentation).
+`¯\_(ツ)_/¯`
 
 I think of it like this: nested XDM data is folders inside folders inside folders. `?FLATTEN` pulls every file out into one drawer, so you can just grab all your metrics by name instead of digging through nested folders to find it - totally inception-style (I hope you've watched the movie). 
 
