@@ -36,22 +36,31 @@ then:
 - **Server**: your AEP query host, e.g. `XXX.platform-query.adobe.io`
 - **Database**: `<your-database>?FLATTEN`
 
-Do not forget to add `?FLATTEN`. CJA's schema is nested XDM under the hood, and this flag flattens it into plain columns that any BI tool can actually work with. Without it, you are staring at struct fields Power BI cannot make sense of. I learned that the hard way (not having read the entire documentation). ¯\_(ツ)_/¯ 
+Do not forget to add `?FLATTEN`. CJA's data schemas are nested XDM - that is basically how the data is structured, and this flag flattens it into plain columns that any BI tool can actually work with. Without it, you are staring at fields that Power BI cannot make sense of. I learned that the hard way (not having read the entire documentation). ¯\_(ツ)_/¯ 
 
-This part of the process is the least fun one. But it is also very very important. If you follow the instructions here, then you're set: [Customer Journey Analytics BI Extension](https://experienceleague.adobe.com/en/docs/analytics-platform/using/cja-dataviews/bi-extension)
+I think of it like this: nested XDM data is folders inside folders inside folders. `?FLATTEN` pulls every file out into one drawer, so you can just grab all your metrics by name instead of digging through nested folders to find it - totally inception-style (I hope you've watched the movie). 
+
+So that one flag is what makes every simple `SUM(column_name)` later in this post actually work.
+
+You can also find the instructions here: [Customer Journey Analytics BI Extension](https://experienceleague.adobe.com/en/docs/analytics-platform/using/cja-dataviews/bi-extension)
 
 
 ---
 
 ## Step 2: Know the three rules
 
-This is the part that really matters, and it takes a few minutes to learn. The BI extension is not a general SQL endpoint sitting on top of your raw data. It is built specifically for reporting-style aggregate queries. That means we will encounter three constraints:
+Quick note before we get into it: a "query" here just means a request for data, sent to Adobe behind the scenes. It does not have to be something you type yourself. I had to recap a lot of PBI-stuff when looking into this. But to simplify it: if you drag a field onto a chart in Power BI (creating a visualisation), Power BI writes a query for you and sends it off. So these rules apply either way, whether Power BI is writing the request for you, or you end up writing it by hand later... like me...in this post.
 
-1. **Every query must be aggregated.** `SELECT * FROM view` will not give you raw rows, you get a message back saying an aggregate query is required instead. Wrap your metric in `SUM()`, `COUNT()`, etc.
+<img class="datadiaryimage--rounded" src="{{ "/assets/images/query-behind-the-scenes.svg" | relative_url }}" alt="Query">
+
+
+Moreover, CJA's BI extension is built specifically for reporting-style aggregate queries. That means we have to consider these three things:
+
+1. **Every query must be aggregated.** So this is pretty important. `SELECT * FROM view` will not give you raw rows, you get a message back saying an aggregate query is required instead. Wrap your metric in `SUM()`, `COUNT()`, etc.
 2. **Every query needs a bounded date range**, using the special `timestamp` or `daterange` / `daterangeday` columns. Skip it, and you silently get the last 30 days by default which is easy to misread as "no data" if you were not expecting that.
 3. **Results are capped at 50 rows by default**, up to 50,000 with an explicit `LIMIT n`.
 
-Keep these three in your head and you skip almost all of the friction.
+These are really good to know. 
 
 ---
 
@@ -62,8 +71,7 @@ I wanted to be sure that I was using the correct column namings so I went straig
 ```sql
 PostgreSQL.Database("your-host.platform-query.adobe.io", "your-database?FLATTEN", [Query="SELECT * FROM public.your_dataview WHERE 1=0"])
 ```
-
-Look at the header row, and you will find your dimensions and metrics, including custom/calculated metrics, usually prefixed something like `cm_`. This beats guessing based on what a report table happened to label something.
+Look at the header row, and you will find your dimensions and metrics, including custom/calculated metrics, usually labelled with something like `cm_`. So the namings have been changed slightly, having the cm_ added to them. Knowing that, I could create my query more easily. 
 
 <img class="datadiaryimage--rounded" src="{{ "/assets/images/ColumnNames.png" | relative_url }}" alt="Find the Column Name">
 
@@ -73,7 +81,7 @@ Look at the header row, and you will find your dimensions and metrics, including
 
 ## Step 4: Write the query
 
-The most reliable path is probably to write SQL directly in Power Query's Advanced Editor rather than relying on drag-and-drop visuals to generate a query on your behalf.
+I like to cut to the chase and prefer adding SQL directly in Power Query's Advanced Editor.
 
 Click on Transform Data:
 
@@ -94,12 +102,17 @@ PostgreSQL.Database("your-host", "your-database?FLATTEN", [Query="
 "])
 ```
 
-- Quote the special `timestamp` column with **backticks**, not double quotes. The BI extension runs on Adobe Query Service, which follows Spark SQL identifier rules, not standard Postgres ones.
-- The first time you run a hand-written query, Power BI will show a native-query security prompt. That is expected behavior for any raw SQL source, not an error , click through it.
+- Quote the special `timestamp` column with **these:``**, not double quotes. 
+- The first time you run a hand-written query, Power BI will probably show a native-query security prompt. That is expected behavior for any raw SQL source, not an error , click through it.
 
 The datamodel might look something like this: 
 <img class="datadiaryimage--rounded" src="{{ "/assets/images/Datamodel.png" | relative_url }}" alt="Data Model">
 
+**Why use raw SQL?** Well I encountered some issues when trying to explore the full dataset in the reporting window in PBI. But I think in theory, if you set the metric aggregation to `Sum`, avoid Power BI's auto-generated date hierarchy, and bind a real date filter from the dataset, you should see the data without having to use SQL. But I kept getting a blank table or a stray `0`, and was pretty much left trying to debug what I did wrong (I haven't used PBI in years). 
+
+By adding the query directly, I got to explore the specific errors straight from the backend instead ("aggregate query required," "unresolved column, did you mean X"), which is a much faster way to find out what actually broke... that is at least what I tell myself after having spent an embarrassing amount of time on this. 
+
+In the query I could use the correct date field, not the PBI hierarchy, when filtering.
 
 ---
 
@@ -119,7 +132,7 @@ Because the query already returns real per-day values, `daterangeday` behaves li
 - `?FLATTEN` on the database string, always.
 - Every query: aggregated, and date-bounded.
 - `SELECT * FROM view WHERE 1=0` to get real column names instead of guessing from a report label.
-- Write the SQL yourself in Power Query rather than hoping the visual layer generates the right shape.
-- Once the query is right, Power BI's native date hierarchy and visuals just work — no further wrestling needed.
+- Write the SQL in Power Query rather than hoping the visual layer generates the right shape.
+- Once the query is right, Power BI's native date hierarchy and visuals just work. No further wrestling needed.
 
-That is really the whole thing. The rules are narrow, but once you know them, wiring a CJA dataview into a Power BI report is a five-minute job, not a debugging session.
+That is really the whole thing. Once you have the right credentials and know the rules and, setting up a CJA dataview into a Power BI report can be a five-minute job. 
