@@ -112,7 +112,9 @@ For **Adobe Analytics**, this beacon is a classic, lightweight request. It has b
 ![beacon](/assets/images/Beaconcute.png)
 
 
-For **Adobe Experience Platform (AEP) and CJA**, the setup is a bit more modern. Data is sent through something called the **Edge Network**, which is Adobe's way of receiving data and routing it to the right places -> your dataset in AEP, Adobe Analytics, Journey Optimizer.. all from one single signal. Think of it as a smarter post office that knows where each package should go: 
+For **Adobe Experience Platform (AEP) and CJA**, the setup is a bit more modern. Data is sent through something called the **Edge Network**, which is Adobe's way of receiving data and routing it to the right places -> your dataset in AEP, Adobe Analytics, Journey Optimizer.. all from one single signal. 
+
+Maybe you can picture something like this. It's like a super smart post office that knows where each package should go:
 
 
 ![edgenetwork](/assets/images/edgenet.png)
@@ -136,7 +138,7 @@ This is why experienced Adobe Analytics teams keep a document called a **solutio
 
 ### CJA (Customer Journey Analytics)
 
-CJA works more flexibly. Instead of numbered containers, it connects directly to your data in AEP and lets you build your own dimension and metric layer on top of it, called a **Data View**. You decide what becomes a dimension and what becomes a metric, and you're not limited by a fixed number of slots.
+CJA works more flexibly. Instead of numbered containers, it connects directly to your data in AEP and lets you build your own dimension and metric layer on top of it, called a **Data View**. You decide what becomes a dimension and what becomes a metric, and you're not limited by a fixed number of containers.
 
 If your data contains a field called "delivery option chosen", you can just use it directly in CJA. No need to map it into a numbered variable first.
 
