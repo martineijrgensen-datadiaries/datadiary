@@ -117,6 +117,7 @@ For **Adobe Experience Platform (AEP) and CJA**, the setup is a bit more modern.
 Maybe you can picture something like this. It's like a super smart post office that knows where each package should go:
 
 
+
 ![edgenetwork](/assets/images/edgenet.png)
 
 <br>
