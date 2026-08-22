@@ -171,5 +171,5 @@ But some of these configurations also surface real business questions. How do yo
 
 
 ---
-
+<br>
 *All settings described here are based on what I have tried to apply in our own environment and are available in the Data View Settings tab. Adobe's documentation on Data Views covers each of these in more detail if you want to go deeper on any of them.*
