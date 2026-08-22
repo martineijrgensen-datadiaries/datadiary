@@ -52,7 +52,7 @@
 
   /* Things that very much do not. */
   var BAD = [
-    { label: 'PASSWORD',  sin: 'you put a PASSWORD in a customer profile.' },
+    { label: 'PASSWORD',  sin: 'you ingested a PASSWORD. that’s not enrichment, that’s a breach.' },
     { label: 'CC_NUM',    sin: 'you ingested a raw CREDIT CARD NUMBER.' },
     { label: 'CPR_NR',    sin: 'you ingested a CPR number. legal is on line one.' },
     { label: 'RAW_EMAIL', sin: 'you ingested an unhashed EMAIL address.' },
@@ -204,11 +204,11 @@
     var pop  = el('div', 'dd-invite-popup');
     pop.appendChild(el('div', 'dd-invite-tape'));
     pop.appendChild(el('p',  'dd-invite-eyebrow', '⚠ anomaly detected'));
-    pop.appendChild(el('h2', 'dd-invite-title', 'some data blocks are loose on this page'));
-    pop.appendChild(el('p',  'dd-invite-sub', 'they want to be part of a customer profile. can you help?'));
+    pop.appendChild(el('h2', 'dd-invite-title', 'Some important data blocks have escaped their datasets.'));
+    pop.appendChild(el('p',  'dd-invite-sub', 'Help us catch them and complete the customer view!'));
 
     var row  = el('div', 'dd-invite-choices');
-    var yes  = el('button', 'dd-invite-btn dd-invite-yes', "let's build a profile");
+    var yes  = el('button', 'dd-invite-btn dd-invite-yes', "let's do it");
     var no   = el('button', 'dd-invite-btn dd-invite-no', "nah, I'm reading");
     row.appendChild(yes);
     row.appendChild(no);
@@ -221,6 +221,7 @@
     no.addEventListener('click', function () {
       ls(false, MUTE_KEY, '1');
       closeInvite();
+      showNavButton();
     });
     wrap.addEventListener('click', function (e) {
       if (e.target === wrap) { closeInvite(); startScanner(); }
@@ -469,7 +470,7 @@
         b.x < bucketX + BUCKET_W;
 
       if (overlapsBucket) {
-        if (b.bad) { draw(); return gameOver('PROFILE REJECTED', b.def.sin); }
+        if (b.bad) { draw(); return gameOver('DATA CONTAMINATED', b.def.sin); }
         blocks.splice(i, 1);
         fields++;
         updateHud();
@@ -610,11 +611,20 @@
   }
 
   /* ── Boot ────────────────────────────────────────────────── */
-  /* The nav link is a direct way in, so it opens the game outright
-     regardless of the wiggle/mute state that gates the easter egg. */
+  /* The nav link stays hidden until someone declines the wiggle invite with
+     "nah, I'm reading". At that point the easter egg goes quiet for good, so
+     the nav link becomes their deliberate way back in. Until then it stays
+     hidden, so it doesn't spoil the surprise before someone's opted out of it. */
+  function showNavButton() {
+    var btn = document.getElementById('nav-play-game');
+    if (btn) btn.classList.add('dd-nav-visible');
+  }
+
   function wireNavButton() {
     var btn = document.getElementById('nav-play-game');
-    if (btn) btn.addEventListener('click', function (e) { e.preventDefault(); openGame(); });
+    if (!btn) return;
+    btn.addEventListener('click', function (e) { e.preventDefault(); openGame(); });
+    if (ls(true, MUTE_KEY)) showNavButton();
   }
 
   /* Console escape hatch: dataBlocks.play() skips straight to the game,

@@ -81,6 +81,10 @@ a { color: inherit; }
 .site-nav a:hover,
 .site-nav a.active { color: var(--ink); }
 
+/* hidden until someone declines the wiggle invite (see datablocks.js) */
+#nav-play-game { display: none; }
+#nav-play-game.dd-nav-visible { display: inline; }
+
 .nav-signin {
   margin-left: .25rem;
   border-radius: var(--radius-md);
@@ -857,7 +861,8 @@ a { color: inherit; }
 @media (max-width: 768px) {
   .mood-card-back { display: none; }
   .site-nav-home { display: none;}
-  #nav-play-game { display: none; }
+  #nav-play-game,
+  #nav-play-game.dd-nav-visible { display: none; }
 }
 
 /* coral marquee (home page only) */
