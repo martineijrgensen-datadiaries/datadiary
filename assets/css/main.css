@@ -536,20 +536,33 @@ a { color: inherit; }
 .callout.gotcha .callout-label { color: var(--coral); }
 
 /* keep reading */
-.comments-section {
-  border: 2px solid var(--ink);
-  border-radius: var(--radius-xl);
-  padding: 1.25rem;
-  margin-top: 3rem;
-  box-shadow: var(--shadow-zine-sm);
+.comments-wrap { max-width: 680px; margin: 0 auto; }
+.comments-divider {
+  border: none;
+  border-top: 2px dashed var(--border);
+  margin: 4rem 0 2.5rem;
 }
-.comments-label {
+.comments-eyebrow {
   font-family: var(--font-mono);
-  font-size: .65rem;
+  font-size: .7rem;
   letter-spacing: .1em;
   text-transform: uppercase;
-  color: var(--muted-fg);
-  margin-bottom: .85rem;
+  color: var(--coral);
+  margin-bottom: .5rem;
+}
+.comments-heading {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -.03em;
+  margin-bottom: 1.5rem;
+}
+.comments-box {
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  background: var(--cream);
+  box-shadow: var(--shadow-zine-sm);
 }
 
 .keep-reading {
