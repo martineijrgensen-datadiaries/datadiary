@@ -536,6 +536,22 @@ a { color: inherit; }
 .callout.gotcha .callout-label { color: var(--coral); }
 
 /* keep reading */
+.comments-section {
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-xl);
+  padding: 1.25rem;
+  margin-top: 3rem;
+  box-shadow: var(--shadow-zine-sm);
+}
+.comments-label {
+  font-family: var(--font-mono);
+  font-size: .65rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted-fg);
+  margin-bottom: .85rem;
+}
+
 .keep-reading {
   border: 2px solid var(--ink);
   border-radius: var(--radius-xl);
