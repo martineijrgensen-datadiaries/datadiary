@@ -1149,3 +1149,262 @@ html.boring-mode .card-tape,
 html.boring-mode .mood-card-tape { background: #d4d4d4; border-color: rgba(0,0,0,.1); }
 html.boring-mode .mode-choice-real { background: #d0d0d0; color: #333; }
 html.boring-mode .mode-toggle-btn { background: #555; border-color: #555; }
+
+/* ══════════════════════════════════════════════════
+   DATA BLOCKS — easter egg game
+   ══════════════════════════════════════════════════ */
+
+/* ── The wiggle: a random element asks to be clicked ── */
+@keyframes dd-wiggle {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  20%      { transform: translate(-2px, 1px) rotate(-1.6deg); }
+  40%      { transform: translate(2px, -1px) rotate(1.6deg); }
+  60%      { transform: translate(-1px, -1px) rotate(-1deg); }
+  80%      { transform: translate(1px, 1px) rotate(1deg); }
+}
+
+.dd-wiggle {
+  animation: dd-wiggle .42s ease-in-out infinite;
+  cursor: pointer;
+  will-change: transform;
+}
+
+@keyframes dd-wiggle-calm {
+  0%, 100% { outline-color: transparent; }
+  50%      { outline-color: var(--coral); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dd-wiggle {
+    animation: dd-wiggle-calm 1.4s ease-in-out infinite;
+    outline: 2px dashed transparent;
+    outline-offset: 3px;
+  }
+}
+
+/* ── Invite popup ─────────────────────────────────── */
+.dd-invite {
+  position: fixed;
+  inset: 0;
+  z-index: 9400;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: oklch(18% .04 270 / .55);
+  backdrop-filter: blur(3px);
+}
+
+.dd-invite-popup {
+  position: relative;
+  background: var(--cream);
+  border: 3px solid var(--ink);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-zine);
+  padding: 2.25rem 1.75rem 1.5rem;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+}
+
+.dd-invite-tape {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 110px;
+  height: 26px;
+  background: #c4e951b3;
+  border: 1px solid oklch(18% .04 270 / .2);
+}
+
+.dd-invite-eyebrow {
+  font-family: var(--font-mono);
+  font-size: .65rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--coral);
+  font-weight: 700;
+  margin-bottom: .75rem;
+}
+
+.dd-invite-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 4.5vw, 1.9rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -.04em;
+  margin-bottom: .6rem;
+}
+
+.dd-invite-sub {
+  font-size: .875rem;
+  color: var(--muted-fg);
+  margin-bottom: 1.5rem;
+}
+
+.dd-invite-choices {
+  display: flex;
+  gap: .75rem;
+  margin-bottom: 1.25rem;
+}
+
+.dd-invite-btn {
+  flex: 1;
+  padding: .7rem .9rem;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-zine-sm);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  transition: transform .12s, box-shadow .12s;
+}
+.dd-invite-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-zine);
+}
+
+.dd-invite-yes { background: var(--coral); color: var(--cream); }
+.dd-invite-no  { background: var(--card);  color: var(--ink); }
+
+.dd-invite-note {
+  font-family: var(--font-mono);
+  font-size: .62rem;
+  color: var(--muted-fg);
+  letter-spacing: .02em;
+}
+
+/* ── Game overlay ─────────────────────────────────── */
+body.dd-game-open { overflow: hidden; }
+
+.dd-game {
+  position: fixed;
+  inset: 0;
+  z-index: 9500;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  background: oklch(18% .04 270 / .72);
+  backdrop-filter: blur(3px);
+}
+
+.dd-game-panel {
+  position: relative;
+  background: var(--cream);
+  border: 3px solid var(--ink);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-zine);
+  padding: 1rem;
+  max-width: 100%;
+}
+
+.dd-game-close {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  width: 32px;
+  height: 32px;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-full);
+  background: var(--coral);
+  color: var(--cream);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: var(--shadow-zine-sm);
+}
+
+.dd-game-hud {
+  display: flex;
+  justify-content: space-between;
+  gap: .75rem;
+  margin-bottom: .6rem;
+  font-family: var(--font-mono);
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.dd-game-stage {
+  position: relative;
+  border: 3px solid var(--ink);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  line-height: 0;
+}
+
+#dd-game-canvas {
+  display: block;
+  width: 360px;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 360 / 480;
+  image-rendering: pixelated;
+  touch-action: none;
+  cursor: crosshair;
+}
+
+/* boring mode swaps the colour tokens, so the canvas is already grey while
+   it redraws. this catches the frozen last frame on the game-over screen. */
+html.boring-mode #dd-game-canvas { filter: grayscale(100%); }
+
+.dd-game-over {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  padding: 1.5rem;
+  text-align: center;
+  line-height: 1.4;
+  background: oklch(18% .04 270 / .88);
+  color: var(--cream);
+}
+
+.dd-over-head {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 900;
+  letter-spacing: -.03em;
+  color: var(--coral);
+}
+
+.dd-over-detail { font-size: .8rem; max-width: 260px; }
+
+.dd-over-score {
+  font-family: var(--font-mono);
+  font-size: .62rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  opacity: .75;
+  margin-bottom: .5rem;
+}
+
+.dd-over-actions { display: flex; gap: .6rem; }
+.dd-over-actions .dd-invite-btn { flex: 0 0 auto; }
+
+.dd-game-hint {
+  margin-top: .6rem;
+  font-family: var(--font-mono);
+  font-size: .58rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted-fg);
+  text-align: center;
+}
+
+@media (max-width: 460px) {
+  .dd-game { padding: .75rem; }
+  .dd-game-panel { width: 100%; }
+  .dd-game-close { top: -10px; right: -6px; }
+  .dd-invite-choices { flex-direction: column; }
+}
