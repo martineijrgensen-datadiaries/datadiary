@@ -36,25 +36,33 @@ layout: default
     });
   </script>
 
-  {% if site.cusdis.app_id != "" %}
-  <div class="comments-section">
-    <div class="comments-label">Discussion</div>
+</div><!-- .post-wrap -->
+
+{% if site.cusdis.app_id != "" %}
+<div class="comments-wrap">
+  <hr class="comments-divider" />
+  <p class="comments-eyebrow">Join the discussion</p>
+  <h2 class="comments-heading">Leave a comment</h2>
+  <div class="comments-box">
     <div id="cusdis_thread"
       data-host="https://cusdis.com"
       data-app-id="{{ site.cusdis.app_id }}"
       data-page-id="{{ page.url }}"
       data-page-url="{{ page.url | absolute_url }}"
       data-page-title="{{ page.title }}"
+      data-theme="light"
     ></div>
     <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
   </div>
-  {% endif %}
+</div>
+{% endif %}
 
-  {% assign other_posts = site.posts | where_exp: "p", "p.url != page.url" | limit: 2 %}
-  {% if other_posts.size > 0 %}
+{% assign other_posts = site.posts | where_exp: "p", "p.url != page.url" %}
+{% if other_posts.size > 0 %}
+<div class="post-wrap">
   <div class="keep-reading">
     <div class="keep-reading-label">Keep reading</div>
-    {% for p in other_posts %}
+    {% for p in other_posts limit: 4 %}
       <a href="{{ p.url | relative_url }}" class="keep-reading-item">
         <span class="keep-reading-item-left">
           {% if p.emoji %}<span>{{ p.emoji }}</span>{% endif %}
@@ -64,5 +72,5 @@ layout: default
       </a>
     {% endfor %}
   </div>
-  {% endif %}
-</div>
+</div><!-- .post-wrap -->
+{% endif %}

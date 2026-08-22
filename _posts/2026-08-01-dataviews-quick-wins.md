@@ -4,6 +4,7 @@ title: "CJA Data Views: Quick Wins Most People Miss"
 subtitle: "8 settings worth configuring before your team opens Workspace ⚙️"
 tags: [CJA, Field Notes]
 read_time: 8
+emoji: "⚙️"
 ---
 
 One of the things I enjoy most about Customer Journey Analytics is how quickly you can reshape your analytics lens... without ever modifying the original data. I'm comparing with how report suites in Adobe Analytics are designed - mostly for receiving the data in containers as eVars, props and metrics. Not leaving much room for data transformation after hitting the Analytics server. Of course you could tend to the pre-processing phase. There are definitely some options for preparing the data for the specific report suite such as IP exclusion or the processing rules. But these layers would leave permanent marks of the data. 
