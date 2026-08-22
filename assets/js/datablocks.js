@@ -610,13 +610,24 @@
   }
 
   /* ── Boot ────────────────────────────────────────────────── */
+  /* The nav link is a direct way in, so it opens the game outright
+     regardless of the wiggle/mute state that gates the easter egg. */
+  function wireNavButton() {
+    var btn = document.getElementById('nav-play-game');
+    if (btn) btn.addEventListener('click', function (e) { e.preventDefault(); openGame(); });
+  }
+
   /* Console escape hatch: dataBlocks.play() skips straight to the game,
      dataBlocks.wiggleNow() forces a pick instead of waiting for the timer. */
   window.dataBlocks = { play: openGame, wiggleNow: pickOne };
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', waitForMode);
+    document.addEventListener('DOMContentLoaded', function () {
+      wireNavButton();
+      waitForMode();
+    });
   } else {
+    wireNavButton();
     waitForMode();
   }
 })();
