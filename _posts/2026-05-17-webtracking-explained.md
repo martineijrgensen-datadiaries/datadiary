@@ -2,7 +2,7 @@
 layout: post
 title: "Webtracking Explained: How Does a Click on Your Website Become a Number in Analytics?"
 subtitle: "A plain-language walkthrough of what actually happens between a user's click and a number in your analytics tool."
-tags: [Adobe Analytics, CJA, Field Notes]
+tags: [Field Notes]
 read_time: 7
 emoji: "🔍"
 ---

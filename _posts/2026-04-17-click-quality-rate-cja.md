@@ -2,7 +2,7 @@
 layout: post
 title: "Your Best-Performing Metric Might Be Your Worst"
 subtitle: "Why click volume is a trap, and how a click quality rate tells you what clicks actually did."
-tags: [CJA]
+tags: [CJA, Adobe Analytics]
 read_time: 5
 emoji: "🎯"
 ---
