@@ -857,6 +857,7 @@ a { color: inherit; }
 @media (max-width: 768px) {
   .mood-card-back { display: none; }
   .site-nav-home { display: none;}
+  #nav-play-game { display: none; }
 }
 
 /* coral marquee (home page only) */
