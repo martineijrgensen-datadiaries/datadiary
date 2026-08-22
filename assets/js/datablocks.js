@@ -25,7 +25,7 @@
   var BUCKET_KEYS   = 460;    // px/sec the bucket moves under keyboard
 
   var W = 360, H = 480;       // logical canvas size
-  var BLOCK_W = 56, BLOCK_H = 28;
+  var BLOCK_W = 62, BLOCK_H = 30;
   var BUCKET_W = 72, BUCKET_H = 18;
 
   var MODE_KEY = 'datadiary-mode';
@@ -34,14 +34,18 @@
 
   /* Things that belong in a customer profile. */
   var GOOD = [
-    { label: 'ECID',    fill: 'sky'   },
-    { label: 'CRMID',   fill: 'lime'  },
-    { label: 'EMLHASH', fill: 'coral' },
-    { label: 'PHNHASH', fill: 'sky'   },
-    { label: 'LOYALTY', fill: 'lime'  },
-    { label: 'AAID',    fill: 'coral' },
-    { label: 'IDFA',    fill: 'sky'   },
-    { label: 'ORDERID', fill: 'lime'  }
+    { label: 'CRM ID',       fill: 'sky'   },
+    { label: 'COOKIE ID',    fill: 'lime'  },
+    { label: 'ORDER ID',     fill: 'coral' },
+    { label: 'PURCHASE',     fill: 'sky'   },
+    { label: 'WEB VISIT',    fill: 'lime'  },
+    { label: 'APP LOGIN',    fill: 'coral' },
+    { label: 'EMAIL CLICK',  fill: 'sky'   },
+    { label: 'LOYALTY CARD', fill: 'lime'  },
+    { label: 'STORE VISIT',  fill: 'coral' },
+    { label: 'SEARCH TERM',  fill: 'sky'   },
+    { label: 'CART ADD',     fill: 'lime'  },
+    { label: 'SUPPORT CHAT', fill: 'coral' }
   ];
 
   /* Things that very much do not. */
@@ -53,16 +57,14 @@
     { label: 'API_KEY',   sin: 'you ingested an API KEY. rotate everything.' },
     { label: 'HEALTH',    sin: 'you ingested HEALTH data. that is regulated.' },
     { label: 'IP_ADDR',   sin: 'you ingested a raw IP ADDRESS.' },
-    { label: '🦆', sin: 'you ingested a duck. a literal duck.' }
+    { label: '🦆', emoji: true, sin: 'you ingested a duck. a literal duck.' },
+    { label: '🍩', emoji: true, sin: 'you ingested a donut. tasty. not a customer attribute.' },
+    { label: '🦖', emoji: true, sin: 'you ingested a dinosaur. extinct, and not GDPR-relevant either.' }
   ];
 
   /* ── Small helpers ───────────────────────────────────────── */
   function ls(get, key, val) {
     try { return get ? localStorage.getItem(key) : localStorage.setItem(key, val); }
-    catch (e) { return null; }
-  }
-  function ss(get, key, val) {
-    try { return get ? sessionStorage.getItem(key) : sessionStorage.setItem(key, val); }
     catch (e) { return null; }
   }
   function el(tag, cls, text) {
@@ -75,6 +77,27 @@
     return getComputedStyle(document.documentElement).getPropertyValue('--' + name).trim();
   }
   function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+  /* Splits a label onto as few lines as fit maxWidth. Assumes ctx.font is
+     already set. Single words are never split (no hyphenation). */
+  function wrapLabel(ctx, text, maxWidth) {
+    var words = text.split(' ');
+    if (words.length === 1) return [text];
+    if (ctx.measureText(text).width <= maxWidth) return [text];
+
+    var lines = [], current = '';
+    for (var i = 0; i < words.length; i++) {
+      var test = current ? current + ' ' + words[i] : words[i];
+      if (ctx.measureText(test).width <= maxWidth) {
+        current = test;
+      } else {
+        if (current) lines.push(current);
+        current = words[i];
+      }
+    }
+    if (current) lines.push(current);
+    return lines;
+  }
 
   /* ══════════════════════════════════════════════════════════
      PART A — the wiggle scanner
@@ -143,7 +166,7 @@
 
   function startScanner() {
     if (scannerOn) return;
-    if (ss(true, MUTE_KEY)) return;        // user said "nah" this session
+    if (ls(true, MUTE_KEY)) return;        // user said "nah, I'm reading" — leave them alone
     if (!ls(true, MODE_KEY)) return;       // mode picker still up on first visit
     scannerOn = true;
     clearInterval(pickTimer);
@@ -194,7 +217,7 @@
 
     yes.addEventListener('click', function () { closeInvite(); openGame(); });
     no.addEventListener('click', function () {
-      ss(false, MUTE_KEY, '1');
+      ls(false, MUTE_KEY, '1');
       closeInvite();
     });
     wrap.addEventListener('click', function (e) {
@@ -468,13 +491,25 @@
         ctx.fillRect(x + 5, y + 17, 4, 4);
       }
 
-      /* the duck is an emoji and is unreadable at label size, so give it room */
-      var emoji = !/^[A-Z0-9_]+$/.test(b.def.label);
+      /* emoji (duck, donut, dinosaur) get room to actually read at this size */
       ctx.fillStyle = b.bad ? cream : ink;
-      ctx.font = '700 ' + (emoji ? 16 : 9) + 'px ' + (token('font-mono') || 'monospace');
+      var fontSize = b.def.emoji ? 16 : 9;
+      ctx.font = '700 ' + fontSize + 'px ' + (token('font-mono') || 'monospace');
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillText(b.def.label, x + BLOCK_W / 2 + (b.bad ? 3 : 0), y + BLOCK_H / 2 + 1);
+
+      var labelX = x + BLOCK_W / 2 + (b.bad ? 3 : 0);
+      if (b.def.emoji) {
+        ctx.fillText(b.def.label, labelX, y + BLOCK_H / 2 + 1);
+      } else {
+        /* two-word labels (COOKIE ID, LOYALTY CARD...) stack onto two lines */
+        var lines = wrapLabel(ctx, b.def.label, BLOCK_W - 8);
+        var lineHeight = fontSize + 2;
+        var startY = y + BLOCK_H / 2 + 1 - ((lines.length - 1) * lineHeight) / 2;
+        for (var li = 0; li < lines.length; li++) {
+          ctx.fillText(lines[li], labelX, startY + li * lineHeight);
+        }
+      }
     }
 
     /* bucket */
