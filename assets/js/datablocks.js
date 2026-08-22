@@ -19,13 +19,15 @@
   var BASE_SPAWN    = 1100;   // ms between spawns at fields = 0
   var SPAWN_RAMP    = 28;     // ms shaved off per field
   var MIN_SPAWN     = 320;    // never tighter than this
+  var MIN_BLOCK_GAP = 40;     // min x-distance between two blocks in play at once
   var BASE_BAD      = 0.12;   // chance a block is a bad one
   var BAD_RAMP      = 0.01;
   var MAX_BAD       = 0.35;
   var BUCKET_KEYS   = 460;    // px/sec the bucket moves under keyboard
 
   var W = 360, H = 480;       // logical canvas size
-  var BLOCK_W = 62, BLOCK_H = 30;
+  var BLOCK_W = 78, BLOCK_H = 30;
+  var ICON_COL = 22;          // width reserved for the good-block icon
   var BUCKET_W = 72, BUCKET_H = 18;
 
   var MODE_KEY = 'datadiary-mode';
@@ -34,18 +36,18 @@
 
   /* Things that belong in a customer profile. */
   var GOOD = [
-    { label: 'CRM ID',       fill: 'sky'   },
-    { label: 'COOKIE ID',    fill: 'lime'  },
-    { label: 'ORDER ID',     fill: 'coral' },
-    { label: 'PURCHASE',     fill: 'sky'   },
-    { label: 'WEB VISIT',    fill: 'lime'  },
-    { label: 'APP LOGIN',    fill: 'coral' },
-    { label: 'EMAIL CLICK',  fill: 'sky'   },
-    { label: 'LOYALTY CARD', fill: 'lime'  },
-    { label: 'STORE VISIT',  fill: 'coral' },
-    { label: 'SEARCH TERM',  fill: 'sky'   },
-    { label: 'CART ADD',     fill: 'lime'  },
-    { label: 'SUPPORT CHAT', fill: 'coral' }
+    { label: 'CRM ID',       fill: 'sky',   icon: '🪪' },
+    { label: 'COOKIE ID',    fill: 'lime',  icon: '🍪' },
+    { label: 'ORDER ID',     fill: 'coral', icon: '📦' },
+    { label: 'PURCHASE',     fill: 'sky',   icon: '🧾' },
+    { label: 'WEB VISIT',    fill: 'lime',  icon: '🌐' },
+    { label: 'APP LOGIN',    fill: 'coral', icon: '📱' },
+    { label: 'EMAIL CLICK',  fill: 'sky',   icon: '✉️' },
+    { label: 'LOYALTY CARD', fill: 'lime',  icon: '⭐' },
+    { label: 'STORE VISIT',  fill: 'coral', icon: '🏬' },
+    { label: 'SEARCH TERM',  fill: 'sky',   icon: '🔍' },
+    { label: 'CART ADD',     fill: 'lime',  icon: '🛒' },
+    { label: 'SUPPORT CHAT', fill: 'coral', icon: '💬' }
   ];
 
   /* Things that very much do not. */
@@ -198,12 +200,12 @@
     var wrap = el('div', 'dd-invite');
     wrap.setAttribute('role', 'dialog');
     wrap.setAttribute('aria-modal', 'true');
-    wrap.setAttribute('aria-label', 'a stray record wants to play');
+    wrap.setAttribute('aria-label', 'some data blocks want to play');
     var pop  = el('div', 'dd-invite-popup');
     pop.appendChild(el('div', 'dd-invite-tape'));
     pop.appendChild(el('p',  'dd-invite-eyebrow', '⚠ anomaly detected'));
-    pop.appendChild(el('h2', 'dd-invite-title', 'a stray record is loose on this page'));
-    pop.appendChild(el('p',  'dd-invite-sub', 'it wants to be part of a customer profile. help it?'));
+    pop.appendChild(el('h2', 'dd-invite-title', 'some data blocks are loose on this page'));
+    pop.appendChild(el('p',  'dd-invite-sub', 'they want to be part of a customer profile. can you help?'));
 
     var row  = el('div', 'dd-invite-choices');
     var yes  = el('button', 'dd-invite-btn dd-invite-yes', "let's build a profile");
@@ -397,15 +399,45 @@
     hudBest.textContent   = 'BEST: ' + best();
   }
 
+  /* Finds the x position furthest from every block already in play, so a new
+     block never lands side by side (or dead in line, one above the other)
+     with an existing one. Rather than gamble on random tries, this scans the
+     open gaps between the existing blocks (sorted) and returns the middle of
+     the widest one, which is provably the best any position can do. */
+  function bestSpawnSpot() {
+    var lo = 0, hi = W - BLOCK_W;
+    if (!blocks.length) return { x: lo + Math.random() * (hi - lo), gap: Infinity };
+
+    var xs = blocks.map(function (b) { return b.x; }).sort(function (a, b) { return a - b; });
+    var pts = [lo].concat(xs, [hi]);
+    var bestX = lo, bestGap = -1;
+    for (var i = 0; i < pts.length - 1; i++) {
+      var segStart = Math.max(lo, pts[i]), segEnd = Math.min(hi, pts[i + 1]);
+      if (segEnd < segStart) continue;
+      var mid = (segStart + segEnd) / 2;
+      var gap = Infinity;
+      for (var j = 0; j < xs.length; j++) gap = Math.min(gap, Math.abs(mid - xs[j]));
+      if (gap > bestGap) { bestGap = gap; bestX = mid; }
+    }
+    return { x: bestX, gap: bestGap };
+  }
+
+  /* Returns false (and spawns nothing) when the play field is too crowded to
+     place a new block without breaking MIN_BLOCK_GAP. The caller retries
+     next frame instead of forcing a cramped, unfair spawn. */
   function spawn() {
+    var spot = bestSpawnSpot();
+    if (spot.gap < MIN_BLOCK_GAP) return false;
+
     var bad = Math.random() < Math.min(MAX_BAD, BASE_BAD + fields * BAD_RAMP);
     var def = bad ? pick(BAD) : pick(GOOD);
     blocks.push({
-      x: Math.random() * (W - BLOCK_W),
+      x: spot.x,
       y: -BLOCK_H,
       bad: bad,
       def: def
     });
+    return true;
   }
 
   function tick(now) {
@@ -420,7 +452,7 @@
     /* spawning */
     spawnAcc += dt * 1000;
     var every = Math.max(MIN_SPAWN, BASE_SPAWN - fields * SPAWN_RAMP);
-    if (spawnAcc >= every) { spawnAcc = 0; spawn(); }
+    if (spawnAcc >= every && spawn()) spawnAcc = 0;
 
     /* movement + collisions */
     var fall = BASE_SPEED * speedMult();
@@ -475,14 +507,21 @@
       var b = blocks[i];
       var x = Math.round(b.x), y = Math.round(b.y);
 
-      ctx.fillStyle = b.bad ? ink : (token(b.def.fill) || '#ccc');
-      ctx.fillRect(x, y, BLOCK_W, BLOCK_H);
+      /* emoji-only bad blocks (duck, donut, dinosaur) skip the filled box
+         entirely: they render as just the warning mark plus the emoji,
+         floating on the play field instead of sitting in an ink tile. */
+      var isBadEmoji = b.bad && b.def.emoji;
 
-      ctx.fillStyle = b.bad ? cream : ink;
-      ctx.fillRect(x, y, BLOCK_W, 3);
-      ctx.fillRect(x, y + BLOCK_H - 3, BLOCK_W, 3);
-      ctx.fillRect(x, y, 3, BLOCK_H);
-      ctx.fillRect(x + BLOCK_W - 3, y, 3, BLOCK_H);
+      if (!isBadEmoji) {
+        ctx.fillStyle = b.bad ? ink : (token(b.def.fill) || '#ccc');
+        ctx.fillRect(x, y, BLOCK_W, BLOCK_H);
+
+        ctx.fillStyle = b.bad ? cream : ink;
+        ctx.fillRect(x, y, BLOCK_W, 3);
+        ctx.fillRect(x, y + BLOCK_H - 3, BLOCK_W, 3);
+        ctx.fillRect(x, y, 3, BLOCK_H);
+        ctx.fillRect(x + BLOCK_W - 3, y, 3, BLOCK_H);
+      }
 
       /* bad blocks get a chunky warning notch so colour isn't the only tell */
       if (b.bad) {
@@ -491,19 +530,34 @@
         ctx.fillRect(x + 5, y + 17, 4, 4);
       }
 
-      /* emoji (duck, donut, dinosaur) get room to actually read at this size */
-      ctx.fillStyle = b.bad ? cream : ink;
-      var fontSize = b.def.emoji ? 16 : 9;
-      ctx.font = '700 ' + fontSize + 'px ' + (token('font-mono') || 'monospace');
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
+      /* good blocks get a small icon in their own column on the left */
+      if (!b.bad && b.def.icon) {
+        ctx.fillStyle = ink;
+        ctx.fillRect(x + ICON_COL, y + 3, 2, BLOCK_H - 6);
+        ctx.font = '15px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(b.def.icon, x + ICON_COL / 2 + 2, y + BLOCK_H / 2 + 1);
+      }
 
-      var labelX = x + BLOCK_W / 2 + (b.bad ? 3 : 0);
-      if (b.def.emoji) {
-        ctx.fillText(b.def.label, labelX, y + BLOCK_H / 2 + 1);
+      if (isBadEmoji) {
+        ctx.font = '22px sans-serif';
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(b.def.label, x + 14, y + BLOCK_H / 2 + 1);
       } else {
+        var iconShift = (!b.bad && b.def.icon) ? ICON_COL : 0;
+        var labelWidth = BLOCK_W - iconShift;
+        var labelX = x + iconShift + labelWidth / 2 + (b.bad ? 3 : 0);
+
+        ctx.fillStyle = b.bad ? cream : ink;
+        var fontSize = 9;
+        ctx.font = '700 ' + fontSize + 'px ' + (token('font-mono') || 'monospace');
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+
         /* two-word labels (COOKIE ID, LOYALTY CARD...) stack onto two lines */
-        var lines = wrapLabel(ctx, b.def.label, BLOCK_W - 8);
+        var lines = wrapLabel(ctx, b.def.label, labelWidth - 8);
         var lineHeight = fontSize + 2;
         var startY = y + BLOCK_H / 2 + 1 - ((lines.length - 1) * lineHeight) / 2;
         for (var li = 0; li < lines.length; li++) {
