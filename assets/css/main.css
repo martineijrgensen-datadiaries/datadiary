@@ -564,7 +564,11 @@ a { color: inherit; }
   background: var(--cream);
   box-shadow: var(--shadow-zine-sm);
 }
-
+#cusdis_thread iframe {
+  width: 100%;
+  min-height: 460px;
+  border: none;
+}
 .keep-reading {
   border: 2px solid var(--ink);
   border-radius: var(--radius-xl);
