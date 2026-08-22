@@ -28,7 +28,8 @@
   var W = 360, H = 480;       // logical canvas size
   var BLOCK_W = 78, BLOCK_H = 30;
   var ICON_COL = 22;          // width reserved for the good-block icon
-  var BUCKET_W = 72, BUCKET_H = 18;
+  var BUCKET_W = 78, BUCKET_H = 36;     // top width / height of the bucket shape
+  var BUCKET_TAPER = 20;                // how much narrower the base is than the rim
 
   var MODE_KEY = 'datadiary-mode';
   var BEST_KEY = 'datadiary-blocks-best';
@@ -480,7 +481,7 @@
       if (b.y > H) {
         if (!b.bad) {
           draw();
-          return gameOver('INSUFFICIENT DATA', 'you dropped ' + b.def.label + '. the profile is incomplete.');
+          return gameOver('INSUFFICIENT DATA', 'you dropped ' + b.def.label + '. the dataset is incomplete.');
         }
         blocks.splice(i, 1);  // dropping a bad block is the correct move
       }
@@ -567,18 +568,39 @@
       }
     }
 
-    /* bucket */
+    /* bucket: a simple tapered pail, rim wider than the base, with a handle */
     var bx = Math.round(bucketX), by = H - BUCKET_H - 6;
+    var taper = BUCKET_TAPER / 2;
+    var cx = bx + BUCKET_W / 2;
+
+    /* handle: a plain half-circle arcing up from the rim */
+    ctx.strokeStyle = ink;
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.arc(cx, by, BUCKET_W * 0.32, Math.PI, 2 * Math.PI);
+    ctx.stroke();
+
+    /* body */
     ctx.fillStyle = ink;
-    ctx.fillRect(bx, by, BUCKET_W, BUCKET_H);
+    ctx.beginPath();
+    ctx.moveTo(bx, by);
+    ctx.lineTo(bx + BUCKET_W, by);
+    ctx.lineTo(bx + BUCKET_W - taper, by + BUCKET_H);
+    ctx.lineTo(bx + taper, by + BUCKET_H);
+    ctx.closePath();
+    ctx.fill();
+
+    /* rim highlight along the top edge */
     ctx.fillStyle = token('lime') || '#c6f24e';
     ctx.fillRect(bx, by, BUCKET_W, 4);
 
+    /* label, two lines so it reads clearly at this width */
     ctx.fillStyle = cream;
     ctx.font = '700 8px ' + (token('font-mono') || 'monospace');
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText('PROFILE', bx + BUCKET_W / 2, by + BUCKET_H / 2 + 3);
+    ctx.fillText('CUSTOMER', cx, by + BUCKET_H / 2 - 5);
+    ctx.fillText('VIEW', cx, by + BUCKET_H / 2 + 5);
 
     /* floor */
     ctx.fillStyle = ink;
