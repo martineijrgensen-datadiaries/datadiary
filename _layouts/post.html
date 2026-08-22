@@ -36,6 +36,20 @@ layout: default
     });
   </script>
 
+  {% if site.cusdis.app_id != "" %}
+  <div class="comments-section">
+    <div class="comments-label">Discussion</div>
+    <div id="cusdis_thread"
+      data-host="https://cusdis.com"
+      data-app-id="{{ site.cusdis.app_id }}"
+      data-page-id="{{ page.url }}"
+      data-page-url="{{ page.url | absolute_url }}"
+      data-page-title="{{ page.title }}"
+    ></div>
+    <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+  </div>
+  {% endif %}
+
   {% assign other_posts = site.posts | where_exp: "p", "p.url != page.url" | limit: 2 %}
   {% if other_posts.size > 0 %}
   <div class="keep-reading">

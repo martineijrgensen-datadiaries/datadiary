@@ -32,3 +32,8 @@ tag_colors:
   CJA: coral
   AEP: lime
   "Field Notes": sky
+
+# Comments (Cusdis) — sign up at cusdis.com, add this site, paste the App ID below.
+# Comments stay off until app_id is filled in.
+cusdis:
+  app_id: ""
