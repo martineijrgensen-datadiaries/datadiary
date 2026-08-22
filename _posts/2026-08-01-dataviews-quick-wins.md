@@ -169,7 +169,6 @@ These 8 settings are not complicated. Most of them are just a checkbox, a dropdo
 
 But some of these configurations also surface real business questions. How do you want to define a session? What should a missing campaign value actually mean? These are not just technical decisions, they are analytical ones. I really think it is worth having these conversations before you get six months into reports built on defaults nobody agreed to.
 
-
 ---
-<br>
+<br/>
 *All settings described here are based on what I have tried to apply in our own environment and are available in the Data View Settings tab. Adobe's documentation on Data Views covers each of these in more detail if you want to go deeper on any of them.*
