@@ -201,11 +201,11 @@
     var wrap = el('div', 'dd-invite');
     wrap.setAttribute('role', 'dialog');
     wrap.setAttribute('aria-modal', 'true');
-    wrap.setAttribute('aria-label', 'some data blocks want to play');
+    wrap.setAttribute('aria-label', 'some data records want to play');
     var pop  = el('div', 'dd-invite-popup');
     pop.appendChild(el('div', 'dd-invite-tape'));
     pop.appendChild(el('p',  'dd-invite-eyebrow', '⚠ anomaly detected'));
-    pop.appendChild(el('h2', 'dd-invite-title', 'Some important data blocks have escaped their datasets.'));
+    pop.appendChild(el('h2', 'dd-invite-title', 'Some important data records have escaped their datasets.'));
     pop.appendChild(el('p',  'dd-invite-sub', 'Help us catch them and complete the customer view!'));
 
     var row  = el('div', 'dd-invite-choices');
@@ -215,7 +215,7 @@
     row.appendChild(no);
     pop.appendChild(row);
 
-    pop.appendChild(el('p', 'dd-invite-note', 'catch the identifiers. drop nothing. ingest nothing you shouldn’t.'));
+    pop.appendChild(el('p', 'dd-invite-note', 'catch the data. drop nothing. ingest nothing you shouldn’t.'));
     wrap.appendChild(pop);
 
     yes.addEventListener('click', function () { closeInvite(); openGame(); });
@@ -594,13 +594,12 @@
     ctx.fillStyle = token('lime') || '#c6f24e';
     ctx.fillRect(bx, by, BUCKET_W, 4);
 
-    /* label, two lines so it reads clearly at this width */
+    /* label: short enough to sit on one line */
     ctx.fillStyle = cream;
-    ctx.font = '700 8px ' + (token('font-mono') || 'monospace');
+    ctx.font = '700 12px ' + (token('font-mono') || 'monospace');
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText('CUSTOMER', cx, by + BUCKET_H / 2 - 5);
-    ctx.fillText('VIEW', cx, by + BUCKET_H / 2 + 5);
+    ctx.fillText('AEP', cx, by + BUCKET_H / 2 + 1);
 
     /* floor */
     ctx.fillStyle = ink;
