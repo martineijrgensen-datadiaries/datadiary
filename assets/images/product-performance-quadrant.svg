@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 820" width="1160" height="820" font-family="'Inter', ui-sans-serif, system-ui, sans-serif">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="5" dy="5" stdDeviation="0" flood-color="#C4BEAA" flood-opacity="1"/>
+    </filter>
+    <filter id="shadow-sm" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="3" dy="3" stdDeviation="0" flood-color="#C4BEAA" flood-opacity="1"/>
+    </filter>
+  </defs>
+
+  <rect width="1160" height="820" fill="#F7F3EA"/>
+
+  <!-- Title -->
+  <text x="580" y="46" text-anchor="middle" font-size="24" font-weight="700" fill="#1C1A2A" font-family="'Fraunces', Georgia, serif">Which products actually drive revenue?</text>
+  <text x="580" y="70" text-anchor="middle" font-size="13" fill="#8A8799">revenue, orders, and conversion efficiency, each measured at sub-event scope</text>
+
+  <!-- scope badge -->
+  <rect x="880" y="90" width="220" height="30" rx="15" fill="#1C1A2A"/>
+  <text x="990" y="110" text-anchor="middle" font-size="11" font-weight="600" fill="#EDF9E6">scope: sub-event (per line item)</text>
+
+  <!-- Legend list -->
+  <rect x="40" y="140" width="155" height="330" rx="16" fill="#FDFAF4" stroke="#1C1A2A" stroke-width="2" filter="url(#shadow-sm)"/>
+  <text x="60" y="168" font-size="11" font-weight="700" letter-spacing="1" fill="#8A8799">PRODUCT SKU</text>
+  <circle cx="66" cy="196" r="7" fill="#2FA9A0"/>
+  <text x="82" y="200" font-size="13" fill="#1C1A2A">prd1006</text>
+  <circle cx="66" cy="228" r="7" fill="#6C63FF"/>
+  <text x="82" y="232" font-size="13" fill="#1C1A2A">prd1036</text>
+  <circle cx="66" cy="260" r="7" fill="#F5A623"/>
+  <text x="82" y="264" font-size="13" fill="#1C1A2A">prd1025</text>
+  <circle cx="66" cy="292" r="7" fill="#E85D9E"/>
+  <text x="82" y="296" font-size="13" fill="#1C1A2A">prd1029</text>
+  <circle cx="66" cy="324" r="7" fill="#A99BE8"/>
+  <text x="82" y="328" font-size="13" fill="#1C1A2A">prd1028</text>
+  <circle cx="66" cy="356" r="7" fill="#4CAF7D"/>
+  <text x="82" y="360" font-size="13" fill="#1C1A2A">prd1048</text>
+  <line x1="60" y1="386" x2="175" y2="386" stroke="#D4CEBC" stroke-width="1.5"/>
+  <text x="60" y="408" font-size="11" fill="#8A8799">bubble size =</text>
+  <text x="60" y="424" font-size="11" fill="#8A8799">cart adds / views</text>
+  <circle cx="70" cy="448" r="4" fill="#8A8799"/>
+  <circle cx="95" cy="448" r="8" fill="#8A8799"/>
+  <circle cx="135" cy="448" r="14" fill="#8A8799"/>
+
+  <!-- Chart quadrants -->
+  <rect x="260" y="140" width="410" height="260" fill="#FFFBEA"/>
+  <rect x="670" y="140" width="410" height="260" fill="#EAF4FD"/>
+  <rect x="260" y="400" width="410" height="260" fill="#FDECEA"/>
+  <rect x="670" y="400" width="410" height="260" fill="#EDF9E6"/>
+
+  <!-- Quadrant labels, tucked into the outer corners so bubbles never sit under them -->
+  <text x="280" y="178" text-anchor="start" font-size="15" font-weight="700" fill="#8A7A2A" font-family="'Fraunces', Georgia, serif"><tspan font-family="'Inter',ui-sans-serif,system-ui,sans-serif">❓</tspan><tspan dx="8">Premium sleepers</tspan></text>
+  <text x="1060" y="178" text-anchor="end" font-size="15" font-weight="700" fill="#3E7F9E" font-family="'Fraunces', Georgia, serif"><tspan font-family="'Inter',ui-sans-serif,system-ui,sans-serif">⭐</tspan><tspan dx="8">Strategic winners</tspan></text>
+  <text x="280" y="635" text-anchor="start" font-size="15" font-weight="700" fill="#B24B33" font-family="'Fraunces', Georgia, serif"><tspan font-family="'Inter',ui-sans-serif,system-ui,sans-serif">🐶</tspan><tspan dx="8">Underperformers</tspan></text>
+  <text x="1060" y="635" text-anchor="end" font-size="15" font-weight="700" fill="#3F8A4C" font-family="'Fraunces', Georgia, serif"><tspan font-family="'Inter',ui-sans-serif,system-ui,sans-serif">🐄</tspan><tspan dx="8">Volume drivers</tspan></text>
+
+  <!-- Axes -->
+  <line x1="260" y1="140" x2="260" y2="660" stroke="#1C1A2A" stroke-width="2.5"/>
+  <line x1="260" y1="660" x2="1080" y2="660" stroke="#1C1A2A" stroke-width="2.5"/>
+  <line x1="670" y1="140" x2="670" y2="660" stroke="#1C1A2A" stroke-width="1.5" stroke-dasharray="6,5"/>
+  <line x1="260" y1="400" x2="1080" y2="400" stroke="#1C1A2A" stroke-width="1.5" stroke-dasharray="6,5"/>
+
+  <!-- y ticks -->
+  <text x="248" y="205" text-anchor="end" font-size="11" fill="#8A8799">6,000</text>
+  <text x="248" y="335" text-anchor="end" font-size="11" fill="#8A8799">4,000</text>
+  <text x="248" y="465" text-anchor="end" font-size="11" fill="#8A8799">2,000</text>
+  <text x="262" y="128" text-anchor="start" font-size="11" fill="#8A8799">Online Revenue (dkk)</text>
+
+  <!-- x ticks -->
+  <text x="360" y="682" text-anchor="middle" font-size="11" fill="#8A8799">16</text>
+  <text x="565" y="682" text-anchor="middle" font-size="11" fill="#8A8799">20</text>
+  <text x="770" y="682" text-anchor="middle" font-size="11" fill="#8A8799">24</text>
+  <text x="975" y="682" text-anchor="middle" font-size="11" fill="#8A8799">28</text>
+  <text x="670" y="712" text-anchor="middle" font-size="12" fill="#8A8799">Online Orders</text>
+
+  <!-- Bubbles: prd1048 green, premium sleeper -->
+  <circle cx="430" cy="230" r="34" fill="#4CAF7D" fill-opacity="0.85" stroke="#1C1A2A" stroke-width="1.5"/>
+  <text x="430" y="235" text-anchor="middle" font-size="10" font-weight="700" fill="#0E2A17">1048</text>
+
+  <!-- unlabeled context bubble, premium sleepers -->
+  <circle cx="330" cy="330" r="12" fill="#A9CBE0" fill-opacity="0.75" stroke="#1C1A2A" stroke-width="1.2"/>
+
+  <!-- prd1036 indigo, strategic winner, big -->
+  <circle cx="800" cy="185" r="42" fill="#6C63FF" fill-opacity="0.85" stroke="#1C1A2A" stroke-width="1.5"/>
+  <text x="800" y="190" text-anchor="middle" font-size="10" font-weight="700" fill="#FDFAF4">1036</text>
+
+  <!-- prd1025 orange, strategic winner -->
+  <circle cx="930" cy="300" r="26" fill="#F5A623" fill-opacity="0.9" stroke="#1C1A2A" stroke-width="1.5"/>
+  <text x="930" y="304" text-anchor="middle" font-size="10" font-weight="700" fill="#3A2A00">1025</text>
+
+  <!-- prd1029 pink, strategic winner lower edge -->
+  <circle cx="790" cy="370" r="18" fill="#E85D9E" fill-opacity="0.9" stroke="#1C1A2A" stroke-width="1.5"/>
+  <text x="790" y="374" text-anchor="middle" font-size="9" font-weight="700" fill="#3A0E22">1029</text>
+
+  <!-- prd1006 teal, strategic winner far right -->
+  <circle cx="1030" cy="350" r="30" fill="#2FA9A0" fill-opacity="0.9" stroke="#1C1A2A" stroke-width="1.5"/>
+  <text x="1030" y="354" text-anchor="middle" font-size="10" font-weight="700" fill="#04211E">1006</text>
+
+  <!-- prd1028 light purple, underperformer -->
+  <circle cx="370" cy="590" r="24" fill="#A99BE8" fill-opacity="0.9" stroke="#1C1A2A" stroke-width="1.5"/>
+  <text x="370" y="594" text-anchor="middle" font-size="10" font-weight="700" fill="#1F1440">1028</text>
+
+  <!-- unlabeled context bubble, underperformers -->
+  <circle cx="600" cy="560" r="13" fill="#D9B98C" fill-opacity="0.75" stroke="#1C1A2A" stroke-width="1.2"/>
+
+  <!-- unlabeled context bubbles, volume drivers -->
+  <circle cx="800" cy="500" r="20" fill="#F0C77A" fill-opacity="0.75" stroke="#1C1A2A" stroke-width="1.2"/>
+  <circle cx="960" cy="470" r="14" fill="#8FC7C0" fill-opacity="0.75" stroke="#1C1A2A" stroke-width="1.2"/>
+
+  <!-- annotation / callout, tucked inside the quadrant, clear of every bubble and label -->
+  <line x1="480" y1="516" x2="389" y2="574" stroke="#1C1A2A" stroke-width="1.5" stroke-dasharray="4,4"/>
+  <circle cx="389" cy="574" r="3" fill="#1C1A2A"/>
+  <rect x="470" y="430" width="210" height="86" rx="14" fill="#FDFAF4" stroke="#1C1A2A" stroke-width="2" filter="url(#shadow-sm)"/>
+  <text x="486" y="456" font-size="11" fill="#1C1A2A">Counts only this SKU's</text>
+  <text x="486" y="472" font-size="11" fill="#1C1A2A">line-item revenue and orders.</text>
+  <text x="486" y="488" font-size="11" fill="#1C1A2A">Not the whole cart it shipped in.</text>
+
+  <text x="580" y="790" text-anchor="middle" font-size="12" fill="#8A8799">Same shape as the classic BCG growth-share matrix, stars, cash cows, dogs, question marks, just built on CJA metrics at sub-event scope.</text>
+</svg>
