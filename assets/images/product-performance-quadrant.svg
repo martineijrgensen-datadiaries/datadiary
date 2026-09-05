@@ -75,8 +75,9 @@
   <circle cx="430" cy="230" r="34" fill="#4CAF7D" fill-opacity="0.85" stroke="#1C1A2A" stroke-width="1.5"/>
   <text x="430" y="235" text-anchor="middle" font-size="10" font-weight="700" fill="#0E2A17">1048</text>
 
-  <!-- unlabeled context bubble, premium sleepers -->
-  <circle cx="330" cy="330" r="12" fill="#A9CBE0" fill-opacity="0.75" stroke="#1C1A2A" stroke-width="1.2"/>
+  <!-- unlabeled context bubbles, premium sleepers -->
+  <circle cx="335" cy="325" r="13" fill="#E85D9E" fill-opacity="0.6" stroke="#1C1A2A" stroke-width="1.2"/>
+  <circle cx="585" cy="285" r="17" fill="#2FA9A0" fill-opacity="0.6" stroke="#1C1A2A" stroke-width="1.2"/>
 
   <!-- prd1036 indigo, strategic winner, big -->
   <circle cx="800" cy="185" r="42" fill="#6C63FF" fill-opacity="0.85" stroke="#1C1A2A" stroke-width="1.5"/>
@@ -98,20 +99,14 @@
   <circle cx="370" cy="590" r="24" fill="#A99BE8" fill-opacity="0.9" stroke="#1C1A2A" stroke-width="1.5"/>
   <text x="370" y="594" text-anchor="middle" font-size="10" font-weight="700" fill="#1F1440">1028</text>
 
-  <!-- unlabeled context bubble, underperformers -->
-  <circle cx="600" cy="560" r="13" fill="#D9B98C" fill-opacity="0.75" stroke="#1C1A2A" stroke-width="1.2"/>
+  <!-- unlabeled context bubbles, underperformers -->
+  <circle cx="600" cy="560" r="12" fill="#2FA9A0" fill-opacity="0.6" stroke="#1C1A2A" stroke-width="1.2"/>
+  <circle cx="510" cy="465" r="18" fill="#F5A623" fill-opacity="0.6" stroke="#1C1A2A" stroke-width="1.2"/>
 
   <!-- unlabeled context bubbles, volume drivers -->
-  <circle cx="800" cy="500" r="20" fill="#F0C77A" fill-opacity="0.75" stroke="#1C1A2A" stroke-width="1.2"/>
-  <circle cx="960" cy="470" r="14" fill="#8FC7C0" fill-opacity="0.75" stroke="#1C1A2A" stroke-width="1.2"/>
-
-  <!-- annotation / callout, tucked inside the quadrant, clear of every bubble and label -->
-  <line x1="480" y1="516" x2="389" y2="574" stroke="#1C1A2A" stroke-width="1.5" stroke-dasharray="4,4"/>
-  <circle cx="389" cy="574" r="3" fill="#1C1A2A"/>
-  <rect x="470" y="430" width="210" height="86" rx="14" fill="#FDFAF4" stroke="#1C1A2A" stroke-width="2" filter="url(#shadow-sm)"/>
-  <text x="486" y="456" font-size="11" fill="#1C1A2A">Counts only this SKU's</text>
-  <text x="486" y="472" font-size="11" fill="#1C1A2A">line-item revenue and orders.</text>
-  <text x="486" y="488" font-size="11" fill="#1C1A2A">Not the whole cart it shipped in.</text>
+  <circle cx="800" cy="500" r="20" fill="#A99BE8" fill-opacity="0.6" stroke="#1C1A2A" stroke-width="1.2"/>
+  <circle cx="960" cy="470" r="14" fill="#F5A623" fill-opacity="0.6" stroke="#1C1A2A" stroke-width="1.2"/>
+  <circle cx="745" cy="590" r="12" fill="#4CAF7D" fill-opacity="0.6" stroke="#1C1A2A" stroke-width="1.2"/>
 
   <text x="580" y="790" text-anchor="middle" font-size="12" fill="#8A8799">Same shape as the classic BCG growth-share matrix, stars, cash cows, dogs, question marks, just built on CJA metrics at sub-event scope.</text>
 </svg>
