@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 800" width="1160" height="800" font-family="'Inter', ui-sans-serif, system-ui, sans-serif">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="5" dy="5" stdDeviation="0" flood-color="#C4BEAA" flood-opacity="1"/>
+    </filter>
+    <filter id="shadow-sm" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="3" dy="3" stdDeviation="0" flood-color="#C4BEAA" flood-opacity="1"/>
+    </filter>
+  </defs>
+
+  <rect width="1160" height="800" fill="#F7F3EA"/>
+
+  <!-- Title -->
+  <text x="580" y="46" text-anchor="middle" font-size="24" font-weight="700" fill="#1C1A2A" font-family="'Fraunces', Georgia, serif">Event scope vs. sub-event scope</text>
+  <text x="580" y="70" text-anchor="middle" font-size="13" fill="#8A8799">same order, same filter, two very different revenue numbers</text>
+
+  <!-- Order card -->
+  <rect x="60" y="96" width="1040" height="150" rx="20" fill="#FDFAF4" stroke="#1C1A2A" stroke-width="2.5" filter="url(#shadow)"/>
+  <line x1="300" y1="96" x2="300" y2="246" stroke="#D4CEBC" stroke-width="1.5"/>
+  <line x1="560" y1="96" x2="560" y2="246" stroke="#D4CEBC" stroke-width="1.5"/>
+
+  <text x="180" y="124" text-anchor="middle" font-size="11" font-weight="700" letter-spacing="1.5" fill="#8A8799">TIMESTAMP</text>
+  <text x="180" y="156" text-anchor="middle" font-size="16" fill="#1C1A2A">2026-08-14</text>
+  <text x="180" y="178" text-anchor="middle" font-size="16" fill="#1C1A2A">09:34:22</text>
+
+  <text x="430" y="124" text-anchor="middle" font-size="11" font-weight="700" letter-spacing="1.5" fill="#8A8799">EVENT TYPE</text>
+  <text x="430" y="160" text-anchor="middle" font-size="16" font-weight="600" fill="#1C1A2A">commerce.order</text>
+
+  <text x="600" y="124" font-size="11" font-weight="700" letter-spacing="1.5" fill="#8A8799">PRODUCT LIST ITEMS · 4 ITEMS</text>
+
+  <circle cx="592" cy="150" r="4" fill="#C4BEAA"/>
+  <text x="606" y="155" font-size="14" fill="#1C1A2A">1. Running Shoes → Footwear · 1,299 dkk</text>
+
+  <circle cx="592" cy="176" r="4" fill="#4CAF7D"/>
+  <text x="606" y="181" font-size="14" font-weight="700" fill="#1C1A2A">2. Sports Bra → Activewear · 299 dkk</text>
+
+  <circle cx="592" cy="202" r="4" fill="#4CAF7D"/>
+  <text x="606" y="207" font-size="14" font-weight="700" fill="#1C1A2A">3. Training Shorts → Activewear · 349 dkk</text>
+
+  <circle cx="592" cy="228" r="4" fill="#C4BEAA"/>
+  <text x="606" y="233" font-size="14" fill="#1C1A2A">4. Shaker Bottle → Accessories · 149 dkk</text>
+
+  <!-- Filter pill -->
+  <rect x="410" y="270" width="340" height="42" rx="21" fill="#1C1A2A"/>
+  <text x="580" y="296" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="13" fill="#FDFAF4">Filter: category = "Activewear"</text>
+
+  <!-- Column headers -->
+  <text x="320" y="372" text-anchor="middle" font-family="'Fraunces', Georgia, serif" font-weight="700" font-size="18" fill="#1C1A2A">EVENT SCOPE</text>
+  <rect x="260" y="384" width="120" height="4" rx="2" fill="#E86A47"/>
+
+  <text x="840" y="372" text-anchor="middle" font-family="'Fraunces', Georgia, serif" font-weight="700" font-size="18" fill="#1C1A2A">SUB-EVENT SCOPE</text>
+  <rect x="760" y="384" width="160" height="4" rx="2" fill="#4CAF7D"/>
+
+  <line x1="580" y1="340" x2="580" y2="700" stroke="#C4BEAA" stroke-width="2" stroke-dasharray="6,5"/>
+
+  <!-- grouping box on sub-event side around the two Activewear rows -->
+  <rect x="630" y="458" width="440" height="88" rx="14" fill="none" stroke="#4CAF7D" stroke-width="2" stroke-dasharray="6,4"/>
+
+  <!-- Row 1: Running Shoes -->
+  <circle cx="110" cy="430" r="7" fill="#E86A47"/>
+  <text x="130" y="435" font-size="14" fill="#1C1A2A">Running Shoes · Footwear · 1,299 dkk</text>
+  <text x="540" y="436" font-size="16" fill="#1C1A2A" text-anchor="end">✓</text>
+
+  <circle cx="660" cy="430" r="7" fill="#C4BEAA"/>
+  <text x="680" y="435" font-size="14" fill="#8A8799">Running Shoes · Footwear · 1,299 dkk</text>
+
+  <!-- Row 2: Sports Bra -->
+  <circle cx="110" cy="476" r="7" fill="#E86A47"/>
+  <text x="130" y="481" font-size="14" font-weight="700" fill="#1C1A2A">Sports Bra ★ · Activewear · 299 dkk</text>
+  <text x="540" y="482" font-size="16" fill="#1C1A2A" text-anchor="end">✓</text>
+
+  <circle cx="660" cy="476" r="7" fill="#4CAF7D"/>
+  <text x="680" y="481" font-size="14" font-weight="700" fill="#1C1A2A">Sports Bra ★ · Activewear · 299 dkk</text>
+  <text x="1060" y="482" font-size="16" fill="#1C1A2A" text-anchor="end">✓</text>
+
+  <!-- Row 3: Training Shorts -->
+  <circle cx="110" cy="522" r="7" fill="#E86A47"/>
+  <text x="130" y="527" font-size="14" font-weight="700" fill="#1C1A2A">Training Shorts ★ · Activewear · 349 dkk</text>
+  <text x="540" y="528" font-size="16" fill="#1C1A2A" text-anchor="end">✓</text>
+
+  <circle cx="660" cy="522" r="7" fill="#4CAF7D"/>
+  <text x="680" y="527" font-size="14" font-weight="700" fill="#1C1A2A">Training Shorts ★ · Activewear · 349 dkk</text>
+  <text x="1060" y="528" font-size="16" fill="#1C1A2A" text-anchor="end">✓</text>
+
+  <!-- Row 4: Shaker Bottle -->
+  <circle cx="110" cy="568" r="7" fill="#E86A47"/>
+  <text x="130" y="573" font-size="14" fill="#1C1A2A">Shaker Bottle · Accessories · 149 dkk</text>
+  <text x="540" y="574" font-size="16" fill="#1C1A2A" text-anchor="end">✓</text>
+
+  <circle cx="660" cy="568" r="7" fill="#C4BEAA"/>
+  <text x="680" y="573" font-size="14" fill="#8A8799">Shaker Bottle · Accessories · 149 dkk</text>
+
+  <!-- Totals -->
+  <rect x="60" y="612" width="490" height="90" rx="16" fill="#E86A47" filter="url(#shadow-sm)"/>
+  <text x="84" y="644" font-size="12" font-weight="600" letter-spacing="1" fill="#FDECEA">REVENUE COUNTED</text>
+  <text x="84" y="682" font-size="32" font-weight="800" fill="#FDFAF4">2,096 DKK</text>
+
+  <rect x="610" y="612" width="490" height="90" rx="16" fill="#1C1A2A" filter="url(#shadow-sm)"/>
+  <text x="634" y="644" font-size="12" font-weight="600" letter-spacing="1" fill="#AAA8B8">REVENUE COUNTED</text>
+  <text x="634" y="682" font-size="32" font-weight="800" fill="#EDF9E6">648 DKK</text>
+
+  <text x="580" y="748" text-anchor="middle" font-size="12" fill="#8A8799">Sub-event scope only counts the line items that match the filter, not the whole order.</text>
+</svg>
