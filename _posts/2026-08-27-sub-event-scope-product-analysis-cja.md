@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Sub-Event Scope: The Setting That Fixes Product-Level Numbers in CJA"
-subtitle: "How switching one scope setting turned a broken product performance matrix into one I could actually trust"
+subtitle: "How you can use the object scope for product analysis"
 tags: [Adobe Analytics, CJA]
 read_time: 8
 emoji: "🛒"
