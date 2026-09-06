@@ -33,7 +33,8 @@
 
   var MODE_KEY = 'datadiary-mode';
   var BEST_KEY = 'datadiary-blocks-best';
-  var MUTE_KEY = 'datadiary-blocks-muted';
+  var MUTE_KEY  = 'datadiary-blocks-muted';   // localStorage: "nah, I'm reading" — quiet forever
+  var SHOWN_KEY = 'datadiary-blocks-shown';   // sessionStorage: invite has appeared once this visit
 
   /* Things that belong in a customer profile. */
   var GOOD = [
@@ -68,6 +69,10 @@
   /* ── Small helpers ───────────────────────────────────────── */
   function ls(get, key, val) {
     try { return get ? localStorage.getItem(key) : localStorage.setItem(key, val); }
+    catch (e) { return null; }
+  }
+  function ss(get, key, val) {
+    try { return get ? sessionStorage.getItem(key) : sessionStorage.setItem(key, val); }
     catch (e) { return null; }
   }
   function el(tag, cls, text) {
@@ -170,6 +175,7 @@
   function startScanner() {
     if (scannerOn) return;
     if (ls(true, MUTE_KEY)) return;        // user said "nah, I'm reading" — leave them alone
+    if (ss(true, SHOWN_KEY)) return;       // invite already appeared once this visit
     if (!ls(true, MODE_KEY)) return;       // mode picker still up on first visit
     scannerOn = true;
     clearInterval(pickTimer);
@@ -241,6 +247,11 @@
     invite.style.display = 'flex';
     invite.querySelector('.dd-invite-yes').focus();
     document.addEventListener('keydown', onInviteKey);
+
+    /* the invite only ever shows once per visit, no matter what's clicked
+       (or not clicked) once it's up. the nav link becomes their way back in. */
+    ss(false, SHOWN_KEY, '1');
+    showNavButton();
   }
 
   function closeInvite() {
@@ -632,10 +643,11 @@
   }
 
   /* ── Boot ────────────────────────────────────────────────── */
-  /* The nav link stays hidden until someone declines the wiggle invite with
-     "nah, I'm reading". At that point the easter egg goes quiet for good, so
-     the nav link becomes their deliberate way back in. Until then it stays
-     hidden, so it doesn't spoil the surprise before someone's opted out of it. */
+  /* The nav link stays hidden until the invite has shown once: either they
+     saw it this visit (any outcome, including ignoring it) or they declined
+     it on a past visit with "nah, I'm reading". After that the nav link is
+     their deliberate way back in, and the wiggle stops trying. Until then it
+     stays hidden, so it doesn't spoil the surprise before anyone's seen it. */
   function showNavButton() {
     var btn = document.getElementById('nav-play-game');
     if (btn) btn.classList.add('dd-nav-visible');
@@ -645,7 +657,7 @@
     var btn = document.getElementById('nav-play-game');
     if (!btn) return;
     btn.addEventListener('click', function (e) { e.preventDefault(); openGame(); });
-    if (ls(true, MUTE_KEY)) showNavButton();
+    if (ls(true, MUTE_KEY) || ss(true, SHOWN_KEY)) showNavButton();
   }
 
   /* Console escape hatch: dataBlocks.play() skips straight to the game,
