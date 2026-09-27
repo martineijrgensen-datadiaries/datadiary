@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 1088" width="860" height="1088" font-family="'Inter', ui-sans-serif, system-ui, sans-serif">
+<defs><filter id="shadow" x="-5%" y="-5%" width="115%" height="115%"><feDropShadow dx="6" dy="6" stdDeviation="0" flood-color="#C4BEAA" flood-opacity="1"/></filter></defs>
+<text x="30" y="48" font-size="26" fill="#1C1A2A" font-family="'Fraunces', Georgia, serif" font-weight="700">The console, filtered on [alloy]</text>
+<text x="30" y="74" font-size="14" fill="#8A8799" font-family="'Inter', ui-sans-serif, system-ui, sans-serif">One page load from top to bottom. Debug mode on, noise filtered out.</text>
+<clipPath id="clipConsole"><rect x="30" y="96" width="790" height="740" rx="14"/></clipPath>
+<rect x="30" y="96" width="790" height="740" rx="14" fill="#FFFFFF" stroke="#1C1A2A" stroke-width="2.5" filter="url(#shadow)"/>
+<g clip-path="url(#clipConsole)">
+<rect x="30" y="96" width="790" height="32" fill="#F1F3F4"/>
+<circle cx="52" cy="112" r="6" fill="#FF5F57"/>
+<circle cx="72" cy="112" r="6" fill="#FEBC2E"/>
+<circle cx="92" cy="112" r="6" fill="#28C840"/>
+<text x="114" y="117" font-size="12.5" fill="#202124" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="500">DevTools - datadiary.dk/</text>
+<text x="60" y="150" font-size="13" fill="#5F6368" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="500">Elements</text>
+<text x="146.8" y="150" font-size="13" fill="#1A73E8" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="600">Console</text>
+<rect x="140.8" y="159" width="65.19999999999999" height="3" fill="#1A73E8"/>
+<text x="226.0" y="150" font-size="13" fill="#5F6368" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="500">Sources</text>
+<text x="305.2" y="150" font-size="13" fill="#5F6368" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="500">Network</text>
+<line x1="30" y1="162" x2="820" y2="162" stroke="#DADCE0"/>
+<circle cx="54" cy="180" r="7" fill="none" stroke="#5F6368" stroke-width="1.5"/>
+<line x1="49" y1="185" x2="59" y2="175" stroke="#5F6368" stroke-width="1.5"/>
+<rect x="76" y="168" width="300" height="24" rx="12" fill="#F1F3F4" stroke="#F07A5F" stroke-width="1.5"/>
+<text x="90" y="184" font-size="11" fill="#5F6368" font-family="'Inter', ui-sans-serif, system-ui, sans-serif">Filter</text>
+<text x="130.0" y="184" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#202124">[alloy]</tspan></text>
+<text x="396" y="184" font-size="12" fill="#5F6368" font-family="'Inter', ui-sans-serif, system-ui, sans-serif">Default levels ▾</text>
+<line x1="30" y1="198" x2="820" y2="198" stroke="#DADCE0"/>
+<text x="46.0" y="217" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#202124">[alloy] Instance initialized.</tspan></text>
+<line x1="30" y1="226" x2="820" y2="226" stroke="#EEEEEE"/>
+<rect x="363.8" y="232" width="238.0" height="18" rx="3" fill="#F07A5F33" stroke="#F07A5F" stroke-width="1"/>
+<text x="46.0" y="245" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#202124">[alloy] Loaded user consent preferences. The user previously consented.</tspan></text>
+<circle cx="798" cy="240.0" r="11" fill="#F07A5F" stroke="#1C1A2A" stroke-width="2"/>
+<text x="798" y="244.5" font-size="12.5" fill="#1C1A2A" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="800" text-anchor="middle">1</text>
+<line x1="30" y1="254" x2="820" y2="254" stroke="#EEEEEE"/>
+<text x="46.0" y="273" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#202124">[alloy] Executing sendEvent command. Options: {type: 'decisioning.propositionFetch', …}</tspan></text>
+<line x1="30" y1="282" x2="820" y2="282" stroke="#EEEEEE"/>
+<text x="46.0" y="301" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#202124">[alloy] Request 95d2b556…: Sending request. {events: Array(1), query: {…}, meta: {…}}</tspan></text>
+<line x1="30" y1="310" x2="820" y2="310" stroke="#EEEEEE"/>
+<text x="46.0" y="329" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#202124">[alloy] Request 95d2b556…: Received response with status code 200 …</tspan></text>
+<line x1="30" y1="338" x2="820" y2="338" stroke="#EEEEEE"/>
+<text x="46.0" y="357" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#202124">[alloy] [Personalization] Started rendering propositions for page-wide scope.</tspan></text>
+<line x1="30" y1="366" x2="820" y2="366" stroke="#EEEEEE"/>
+<text x="46.0" y="385" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#202124">[alloy] [Personalization] Action {"id":"1234567-1","meta":{</tspan></text>
+<rect x="122.0" y="392" width="433.0" height="18" rx="3" fill="#F07A5F33" stroke="#F07A5F" stroke-width="1"/>
+<text x="46.0" y="405" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#202124">          "activity.name":"DataDiary | Demo | Homepage mood card",</tspan></text>
+<rect x="122.0" y="412" width="253.6" height="18" rx="3" fill="#F07A5F33" stroke="#F07A5F" stroke-width="1"/>
+<rect x="410.6" y="412" width="74.2" height="18" rx="3" fill="#F07A5F33" stroke="#F07A5F" stroke-width="1"/>
+<text x="46.0" y="425" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#202124">          "experience.name":"Experience B"},…} executed.</tspan></text>
+<circle cx="798" cy="400" r="11" fill="#F07A5F" stroke="#1C1A2A" stroke-width="2"/>
+<text x="798" y="404.5" font-size="12.5" fill="#1C1A2A" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="800" text-anchor="middle">2</text>
+<circle cx="798" cy="420" r="11" fill="#F07A5F" stroke="#1C1A2A" stroke-width="2"/>
+<text x="798" y="424.5" font-size="12.5" fill="#1C1A2A" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="800" text-anchor="middle">3</text>
+<line x1="30" y1="434" x2="820" y2="434" stroke="#EEEEEE"/>
+<text x="46.0" y="453" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#202124">[alloy] sendEvent command resolved. Result: {propositions: Array(1), …}</tspan></text>
+<line x1="30" y1="462" x2="820" y2="462" stroke="#EEEEEE"/>
+<rect x="30" y="462" width="790" height="28" fill="#FDF1EC"/>
+<text x="46.0" y="481" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#202124">[alloy] Executing sendEvent command. Options: {xdm: {…}, data: {…}, personalization: {…}, …}</tspan></text>
+<circle cx="798" cy="476.0" r="11" fill="#F07A5F" stroke="#1C1A2A" stroke-width="2"/>
+<text x="798" y="480.5" font-size="12.5" fill="#1C1A2A" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="800" text-anchor="middle">4</text>
+<line x1="30" y1="490" x2="820" y2="490" stroke="#EEEEEE"/>
+<rect x="30" y="490" width="790" height="28" fill="#FDF1EC"/>
+<text x="46.0" y="509" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#202124">[alloy] Request ef384a23…: Sending request. ▼{events: Array(1), query: {…}, meta: {…}}</tspan></text>
+<line x1="30" y1="518" x2="820" y2="518" stroke="#EEEEEE"/>
+<rect x="30" y="518" width="790" height="250" fill="#FDF1EC"/>
+<text x="57.7" y="536" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#5F6368">▼ </tspan><tspan fill="#881391">events</tspan><tspan fill="#202124">: Array(1)</tspan></text>
+<text x="69.4" y="556" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#5F6368">▼ </tspan><tspan fill="#881391">0</tspan><tspan fill="#202124">:</tspan></text>
+<text x="81.1" y="576" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#5F6368">▼ </tspan><tspan fill="#881391">xdm</tspan><tspan fill="#202124">:</tspan></text>
+<text x="92.8" y="596" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#5F6368">▼ </tspan><tspan fill="#881391">_experience</tspan><tspan fill="#202124">:</tspan></text>
+<text x="104.5" y="616" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#5F6368">▼ </tspan><tspan fill="#881391">decisioning</tspan><tspan fill="#202124">:</tspan></text>
+<rect x="305.3" y="623" width="82.0" height="18" rx="3" fill="#F07A5F33" stroke="#F07A5F" stroke-width="1"/>
+<text x="127.9" y="636" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#881391">propositionEventType</tspan><tspan fill="#202124">: {</tspan><tspan fill="#881391">display</tspan><tspan fill="#202124">: </tspan><tspan fill="#1C00CF">1</tspan><tspan fill="#202124">}</tspan></text>
+<text x="116.2" y="656" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#5F6368">▼ </tspan><tspan fill="#881391">propositions</tspan><tspan fill="#202124">: Array(1)</tspan></text>
+<text x="127.9" y="676" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#5F6368">▼ </tspan><tspan fill="#881391">0</tspan><tspan fill="#202124">:</tspan></text>
+<text x="151.3" y="696" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#881391">scope</tspan><tspan fill="#202124">: </tspan><tspan fill="#C41A16">'__view__'</tspan></text>
+<text x="139.6" y="716" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#5F6368">▼ </tspan><tspan fill="#881391">scopeDetails</tspan><tspan fill="#202124">:</tspan></text>
+<rect x="278.0" y="723" width="74.2" height="18" rx="3" fill="#F07A5F33" stroke="#F07A5F" stroke-width="1"/>
+<text x="163.0" y="736" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#881391">activity</tspan><tspan fill="#202124">: {</tspan><tspan fill="#881391">id</tspan><tspan fill="#202124">: </tspan><tspan fill="#C41A16">'1234567'</tspan><tspan fill="#202124">}</tspan></text>
+<rect x="293.6" y="743" width="27.4" height="18" rx="3" fill="#F07A5F33" stroke="#F07A5F" stroke-width="1"/>
+<text x="163.0" y="756" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#881391">experience</tspan><tspan fill="#202124">: {</tspan><tspan fill="#881391">id</tspan><tspan fill="#202124">: </tspan><tspan fill="#C41A16">'1'</tspan><tspan fill="#202124">}</tspan></text>
+<line x1="30" y1="768" x2="820" y2="768" stroke="#EEEEEE"/>
+<text x="46.0" y="787" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#202124">[alloy] Request ef384a23…: Received response with status code 200 …</tspan></text>
+<line x1="30" y1="796" x2="820" y2="796" stroke="#EEEEEE"/>
+<text x="46.0" y="815" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#202124">[alloy] Executing sendEvent command. Options: {xdm: {…}, type: 'web.webpagedetails.pageViews', …}</tspan></text>
+<line x1="30" y1="824" x2="820" y2="824" stroke="#EEEEEE"/>
+</g>
+<circle cx="55" cy="880" r="11" fill="#F07A5F" stroke="#1C1A2A" stroke-width="2"/>
+<text x="55" y="884.5" font-size="12.5" fill="#1C1A2A" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="800" text-anchor="middle">1</text>
+<text x="76" y="885" font-size="15" fill="#1C1A2A" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="700">Is the Web SDK running?</text>
+<text x="76" y="906" font-size="13.5" fill="#55526A" font-family="'Inter', ui-sans-serif, system-ui, sans-serif">Yep. It's up and running, and consent is</text>
+<text x="76" y="925" font-size="13.5" fill="#55526A" font-family="'Inter', ui-sans-serif, system-ui, sans-serif">in place. No line like this? Then nothing</text>
+<text x="76" y="944" font-size="13.5" fill="#55526A" font-family="'Inter', ui-sans-serif, system-ui, sans-serif">else will happen either.</text>
+<circle cx="450.0" cy="880" r="11" fill="#F07A5F" stroke="#1C1A2A" stroke-width="2"/>
+<text x="450.0" y="884.5" font-size="12.5" fill="#1C1A2A" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="800" text-anchor="middle">2</text>
+<text x="471.0" y="885" font-size="15" fill="#1C1A2A" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="700">Did Target choose an activity?</text>
+<text x="471.0" y="906" font-size="13.5" fill="#55526A" font-family="'Inter', ui-sans-serif, system-ui, sans-serif">Yes, and it even tells you which one.</text>
+<text x="471.0" y="925" font-size="13.5" fill="#55526A" font-family="'Inter', ui-sans-serif, system-ui, sans-serif">Activity name and experience, right there.</text>
+<circle cx="55" cy="976" r="11" fill="#F07A5F" stroke="#1C1A2A" stroke-width="2"/>
+<text x="55" y="980.5" font-size="12.5" fill="#1C1A2A" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="800" text-anchor="middle">3</text>
+<text x="76" y="981" font-size="15" fill="#1C1A2A" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="700">Did the change get onto the page?</text>
+<text x="76" y="1002" font-size="13.5" fill="#55526A" font-family="'Inter', ui-sans-serif, system-ui, sans-serif">It says executed. So if you still can't</text>
+<text x="76" y="1021" font-size="13.5" fill="#55526A" font-family="'Inter', ui-sans-serif, system-ui, sans-serif">see the change, I'd look at the script.</text>
+<circle cx="450.0" cy="976" r="11" fill="#F07A5F" stroke="#1C1A2A" stroke-width="2"/>
+<text x="450.0" y="980.5" font-size="12.5" fill="#1C1A2A" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="800" text-anchor="middle">4</text>
+<text x="471.0" y="981" font-size="15" fill="#1C1A2A" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="700">Was I counted?</text>
+<text x="471.0" y="1002" font-size="13.5" fill="#55526A" font-family="'Inter', ui-sans-serif, system-ui, sans-serif">The sneaky one. A sendEvent with no type,</text>
+<text x="471.0" y="1021" font-size="13.5" fill="#55526A" font-family="'Inter', ui-sans-serif, system-ui, sans-serif">sent right after Target answers. Expand</text>
+<text x="471.0" y="1040" font-size="13.5" fill="#55526A" font-family="'Inter', ui-sans-serif, system-ui, sans-serif">the request below it and look for</text>
+<text x="471.0" y="1059" font-size="13.5" fill="#55526A" font-family="'Inter', ui-sans-serif, system-ui, sans-serif">display: 1 and your activity ID.</text>
+</svg>

@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 1170" width="860" height="1170" font-family="'Inter', ui-sans-serif, system-ui, sans-serif">
+<defs><filter id="shadow" x="-5%" y="-5%" width="115%" height="115%"><feDropShadow dx="6" dy="6" stdDeviation="0" flood-color="#C4BEAA" flood-opacity="1"/></filter></defs>
+<text x="30" y="48" font-size="26" fill="#1C1A2A" font-family="'Fraunces', Georgia, serif" font-weight="700">The Network tab: Preview and Payload</text>
+
+<circle cx="41" cy="96" r="11" fill="#F07A5F" stroke="#1C1A2A" stroke-width="2"/>
+<text x="41" y="100.5" font-size="12.5" fill="#1C1A2A" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="800" text-anchor="middle">1</text>
+<text x="62" y="101" font-size="16" fill="#1C1A2A" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="700">Which activity did I get?</text>
+<text x="62" y="122" font-size="13.5" fill="#55526A" font-family="'Inter', ui-sans-serif, system-ui, sans-serif">Click the first request and open Preview. That's Target's answer to the page.</text>
+<text x="62" y="141" font-size="13.5" fill="#55526A" font-family="'Inter', ui-sans-serif, system-ui, sans-serif">No names under meta? Then response tokens are probably turned off in Target.</text>
+<clipPath id="clipNet1"><rect x="30" y="160" width="790" height="420" rx="14"/></clipPath>
+<rect x="30" y="160" width="790" height="420" rx="14" fill="#FFFFFF" stroke="#1C1A2A" stroke-width="2.5" filter="url(#shadow)"/>
+<g clip-path="url(#clipNet1)">
+<rect x="30" y="160" width="790" height="32" fill="#F1F3F4"/>
+<circle cx="52" cy="176" r="6" fill="#FF5F57"/>
+<circle cx="72" cy="176" r="6" fill="#FEBC2E"/>
+<circle cx="92" cy="176" r="6" fill="#28C840"/>
+<text x="114" y="181" font-size="12.5" fill="#202124" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="500">DevTools - datadiary.dk/</text>
+<text x="60" y="214" font-size="13" fill="#5F6368" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="500">Elements</text>
+<text x="146.8" y="214" font-size="13" fill="#5F6368" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="500">Console</text>
+<text x="226.0" y="214" font-size="13" fill="#5F6368" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="500">Sources</text>
+<text x="305.2" y="214" font-size="13" fill="#1A73E8" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="600">Network</text>
+<rect x="299.2" y="223" width="65.19999999999999" height="3" fill="#1A73E8"/>
+<line x1="30" y1="226" x2="820" y2="226" stroke="#DADCE0"/>
+<circle cx="54" cy="244" r="7" fill="none" stroke="#5F6368" stroke-width="1.5"/>
+<line x1="49" y1="249" x2="59" y2="239" stroke="#5F6368" stroke-width="1.5"/>
+<rect x="76" y="232" width="300" height="24" rx="12" fill="#F1F3F4" stroke="#F07A5F" stroke-width="1.5"/>
+<text x="90" y="248" font-size="11" fill="#5F6368" font-family="'Inter', ui-sans-serif, system-ui, sans-serif">Filter</text>
+<text x="130.0" y="248" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#202124">edge</tspan></text>
+<text x="396" y="248" font-size="12" fill="#5F6368" font-family="'Inter', ui-sans-serif, system-ui, sans-serif">Fetch/XHR</text>
+<line x1="30" y1="262" x2="820" y2="262" stroke="#DADCE0"/>
+<rect x="30" y="262" width="200" height="28" fill="#F1F3F4"/>
+<text x="44" y="281" font-size="12" fill="#5F6368" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="600">Name</text>
+<rect x="30" y="290" width="200" height="26" fill="#E8F0FE"/>
+<rect x="42" y="298" width="10" height="10" rx="2" fill="none" stroke="#5F6368"/>
+<text x="60" y="307" font-size="12.5" fill="#202124" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="600">interact?configId=da…</text>
+<rect x="42" y="324" width="10" height="10" rx="2" fill="none" stroke="#5F6368"/>
+<text x="60" y="333" font-size="12.5" fill="#202124" font-family="'Inter', ui-sans-serif, system-ui, sans-serif">interact?configId=da…</text>
+<rect x="42" y="350" width="10" height="10" rx="2" fill="none" stroke="#5F6368"/>
+<text x="60" y="359" font-size="12.5" fill="#202124" font-family="'Inter', ui-sans-serif, system-ui, sans-serif">interact?configId=da…</text>
+<rect x="42" y="376" width="10" height="10" rx="2" fill="none" stroke="#5F6368"/>
+<text x="60" y="385" font-size="12.5" fill="#202124" font-family="'Inter', ui-sans-serif, system-ui, sans-serif">interact?configId=da…</text>
+<rect x="230" y="262" width="590" height="28" fill="#F1F3F4"/>
+<text x="244" y="281" font-size="15" fill="#5F6368" font-family="'Inter', ui-sans-serif, system-ui, sans-serif">×</text>
+<text x="268" y="281" font-size="12.5" fill="#5F6368" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="500">Headers</text>
+<text x="339.8" y="281" font-size="12.5" fill="#5F6368" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="500">Payload</text>
+<text x="411.6" y="281" font-size="12.5" fill="#1A73E8" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="600">Preview</text>
+<rect x="407.6" y="287" width="59.800000000000004" height="3" fill="#1A73E8"/>
+<text x="483.40000000000003" y="281" font-size="12.5" fill="#5F6368" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="500">Response</text>
+<text x="244.0" y="312" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#5F6368">▼ </tspan><tspan fill="#202124">{requestId: </tspan><tspan fill="#C41A16">"0dcc927a…"</tspan><tspan fill="#202124">, handle: [...]}</tspan></text>
+<text x="255.7" y="332" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#5F6368">▼ </tspan><tspan fill="#881391">handle</tspan><tspan fill="#202124">: [{payload: [...], type: </tspan><tspan fill="#C41A16">"personalization:…"</tspan><tspan fill="#202124">}, …]</tspan></text>
+<text x="267.4" y="352" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#5F6368">▼ </tspan><tspan fill="#881391">0</tspan><tspan fill="#202124">: {payload: [...], type: </tspan><tspan fill="#C41A16">"personalization:decisions"</tspan><tspan fill="#202124">}</tspan></text>
+<text x="279.1" y="372" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#5F6368">▼ </tspan><tspan fill="#881391">payload</tspan><tspan fill="#202124">: [{id: </tspan><tspan fill="#C41A16">"AT:eyJhY3Rp…"</tspan><tspan fill="#202124">, scope: </tspan><tspan fill="#C41A16">"__view__"</tspan><tspan fill="#202124">, …}]</tspan></text>
+<text x="290.8" y="392" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#5F6368">▼ </tspan><tspan fill="#881391">0</tspan><tspan fill="#202124">: {…}</tspan></text>
+<text x="314.2" y="412" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#881391">scope</tspan><tspan fill="#202124">: </tspan><tspan fill="#C41A16">"__view__"</tspan></text>
+<text x="302.5" y="432" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#5F6368">▼ </tspan><tspan fill="#881391">items</tspan><tspan fill="#202124">: [{…}]</tspan></text>
+<text x="314.2" y="452" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#5F6368">▼ </tspan><tspan fill="#881391">0</tspan><tspan fill="#202124">: {id: </tspan><tspan fill="#C41A16">"1234567-1"</tspan><tspan fill="#202124">, meta: {…}, data: {…}}</tspan></text>
+<text x="325.9" y="472" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#5F6368">▼ </tspan><tspan fill="#881391">meta</tspan><tspan fill="#202124">: {…}</tspan></text>
+<text x="349.3" y="492" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#881391">activity.id</tspan><tspan fill="#202124">: </tspan><tspan fill="#C41A16">"1234567"</tspan></text>
+<rect x="464.3" y="499" width="308.2" height="18" rx="3" fill="#F07A5F33" stroke="#F07A5F" stroke-width="1"/>
+<text x="349.3" y="512" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#881391">activity.name</tspan><tspan fill="#202124">: </tspan><tspan fill="#C41A16">"DataDiary | Demo | Homepage mood card"</tspan></text>
+<text x="349.3" y="532" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#881391">experience.id</tspan><tspan fill="#202124">: </tspan><tspan fill="#C41A16">"1"</tspan></text>
+<rect x="479.9" y="539" width="113.2" height="18" rx="3" fill="#F07A5F33" stroke="#F07A5F" stroke-width="1"/>
+<text x="349.3" y="552" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#881391">experience.name</tspan><tspan fill="#202124">: </tspan><tspan fill="#C41A16">"Experience B"</tspan></text>
+<line x1="230" y1="262" x2="230" y2="592" stroke="#DADCE0"/>
+</g>
+<circle cx="41" cy="636" r="11" fill="#F07A5F" stroke="#1C1A2A" stroke-width="2"/>
+<text x="41" y="640.5" font-size="12.5" fill="#1C1A2A" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="800" text-anchor="middle">2</text>
+<text x="62" y="641" font-size="16" fill="#1C1A2A" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="700">Was I counted?</text>
+<text x="62" y="662" font-size="13.5" fill="#55526A" font-family="'Inter', ui-sans-serif, system-ui, sans-serif">Now click the display event and open Payload. That's the browser telling Adobe what it showed.</text>
+<text x="62" y="681" font-size="13.5" fill="#55526A" font-family="'Inter', ui-sans-serif, system-ui, sans-serif">See display: 1 with your activity and experience ID? Then you're in.</text>
+<clipPath id="clipNet2"><rect x="30" y="700" width="790" height="440" rx="14"/></clipPath>
+<rect x="30" y="700" width="790" height="440" rx="14" fill="#FFFFFF" stroke="#1C1A2A" stroke-width="2.5" filter="url(#shadow)"/>
+<g clip-path="url(#clipNet2)">
+<rect x="30" y="700" width="790" height="32" fill="#F1F3F4"/>
+<circle cx="52" cy="716" r="6" fill="#FF5F57"/>
+<circle cx="72" cy="716" r="6" fill="#FEBC2E"/>
+<circle cx="92" cy="716" r="6" fill="#28C840"/>
+<text x="114" y="721" font-size="12.5" fill="#202124" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="500">DevTools - datadiary.dk/</text>
+<text x="60" y="754" font-size="13" fill="#5F6368" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="500">Elements</text>
+<text x="146.8" y="754" font-size="13" fill="#5F6368" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="500">Console</text>
+<text x="226.0" y="754" font-size="13" fill="#5F6368" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="500">Sources</text>
+<text x="305.2" y="754" font-size="13" fill="#1A73E8" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="600">Network</text>
+<rect x="299.2" y="763" width="65.19999999999999" height="3" fill="#1A73E8"/>
+<line x1="30" y1="766" x2="820" y2="766" stroke="#DADCE0"/>
+<circle cx="54" cy="784" r="7" fill="none" stroke="#5F6368" stroke-width="1.5"/>
+<line x1="49" y1="789" x2="59" y2="779" stroke="#5F6368" stroke-width="1.5"/>
+<rect x="76" y="772" width="300" height="24" rx="12" fill="#F1F3F4" stroke="#F07A5F" stroke-width="1.5"/>
+<text x="90" y="788" font-size="11" fill="#5F6368" font-family="'Inter', ui-sans-serif, system-ui, sans-serif">Filter</text>
+<text x="130.0" y="788" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#202124">edge</tspan></text>
+<text x="396" y="788" font-size="12" fill="#5F6368" font-family="'Inter', ui-sans-serif, system-ui, sans-serif">Fetch/XHR</text>
+<line x1="30" y1="802" x2="820" y2="802" stroke="#DADCE0"/>
+<rect x="30" y="802" width="200" height="28" fill="#F1F3F4"/>
+<text x="44" y="821" font-size="12" fill="#5F6368" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="600">Name</text>
+<rect x="42" y="838" width="10" height="10" rx="2" fill="none" stroke="#5F6368"/>
+<text x="60" y="847" font-size="12.5" fill="#202124" font-family="'Inter', ui-sans-serif, system-ui, sans-serif">interact?configId=da…</text>
+<rect x="30" y="856" width="200" height="26" fill="#E8F0FE"/>
+<rect x="42" y="864" width="10" height="10" rx="2" fill="none" stroke="#5F6368"/>
+<text x="60" y="873" font-size="12.5" fill="#202124" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="600">interact?configId=da…</text>
+<rect x="42" y="890" width="10" height="10" rx="2" fill="none" stroke="#5F6368"/>
+<text x="60" y="899" font-size="12.5" fill="#202124" font-family="'Inter', ui-sans-serif, system-ui, sans-serif">interact?configId=da…</text>
+<rect x="42" y="916" width="10" height="10" rx="2" fill="none" stroke="#5F6368"/>
+<text x="60" y="925" font-size="12.5" fill="#202124" font-family="'Inter', ui-sans-serif, system-ui, sans-serif">interact?configId=da…</text>
+<rect x="230" y="802" width="590" height="28" fill="#F1F3F4"/>
+<text x="244" y="821" font-size="15" fill="#5F6368" font-family="'Inter', ui-sans-serif, system-ui, sans-serif">×</text>
+<text x="268" y="821" font-size="12.5" fill="#5F6368" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="500">Headers</text>
+<text x="339.8" y="821" font-size="12.5" fill="#1A73E8" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="600">Payload</text>
+<rect x="335.8" y="827" width="59.800000000000004" height="3" fill="#1A73E8"/>
+<text x="411.6" y="821" font-size="12.5" fill="#5F6368" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="500">Preview</text>
+<text x="483.40000000000003" y="821" font-size="12.5" fill="#5F6368" font-family="'Inter', ui-sans-serif, system-ui, sans-serif" font-weight="500">Response</text>
+<text x="244.0" y="852" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#5F6368">▼ </tspan><tspan fill="#202124">{events: [{xdm: {…}}], query: {…}, meta: {…}}</tspan></text>
+<text x="255.7" y="872" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#5F6368">▼ </tspan><tspan fill="#881391">events</tspan><tspan fill="#202124">: [{xdm: {…}}]</tspan></text>
+<text x="267.4" y="892" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#5F6368">▼ </tspan><tspan fill="#881391">0</tspan><tspan fill="#202124">: {xdm: {…}}</tspan></text>
+<text x="279.1" y="912" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#5F6368">▼ </tspan><tspan fill="#881391">xdm</tspan><tspan fill="#202124">: {_experience: {…}, web: {…}, timestamp: …}</tspan></text>
+<text x="290.8" y="932" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#5F6368">▼ </tspan><tspan fill="#881391">_experience</tspan><tspan fill="#202124">: {decisioning: {…}}</tspan></text>
+<text x="302.5" y="952" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#5F6368">▼ </tspan><tspan fill="#881391">decisioning</tspan><tspan fill="#202124">: {propositionEventType: {…}, …}</tspan></text>
+<text x="314.2" y="972" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#5F6368">▼ </tspan><tspan fill="#881391">propositionEventType</tspan><tspan fill="#202124">: {display: 1}</tspan></text>
+<rect x="335.6" y="979" width="82.0" height="18" rx="3" fill="#F07A5F33" stroke="#F07A5F" stroke-width="1"/>
+<text x="337.6" y="992" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#881391">display</tspan><tspan fill="#202124">: </tspan><tspan fill="#1C00CF">1</tspan></text>
+<text x="314.2" y="1012" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#5F6368">▼ </tspan><tspan fill="#881391">propositions</tspan><tspan fill="#202124">: [{…}]</tspan></text>
+<text x="325.9" y="1032" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#5F6368">▼ </tspan><tspan fill="#881391">0</tspan><tspan fill="#202124">: {id: </tspan><tspan fill="#C41A16">"AT:eyJhY3Rp…"</tspan><tspan fill="#202124">, scope: </tspan><tspan fill="#C41A16">"__view__"</tspan><tspan fill="#202124">, …}</tspan></text>
+<text x="349.3" y="1052" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#881391">scope</tspan><tspan fill="#202124">: </tspan><tspan fill="#C41A16">"__view__"</tspan></text>
+<text x="337.6" y="1072" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#5F6368">▼ </tspan><tspan fill="#881391">scopeDetails</tspan><tspan fill="#202124">: {decisionProvider: </tspan><tspan fill="#C41A16">"TGT"</tspan><tspan fill="#202124">, …}</tspan></text>
+<rect x="476.0" y="1079" width="74.2" height="18" rx="3" fill="#F07A5F33" stroke="#F07A5F" stroke-width="1"/>
+<text x="361.0" y="1092" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#881391">activity</tspan><tspan fill="#202124">: {id: </tspan><tspan fill="#C41A16">"1234567"</tspan><tspan fill="#202124">}</tspan></text>
+<rect x="491.6" y="1099" width="27.4" height="18" rx="3" fill="#F07A5F33" stroke="#F07A5F" stroke-width="1"/>
+<text x="361.0" y="1112" font-size="13" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" xml:space="preserve"><tspan fill="#881391">experience</tspan><tspan fill="#202124">: {id: </tspan><tspan fill="#C41A16">"1"</tspan><tspan fill="#202124">}</tspan></text>
+<line x1="230" y1="802" x2="230" y2="1152" stroke="#DADCE0"/>
+</g>
+</svg>
