@@ -81,10 +81,6 @@ a { color: inherit; }
 .site-nav a:hover,
 .site-nav a.active { color: var(--ink); }
 
-/* hidden until someone declines the wiggle invite (see datablocks.js) */
-#nav-play-game { display: none; }
-#nav-play-game.dd-nav-visible { display: inline; }
-
 .nav-signin {
   margin-left: .25rem;
   border-radius: var(--radius-md);
@@ -861,8 +857,7 @@ a { color: inherit; }
 @media (max-width: 768px) {
   .mood-card-back { display: none; }
   .site-nav-home { display: none;}
-  #nav-play-game,
-  #nav-play-game.dd-nav-visible { display: none; }
+  #nav-play-game { display: none; }
 }
 
 /* coral marquee (home page only) */
@@ -1159,34 +1154,6 @@ html.boring-mode .mode-toggle-btn { background: #555; border-color: #555; }
 /* ══════════════════════════════════════════════════
    DATA BLOCKS — easter egg game
    ══════════════════════════════════════════════════ */
-
-/* ── The wiggle: a random element asks to be clicked ── */
-@keyframes dd-wiggle {
-  0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  20%      { transform: translate(-2px, 1px) rotate(-1.6deg); }
-  40%      { transform: translate(2px, -1px) rotate(1.6deg); }
-  60%      { transform: translate(-1px, -1px) rotate(-1deg); }
-  80%      { transform: translate(1px, 1px) rotate(1deg); }
-}
-
-.dd-wiggle {
-  animation: dd-wiggle .42s ease-in-out infinite;
-  cursor: pointer;
-  will-change: transform;
-}
-
-@keyframes dd-wiggle-calm {
-  0%, 100% { outline-color: transparent; }
-  50%      { outline-color: var(--coral); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .dd-wiggle {
-    animation: dd-wiggle-calm 1.4s ease-in-out infinite;
-    outline: 2px dashed transparent;
-    outline-offset: 3px;
-  }
-}
 
 /* ── Invite popup ─────────────────────────────────── */
 .dd-invite {
