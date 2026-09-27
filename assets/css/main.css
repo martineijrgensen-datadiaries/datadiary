@@ -974,6 +974,12 @@ a { color: inherit; }
   margin-bottom: 2rem;
 }
 
+.datadiaryimage--small {
+  max-width: 360px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* ── Mode picker popup ───────────────────────── */
 .mode-overlay {
   position: fixed;
