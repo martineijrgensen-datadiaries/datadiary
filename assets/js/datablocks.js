@@ -1,8 +1,8 @@
 /* ──────────────────────────────────────────────────────────────
    data/diary — DATA BLOCKS
-   A pixel easter egg. Every so often a random element on the page
-   starts wiggling. Click it and you get to build a customer profile
-   out of falling identifier blocks.
+   A pixel easter egg, reached from "play a game" in the nav. Click it
+   and you get to build a customer profile out of falling identifier
+   blocks.
 
    Vanilla JS, no dependencies, no build step.
    ────────────────────────────────────────────────────────────── */
@@ -10,9 +10,6 @@
   'use strict';
 
   /* ── Tuning ──────────────────────────────────────────────── */
-  var PICK_INTERVAL = 10000;  // ms between picking a new wiggler
-  var WIGGLE_TIME   = 10000;  // ms the picked element stays clickable
-
   var BASE_SPEED    = 95;     // px/sec a block falls at fields = 0
   var SPEED_RAMP    = 0.045;  // +4.5% speed per field ingested
   var SPEED_CAP     = 4;      // never faster than 4x base
@@ -31,10 +28,7 @@
   var BUCKET_W = 78, BUCKET_H = 36;     // top width / height of the bucket shape
   var BUCKET_TAPER = 20;                // how much narrower the base is than the rim
 
-  var MODE_KEY = 'datadiary-mode';
   var BEST_KEY = 'datadiary-blocks-best';
-  var MUTE_KEY  = 'datadiary-blocks-muted';   // localStorage: "nah, I'm reading" — quiet forever
-  var SHOWN_KEY = 'datadiary-blocks-shown';   // sessionStorage: invite has appeared once this visit
 
   /* Things that belong in a customer profile. */
   var GOOD = [
@@ -71,10 +65,6 @@
     try { return get ? localStorage.getItem(key) : localStorage.setItem(key, val); }
     catch (e) { return null; }
   }
-  function ss(get, key, val) {
-    try { return get ? sessionStorage.getItem(key) : sessionStorage.setItem(key, val); }
-    catch (e) { return null; }
-  }
   function el(tag, cls, text) {
     var n = document.createElement(tag);
     if (cls) n.className = cls;
@@ -108,96 +98,6 @@
   }
 
   /* ══════════════════════════════════════════════════════════
-     PART A — the wiggle scanner
-     ══════════════════════════════════════════════════════════ */
-
-  var CANDIDATES = 'p, h1, h2, h3, h4, li, img, blockquote, td, .tag, .mood-card-tape, .logo-icon';
-
-  var wiggling = null;      // currently wiggling element
-  var pickTimer = null;
-  var stopTimer = null;
-  var scannerOn = false;
-
-  function eligible(node) {
-    if (node.closest('a, button, input, textarea, .dd-game, .dd-invite, .mode-overlay')) return false;
-    if (node.querySelector('a, button')) return false;
-
-    var r = node.getBoundingClientRect();
-    // the content column is 680px wide, so the width cap has to clear that.
-    // the height cap is what actually keeps us off big layout containers.
-    if (r.width < 12 || r.height < 12 || r.width > 900 || r.height > 400) return false;
-    // must actually be on screen right now
-    if (r.bottom < 0 || r.top > window.innerHeight) return false;
-    if (r.right < 0 || r.left > window.innerWidth) return false;
-
-    var cs = getComputedStyle(node);
-    if (cs.visibility === 'hidden' || cs.display === 'none' || cs.opacity === '0') return false;
-    // we animate `transform`, so skip anything already using it (mood cards, tape)
-    if (cs.transform !== 'none') return false;
-
-    return true;
-  }
-
-  function unwiggle() {
-    if (!wiggling) return;
-    wiggling.classList.remove('dd-wiggle');
-    wiggling.removeAttribute('title');
-    wiggling.removeEventListener('click', onWiggleClick);
-    wiggling = null;
-  }
-
-  function onWiggleClick() {
-    unwiggle();
-    stopScanner();
-    openInvite();
-  }
-
-  function pickOne() {
-    unwiggle();
-    if (!scannerOn) return;
-
-    var all = document.querySelectorAll(CANDIDATES);
-    var ok = [];
-    for (var i = 0; i < all.length; i++) {
-      if (eligible(all[i])) ok.push(all[i]);
-    }
-    if (!ok.length) return;
-
-    wiggling = pick(ok);
-    wiggling.classList.add('dd-wiggle');
-    wiggling.setAttribute('title', '?');
-    wiggling.addEventListener('click', onWiggleClick);
-
-    clearTimeout(stopTimer);
-    stopTimer = setTimeout(unwiggle, WIGGLE_TIME);
-  }
-
-  function startScanner() {
-    if (scannerOn) return;
-    if (ls(true, MUTE_KEY)) return;        // user said "nah, I'm reading" — leave them alone
-    if (ss(true, SHOWN_KEY)) return;       // invite already appeared once this visit
-    if (!ls(true, MODE_KEY)) return;       // mode picker still up on first visit
-    scannerOn = true;
-    clearInterval(pickTimer);
-    pickTimer = setInterval(pickOne, PICK_INTERVAL);
-  }
-
-  function stopScanner() {
-    scannerOn = false;
-    clearInterval(pickTimer);
-    clearTimeout(stopTimer);
-    unwiggle();
-  }
-
-  /* The mode picker blocks the scanner. Poll until it's answered. */
-  function waitForMode() {
-    if (ls(true, MODE_KEY)) { startScanner(); return; }
-    var t = setInterval(function () {
-      if (ls(true, MODE_KEY)) { clearInterval(t); startScanner(); }
-    }, 1000);
-  }
-
-  /* ══════════════════════════════════════════════════════════
      PART B — the invite prompt
      ══════════════════════════════════════════════════════════ */
 
@@ -225,13 +125,9 @@
     wrap.appendChild(pop);
 
     yes.addEventListener('click', function () { closeInvite(); openGame(); });
-    no.addEventListener('click', function () {
-      ls(false, MUTE_KEY, '1');
-      closeInvite();
-      showNavButton();
-    });
+    no.addEventListener('click', closeInvite);
     wrap.addEventListener('click', function (e) {
-      if (e.target === wrap) { closeInvite(); startScanner(); }
+      if (e.target === wrap) closeInvite();
     });
 
     document.body.appendChild(wrap);
@@ -239,7 +135,7 @@
   }
 
   function onInviteKey(e) {
-    if (e.key === 'Escape') { closeInvite(); startScanner(); }
+    if (e.key === 'Escape') closeInvite();
   }
 
   function openInvite() {
@@ -247,11 +143,6 @@
     invite.style.display = 'flex';
     invite.querySelector('.dd-invite-yes').focus();
     document.addEventListener('keydown', onInviteKey);
-
-    /* the invite only ever shows once per visit, no matter what's clicked
-       (or not clicked) once it's up. the nav link becomes their way back in. */
-    ss(false, SHOWN_KEY, '1');
-    showNavButton();
   }
 
   function closeInvite() {
@@ -358,7 +249,6 @@
     document.addEventListener('keydown', onKeyDown);
     document.addEventListener('keyup', onKeyUp);
     document.addEventListener('visibilitychange', onVisibility);
-    stopScanner();
     closeBtn.focus();
     resetRun();
   }
@@ -372,7 +262,6 @@
     document.removeEventListener('keyup', onKeyUp);
     document.removeEventListener('visibilitychange', onVisibility);
     if (lastFocus && lastFocus.focus) lastFocus.focus();
-    startScanner();
   }
 
   function onVisibility() {
@@ -643,34 +532,19 @@
   }
 
   /* ── Boot ────────────────────────────────────────────────── */
-  /* The nav link stays hidden until the invite has shown once: either they
-     saw it this visit (any outcome, including ignoring it) or they declined
-     it on a past visit with "nah, I'm reading". After that the nav link is
-     their deliberate way back in, and the wiggle stops trying. Until then it
-     stays hidden, so it doesn't spoil the surprise before anyone's seen it. */
-  function showNavButton() {
-    var btn = document.getElementById('nav-play-game');
-    if (btn) btn.classList.add('dd-nav-visible');
-  }
-
+  /* "play a game" in the nav is the only way in: it opens the invite, same
+     popup as before, just reached deliberately instead of via a wiggle. */
   function wireNavButton() {
     var btn = document.getElementById('nav-play-game');
-    if (!btn) return;
-    btn.addEventListener('click', function (e) { e.preventDefault(); openGame(); });
-    if (ls(true, MUTE_KEY) || ss(true, SHOWN_KEY)) showNavButton();
+    if (btn) btn.addEventListener('click', function (e) { e.preventDefault(); openInvite(); });
   }
 
-  /* Console escape hatch: dataBlocks.play() skips straight to the game,
-     dataBlocks.wiggleNow() forces a pick instead of waiting for the timer. */
-  window.dataBlocks = { play: openGame, wiggleNow: pickOne };
+  /* Console escape hatch: dataBlocks.play() skips straight to the game. */
+  window.dataBlocks = { play: openGame };
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function () {
-      wireNavButton();
-      waitForMode();
-    });
+    document.addEventListener('DOMContentLoaded', wireNavButton);
   } else {
     wireNavButton();
-    waitForMode();
   }
 })();
