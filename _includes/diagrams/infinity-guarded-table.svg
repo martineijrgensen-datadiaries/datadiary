@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 452" width="100%" style="display:block;height:auto" aria-hidden="true" focusable="false" font-family="'Inter', sans-serif">
+  <defs>
+    <filter id="ipt-shadow" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="6" dy="6" stdDeviation="0" flood-color="#C4BEAA" flood-opacity="1"/>
+    </filter>
+  </defs>
+  <rect x="8" y="8" width="736" height="360" fill="#FFFFFF" stroke="#1C1A2A" stroke-width="2" filter="url(#ipt-shadow)"/>
+  <rect x="9" y="9" width="734" height="83" fill="#F4F4F4"/>
+  <rect x="280" y="9" width="5" height="41" fill="#9B45C9"/>
+  <rect x="280" y="50" width="5" height="42" fill="#4CAF50"/>
+  <rect x="470" y="9" width="5" height="83" fill="#4CAF50"/>
+  <rect x="610" y="9" width="5" height="83" fill="#4CAF50"/>
+  <rect x="9" y="50" width="5" height="42" fill="#E8833A"/>
+  <text x="296" y="35" font-size="15" fill="#1C1A2A">Aug 13 - Sep 11, 2026</text>
+  <text x="296" y="77" font-size="15" fill="#1C1A2A">Orders</text>
+  <text x="486" y="56" font-size="15" fill="#1C1A2A">Orders</text>
+  <text x="626" y="56" font-size="15" fill="#1C1A2A">Percent change</text>
+  <text x="26" y="77" font-size="15" font-weight="700" fill="#1C1A2A">Product</text>
+  <line x1="280" y1="50" x2="470" y2="50" stroke="#CFCFCF" stroke-width="1"/>
+  <line x1="8" y1="92" x2="744" y2="92" stroke="#B5B5B5" stroke-width="1.5"/>
+  <rect x="9" y="93" width="5" height="45" fill="#E8C547"/>
+  <text x="26" y="121" font-size="15" fill="#1C1A2A"><tspan fill="#5E5B6E">1.</tspan>  Wool coat</text>
+  <text x="456" y="121" font-size="15" text-anchor="end" fill="#1C1A2A" style="font-variant-numeric:tabular-nums">0</text>
+  <text x="596" y="121" font-size="15" text-anchor="end" fill="#1C1A2A" style="font-variant-numeric:tabular-nums">410</text>
+  <line x1="8" y1="138" x2="744" y2="138" stroke="#DCDCDC" stroke-width="1"/>
+  <rect x="9" y="139" width="5" height="45" fill="#E8C547"/>
+  <text x="26" y="167" font-size="15" fill="#1C1A2A"><tspan fill="#5E5B6E">2.</tspan>  Chunky knit sweater</text>
+  <text x="456" y="167" font-size="15" text-anchor="end" fill="#1C1A2A" style="font-variant-numeric:tabular-nums">0</text>
+  <text x="596" y="167" font-size="15" text-anchor="end" fill="#1C1A2A" style="font-variant-numeric:tabular-nums">250</text>
+  <line x1="8" y1="184" x2="744" y2="184" stroke="#DCDCDC" stroke-width="1"/>
+  <rect x="611" y="185" width="132" height="45" fill="#F7A98F"/>
+  <text x="730" y="213" font-size="15" text-anchor="end" fill="#1C1A2A" style="font-variant-numeric:tabular-nums">-30.00%</text>
+  <rect x="9" y="185" width="5" height="45" fill="#E8C547"/>
+  <text x="26" y="213" font-size="15" fill="#1C1A2A"><tspan fill="#5E5B6E">3.</tspan>  Linen shirt</text>
+  <text x="456" y="213" font-size="15" text-anchor="end" fill="#1C1A2A" style="font-variant-numeric:tabular-nums">300</text>
+  <text x="596" y="213" font-size="15" text-anchor="end" fill="#1C1A2A" style="font-variant-numeric:tabular-nums">210</text>
+  <line x1="8" y1="230" x2="744" y2="230" stroke="#DCDCDC" stroke-width="1"/>
+  <rect x="611" y="231" width="132" height="45" fill="#9BCB63"/>
+  <text x="730" y="259" font-size="15" text-anchor="end" fill="#1C1A2A" style="font-variant-numeric:tabular-nums">120.00%</text>
+  <rect x="9" y="231" width="5" height="45" fill="#E8C547"/>
+  <text x="26" y="259" font-size="15" fill="#1C1A2A"><tspan fill="#5E5B6E">4.</tspan>  Rain jacket</text>
+  <text x="456" y="259" font-size="15" text-anchor="end" fill="#1C1A2A" style="font-variant-numeric:tabular-nums">40</text>
+  <text x="596" y="259" font-size="15" text-anchor="end" fill="#1C1A2A" style="font-variant-numeric:tabular-nums">88</text>
+  <line x1="8" y1="276" x2="744" y2="276" stroke="#DCDCDC" stroke-width="1"/>
+  <rect x="611" y="277" width="132" height="45" fill="#9BCB63"/>
+  <text x="730" y="305" font-size="15" text-anchor="end" fill="#1C1A2A" style="font-variant-numeric:tabular-nums">2,300.00%</text>
+  <rect x="9" y="277" width="5" height="45" fill="#E8C547"/>
+  <text x="26" y="305" font-size="15" fill="#1C1A2A"><tspan fill="#5E5B6E">5.</tspan>  Bucket hat</text>
+  <text x="456" y="305" font-size="15" text-anchor="end" fill="#1C1A2A" style="font-variant-numeric:tabular-nums">2</text>
+  <text x="596" y="305" font-size="15" text-anchor="end" fill="#1C1A2A" style="font-variant-numeric:tabular-nums">48</text>
+  <line x1="8" y1="322" x2="744" y2="322" stroke="#DCDCDC" stroke-width="1"/>
+  <rect x="611" y="323" width="132" height="45" fill="#F7A98F"/>
+  <text x="730" y="351" font-size="15" text-anchor="end" fill="#1C1A2A" style="font-variant-numeric:tabular-nums">-60.00%</text>
+  <rect x="9" y="323" width="5" height="45" fill="#E8C547"/>
+  <text x="26" y="351" font-size="15" fill="#1C1A2A"><tspan fill="#5E5B6E">6.</tspan>  Kids' sandals</text>
+  <text x="456" y="351" font-size="15" text-anchor="end" fill="#1C1A2A" style="font-variant-numeric:tabular-nums">10</text>
+  <text x="596" y="351" font-size="15" text-anchor="end" fill="#1C1A2A" style="font-variant-numeric:tabular-nums">4</text>
+  <line x1="280" y1="8" x2="280" y2="368" stroke="#CFCFCF" stroke-width="1"/>
+  <line x1="470" y1="8" x2="470" y2="368" stroke="#CFCFCF" stroke-width="1"/>
+  <line x1="610" y1="8" x2="610" y2="368" stroke="#CFCFCF" stroke-width="1"/>
+  <rect x="614" y="96" width="126" height="84" rx="4" fill="none" stroke="#D9573F" stroke-width="2" stroke-dasharray="6 4"/>
+  <rect x="614" y="280" width="126" height="38" rx="4" fill="none" stroke="#D9573F" stroke-width="2" stroke-dasharray="6 4"/>
+  <rect x="8" y="8" width="736" height="360" fill="none" stroke="#1C1A2A" stroke-width="2"/>
+  <rect x="10" y="396" width="22" height="14" rx="3" fill="none" stroke="#D9573F" stroke-width="2" stroke-dasharray="4 3"/>
+  <text x="44" y="408" font-size="14" fill="#5E5B6E" font-family="'JetBrains Mono', monospace">Prior period was 0: a blank cell instead of Infinity%</text>
+  <rect x="10" y="422" width="22" height="14" rx="3" fill="none" stroke="#D9573F" stroke-width="2" stroke-dasharray="4 3"/>
+  <text x="44" y="434" font-size="14" fill="#5E5B6E" font-family="'JetBrains Mono', monospace">2 to 48 orders: still 2,300%, still the greenest cell</text>
+</svg>
