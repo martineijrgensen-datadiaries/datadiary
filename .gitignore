@@ -6,3 +6,5 @@ vendor/
 .bundle/
 Gemfile.lock
 .claude/
+CLAUDE.md
+AGENTS.md
