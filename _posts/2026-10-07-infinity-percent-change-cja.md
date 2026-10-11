@@ -11,9 +11,6 @@ You know the table. Products down the side. Orders in one column, percent change
 
 And at the very top, glowing the greenest of them all: **Infinity%**. 
 
-<img class="datadiaryimage--rounded datadiaryimage--small" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExeGQ3NjZ4Mmk4dmdwZzhjMmZ0ZmpiN3R0b24yZG1uMnM0MDZ2cjV5diZlcD12MV9naWZzX3NlYXJjaCZjdD1n/BzCLJGxXQbwH09jzq0/giphy.gif" alt="ThanosInfinityStone">
-
-
 The last time I built one of these tables, I was a bit too quick setting up my percentage metrics, and the top of my table was basically a wall of Infinity%. And it's not even wrong. I just don't find it useful at all.
 
 I'm sure our sales director would've been puzzled if I had announced that our sales were growing by... (っᵔ◡ᵔ)っ ⋆˙⟡ infinity ⋆˙⟡
@@ -22,8 +19,6 @@ I'm sure our sales director would've been puzzled if I had announced that our sa
 
 
 The actual story behind the funky value is that a product launched this month and went from zero orders to a few hundred. So you might have listed this product in your table with a metric that shows the percentage change and what you're comparing with is just 0. 
-
-I promise no more gifs now. 
 
 ---
 
@@ -93,6 +88,12 @@ IF( EQUAL( Orders [Compare date range], 0 ), Orders [Target date range], 0 )
 ```
 
 Call it something like "Orders from new products" and turn on **Interpret zero as no value** for that column too. It only shows a number on rows that didn't exist last period. Now "new" is its own column instead of a broken percentage.
+
+That’s my rule for Infinity: it's not some magic value that suddenly lifts the analysis to the next level just like that. Most people don't know why it's there. So it should only get a seat at the table if it brings something to it. “This product is new” is worth a column. Dividing by zero isn’t.
+
+<img class="datadiaryimage--rounded datadiaryimage--small" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExeGQ3NjZ4Mmk4dmdwZzhjMmZ0ZmpiN3R0b24yZG1uMnM0MDZ2cjV5diZlcD12MV9naWZzX3NlYXJjaCZjdD1n/BzCLJGxXQbwH09jzq0/giphy.gif" alt="ThanosInfinityStone">
+
+(I promise no more gifs. But he’s collecting Infinity Stones, so technically he’s on topic.)
 
 ---
 
