@@ -26,6 +26,10 @@ exclude:
   - vendor
   - .bundle
   - .sass-cache
+  - CLAUDE.md
+  - AGENTS.md
+  - mise.toml
+  - adobe_summit_slides.pptx
 
 # Tags
 tag_colors:
