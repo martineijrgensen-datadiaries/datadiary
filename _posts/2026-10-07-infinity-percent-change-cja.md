@@ -13,7 +13,9 @@ And at the very top, glowing the greenest of them all: **Infinity%**.
 
 The last time I built one of these tables, I was a bit too quick setting up my percentage metrics, and the top of my table was basically a wall of Infinity%. And it's not even wrong. I just don't find it useful at all.
 
-I'm sure our sales director would've been puzzled if I had announced that our sales were growing by... (っᵔ◡ᵔ)っ ⋆˙⟡ infinity ⋆˙⟡
+I'm sure our sales director would've been puzzled if I had announced that our sales were growing by...  
+  
+  (っᵔ◡ᵔ)っ ⋆˙⟡ infinity ⋆˙⟡
 
 <img class="datadiaryimage--rounded datadiaryimage--small" src="{{ "/assets/images/infinity.gif" | relative_url }}" alt="BuzzLightYearInfinity">
 
