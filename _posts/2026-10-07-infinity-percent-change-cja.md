@@ -152,7 +152,7 @@ Here we have the same data but we are able to tell the story in a more meaningfu
 I still keep the guarded percent change as a second column. Since its good context.
 
 ---
-
+ 
 ## Bonus: 'Infinity' as a tell-tale
 
 If you see an Infinity row and somewhere further down a row at -100%, check whether they're the same thing under two names.
