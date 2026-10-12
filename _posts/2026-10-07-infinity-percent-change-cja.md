@@ -135,7 +135,7 @@ Orders [Target date range] - Orders [Compare date range]
 
 A difference can never be infinite. If you already have a 'Compare time period' column in the table, you don't even need the builder: select both columns, right-click and choose 'Create metric from selection -> Subtract'.
 
-Here's the same made-up table which is sorted by the change in orders, with the guarded percent change from Fix 2 next to it:
+Here's the same made-up table which is sorted by the change in orders, with the percent change from Fix 2 next to it:
 
 | Product | Orders, prior period | Orders, this period | Δ orders | % change |
 |---|---|---|---|---|
