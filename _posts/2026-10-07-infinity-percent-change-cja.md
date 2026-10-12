@@ -24,7 +24,7 @@ The story behind the funky value is that a product launched this month and went 
 
 ---
 
-## Why CJA says Infinity%
+## Why CJA says Infinity
 
 Percent change is a simple formula:
 
