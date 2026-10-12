@@ -103,7 +103,7 @@ That’s my rule for Infinity: it's not some magic value that suddenly lifts the
 
 ## Fix 2: Raise the bar
 
-So this is definitely more a matter of interpretation. Maybe the business is actually only interested in the percentage change of products with a specific number of orders. Then I would need to remove a lot of noise from new products and products with a low number of orders. 
+So this is definitely a matter of interpretation. Maybe the business is actually only interested in the percentage change of products with a specific number of orders. Then I would need to remove a lot of noise from new products and products with a low number of orders. 
 
 So change the 0 to a minimum base:
 
