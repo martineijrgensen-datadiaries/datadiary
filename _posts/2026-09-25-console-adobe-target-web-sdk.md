@@ -11,7 +11,7 @@ When I test-run an A/B test in Adobe Target, there are times where I can't see a
 
 So I go through the same routine: clear the browser cache, go full spy mode in incognito, try another browser. If the test uses a custom script, I always run the script in the browser console to check that it works. Then I test the audience criteria. 
 
-Before I buy a new computer, I check the network calls to see if anything is being delivered at all.
+Before I buy a new computer, I check the network calls to see if anything is being delivered at all. I prefer using the browser's DevTool instead of a debugging extention. 
 
 Finding the Target delivery looks slightly different in a Web SDK setup than it did with at.js (Target's old library, next to AppMeasurement for Analytics). Target counts you in an activity when you qualify and are served an experience. But you have to look in the right places to see the display event that carries the activity and experience IDs. If it isn't sent, both the test itself and the evaluation in CJA aren't worth much.
 
@@ -33,9 +33,9 @@ Step 3 is the one that matters for your test data. It's the event that carries t
 
 You can deliver an activity via Visual Experience Composer (VEC) and Form-based Composer depending on the requirements. The VEC is usually fine for digital properties. While the form-based composer is handy for non-digital properties or more unusual locations. Like an in-store screen or an eMail. 
 
-I've used the form-based composer for one of my tests because the VEC seemed to struggle with timing on our website. The component I was testing wasn't static. It's built by the front end in the browser, and it takes a long time to load, with or without an experience. 
+I've used the form-based composer for one of my tests because the VEC seemed to struggle with timing on our website. The component I was testing wasn't static, and it takes a long time to load, with or without an experience. 
 
-Even though Target was running on the page, I had to reload once or twice before I saw the experience. I tested it in multiple browsers and on two different computers, to make sure it wasn't just my 100 Chrome extensions and ad blockers. I admit I might be an extension hoarder. I once installed one that adds a cute pink ribbon 🎀 to all my browser tabs. I'm trying to cut down.
+Even though a Target VEC experience was running on the page, I had to reload once or twice before I saw the experience. I tested it in multiple browsers and on two different computers, to make sure it wasn't just my 100 Chrome extensions and ad blockers. I admit I might be an extension hoarder. I once installed one that adds a cute pink ribbon 🎀 to all my browser tabs. I'm trying to cut down.
 
 I set up the exact same activity, with the same script, using the form-based composer. It worked on the first load, and the component only ever showed the experience version. It just worked perfectly. 
 
@@ -51,15 +51,14 @@ Whatever the reason, it would have been nice to know that before I spent so much
 
 ## 2. You can turn on debug mode
 
-Working with a tool like Adobe Target can be a bit uphill if you don't know all the debug methods. 
+Working with a tool like Adobe Target can be a bit uphill if you don't know all the debug methods. You might get a little tired. 
 
 If you have Web SDK, you can turn on debug mode with the [`setDebug` command](https://experienceleague.adobe.com/en/docs/experience-platform/web-sdk/commands/setdebug) and reload the page:
 
 ```js
 alloy("setDebug", { enabled: true });
 ```
-
-Then you'll see everything the Web SDK does written to the console, on lines starting with `[alloy]`. So it basically turns the page load into a step-by-step story you can read. But you gotta filter on alloy. 
+Then you'll see everything the Web SDK does written to the console. This will be visible on lines starting with `[alloy]`. So it basically turns the page load into a step-by-step story you can read. But first you gotta filter on alloy. 
 
 ---
 
@@ -80,10 +79,11 @@ This is what the four answers look like in the console:
 
 ### Reading a real console
 
-On a busy website, the console is noisy. So as I mentioned before, filtering the noise out is key. 
+Most websites are quite busy. That means the console gets filled with a lot of noise. So as I mentioned before, filtering the noise out is key. 
 
 - **Filter on `[alloy]`.** That hides everything that isn't the Web SDK.
-- **Look for `Navigated to ...`.** It marks where a new page starts. Lines above it belong to the previous page.
+- **Look for `Navigated to ...`.** It marks where a new page starts. Really nice to know once you start digging. 
+The lines above it belong to the previous page.
 
 But to be honest, I mostly use the Network Tab.
 
@@ -136,15 +136,15 @@ You may also find a display event that only has the page name and no activity ID
 
 I think this is really good to know. 
 
-- **Payload** is what the browser **sends** to Adobe
-- **Preview** and **Response** are what Adobe **sends back**
+- **Payload** is what the browser sends to Adobe.
+- **Preview** and **Response** are what Adobe sends back.
 
 | Request | Payload (sent) | Preview (received) |
 |---|---|---|
 | The first request, where the page asks Target | "What should I show here?" | **The answer:** activity name, experience name and the content |
 | The display event | **"I showed this":** activity ID, experience ID and `display: 1` | Nothing important |
 
-So checking a test takes both:
+So you can validate your activity by looking at:
 
 1. The **Preview** of the first request tells you *which* activity and experience you got
 2. The **Payload** of the display event tells you that you were *counted*
@@ -156,37 +156,23 @@ So checking a test takes both:
 
 ## 6. Other things I picked up along the way
 
-- **Being counted isn't the same as seeing it.** Target counts you when the experience is delivered, not when your script has finished changing the page. If the script gives up, you're still counted. It happens in both experiences, so it evens out, but it makes the difference harder to spot.
-- **Clicks aren't always tracked automatically.** If your success metric is a click, check that it's actually measured ([Adobe's docs](https://experienceleague.adobe.com/en/docs/platform-learn/implement-web-sdk/applications-setup/setup-target)). A page view of the next page is often a safer choice.
-
+- **Being counted isn't the same as seeing it.** Target counts you when the experience is delivered. That does not mean your script has finished changing the page. So if the script happens to give up, Target doesn't really care. You're still counted. I think it's always a good idea to test-run the script multiple times. 
 ---
 
-## 7. Served vs seen, and what it means in CJA
-
-Adobe has a knowledge base article called ["Visitor identification process in Adobe Target"](https://experienceleague.adobe.com/en/docs/experience-cloud-kcs/kbarticles/ka-14003). The key point for me: Target only counts a visitor in an activity when they qualify for it and are **served** an experience. Served, not seen. So that would mean that visitors can be counted, even though they haven't seen the experience (maybe something broke).
-
-The article also explains how the A4T metrics are counted:
-
-| Metric | Counted when |
-|---|---|
-| Unique visitors | From the moment the visitor enters the test. They stay counted, even if they never see the test content again |
-| Visits | Also includes visits where the visitor didn't see the activity |
-| Activity impressions | Each time the test content is shown |
-| Instances | Once per page where the content is shown |
 
 ### Persistence in CJA
 
-The activity and experience IDs only travel with the display event. A purchase later in the visit is a different event, without them. So in CJA, the Activity and Experience dimensions need **persistence**, or conversions can't be connected to an experience. [Adobe recommends](https://experienceleague.adobe.com/en/docs/analytics-platform/using/integrations/at) setting the allocation to "All", so a visitor can be in several activities at the same time.
+The activity and experience IDs only travel with the display event. So if the visitor makes a purchase later in the visit, it will be a different event, without the Target information. That means you need to enable persistence for these Target dimensions. If you forget that, the conversions can't be connected to the experience [Read more](https://experienceleague.adobe.com/en/docs/analytics-platform/using/integrations/at).
 
-Also: just a consideration. If you have turned on stitching, the number of people can shrink, because several ECIDs get tied to one person. If someone visits on both their phone and their laptop, Target may have put them in a different experience on each device. Once stitched, that person one can show up in both experiences in CJA.
+Also: just a consideration. If you have turned on stitching, the number of people can shrink, since several ECIDs get tied to one person. So the way we think about a person in CJA is different from Adobe Analytics. But that doesn't apply to Target. I still have to get used to that. If someone visits on both their phone and their laptop, Target may have put them in different experiences on each device. 
 
 ---
 
 ## Summing up
 
-VEC or form-based: which one, for real? There is documentation, but to me it seems there are cases where the form-based composer can solve things the VEC can't. Even on a standard website. So if the thing I'm testing is built by the front end after the page has loaded, I'd at least try form-based before spending hours in the VEC.
+VEC or form-based: to me it seems there are cases where the form-based composer can solve things the VEC can't. Even on a standard website. So if the thing I'm testing is built by the front end after the page has loaded, I'd at least try form-based before spending hours in the VEC.
 
-Then there's debugging. The Target report only shows the totals. It can't tell you whether an experience was served on this exact page load, whether it was counted, or which experience you ended up in. The console and the Network tab can.
+Then there's debugging. The Target or Analytics report only shows the totals. It can't tell you whether an experience was served on this exact page load, whether it was counted, or which experience you ended up in. Luckily, You can use the console and the Network tab for these things.
 
 I'm sure there are more tricks out there, and I'm still learning. If you have one, leave it in the comments.
 
