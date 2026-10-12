@@ -7,11 +7,11 @@ read_time: 6
 emoji: "♾️"
 ---
 
-You know the table. Products down the side. Orders in one column, percent change against last period in the next. Conditional formatting on, so the winners glow green and the losers go red.
+You know the table. Products down the side. Orders in one column, percent change against last period in the next. You might even have Conditional formatting on, so the winners are green and the losers are red.
 
-And at the very top, glowing the greenest of them all: **Infinity%**. 
+And at the very top, you have the greenest of them all: **Infinity%**. 
 
-The last time I built one of these tables, I was a bit too quick setting up my percentage metrics, and the top of my table was basically a wall of Infinity%. And it's not even wrong. I just don't find it useful at all.
+The last time I built one of these tables, I was a bit too quick setting up my percentage metrics, and the top of my table was basically a wall of Infinity%. I just don't find it useful at all.
 
 I'm sure our sales director would've been puzzled if I had announced that our sales were growing by...  
   
@@ -20,20 +20,21 @@ I'm sure our sales director would've been puzzled if I had announced that our sa
 <img class="datadiaryimage--rounded datadiaryimage--small" src="{{ "/assets/images/infinity.gif" | relative_url }}" alt="BuzzLightYearInfinity">
 
 
-The actual story behind the funky value is that a product launched this month and went from zero orders to a few hundred. So you might have listed this product in your table with a metric that shows the percentage change and what you're comparing with is just 0. 
+The story behind the funky value is that a product launched this month and went from zero orders to a few hundred. So you might have listed this product in your table with a metric that shows the percentage change and what you're comparing with is just 0. 
 
 ---
 
 ## Why CJA says Infinity%
 
-This is just one example. Percent change is a simple formula:
+Percent change is a simple formula:
 
 ```
 (this period - last period) / last period
 ```
 
-It's basic math that is the metric is not automatically adjusting. When last period is zero, you're dividing by zero.
-Then CJA finds that undefined and writes Infinity%.
+It's basic math that the 'percentage change metric' is not automatically correcting. When last period is zero, you're dividing by zero.
+
+CJA finds that undefined and writes Infinity%.
 
 Anything that's new can show 0 the previous period. Maybe you just started collecting data for a certain dimension value. That could be a product that just launched, a campaign that just started, a page that didn't exist a month ago. 
 
@@ -83,7 +84,8 @@ Then open the column settings in the table and turn on **Interpret zero as no va
 You can also just build this metric from scratch and it would be the same structure and if-function. Then you create the date ranges yourself. Remember if that date range is rolling, look at the panel calendar under 'Show advanced settings' for 'Make date range components relative to panel calendar'. With it on, the comparison moves with the panel dates. If not, whenever someone changes the panel to last quarter or something like that, the table shows a comparison that makes no sense.
 
 **Pro Tip** 
-If you want to keep infinity to show what's new. That's the one useful thing Infinity% can tel us. Then you can add a second metric:
+
+If you want to keep infinity to show what's new. That's the one useful thing Infinity can tel us. Then you can add a second metric:
 
 ```
 IF( EQUAL( Orders [Compare date range], 0 ), Orders [Target date range], 0 )
@@ -101,7 +103,7 @@ That’s my rule for Infinity: it's not some magic value that suddenly lifts the
 
 ## Fix 2: Raise the bar
 
-So this is definitely more an interpretive decision. Maybe the business is actually only interested in the percentage change of products with a specific number of orders. That would remove a lot of noise from new products and products with a low number of orders. 
+So this is definitely more a matter of interpretation. Maybe the business is actually only interested in the percentage change of products with a specific number of orders. Then I would need to remove a lot of noise from new products and products with a low number of orders. 
 
 So change the 0 to a minimum base:
 
