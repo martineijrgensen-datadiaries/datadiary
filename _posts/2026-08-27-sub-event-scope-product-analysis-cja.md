@@ -21,7 +21,7 @@ First, let's look at what this feature is actually all about.
 
 If you've recently been poking around in the Data View settings and noticed a new tab called "Containers", you might have had the same reaction I did: "was that always there?" quickly followed by "how have I not noticed this before?". 
 
-That tab lets you do two things. You can rename the existing containers, person, session, event, and you can build a brand new 🌟custom container🌟, which is where it actually gets fun. This is where you'd define a custom container for something like product details.
+That tab lets you do two things. You can rename the existing containers, person, session, event, and you can build a brand new 🌟custom container🌟, which is where it actually gets fun. This is where you define a custom container for something like product details.
 
 A custom container has to be built on an object or an array, because it represents a smaller scope than the event itself, the smallest one yet: a list living inside the event.
 
@@ -40,7 +40,7 @@ This is the same order with the same filter definition, `category = "Activewear"
 - **Event scope**: one item in the array matched Activewear, so the *entire event* qualifies. Every product on that order counts, including the running shoes and the shaker bottle. Revenue counted: **2,096 DKK**.
 - **Sub-event scope**: only the array entries that actually match the filter count. The running shoes and the shaker bottle drop out. Revenue counted: **648 DKK**.
 
-It's not that one of them is wrong. They're just answering different questions. 
+Both of these are answering different questions. 
 
 Event scope looks at *"how much revenue came from orders that included at least one Activewear item"*
 
@@ -69,7 +69,7 @@ Then create a segment with an object scope. That can be a quick segment or via t
 
 There are many ways to do a product performance analysis. This is one way of doing it.
 
-The idea itself isn't new, it's a straight lift from the **BCG growth-share matrix**: stars, cash cows, dogs, question marks, plotted on a 2x2 with a couple of axes and bubble size as a third dimension. just built in CJA.
+With inspiration from the **BCG growth-share matrix**: stars, cash cows, dogs, question marks, plotted on a 2x2 with a couple of axes and bubble size as a third dimension.
 
 Now I can get pretty specific with the product category. As an example, I am only interested in the Activewear brand. But when I used the event scope, I kept seeing other brands as well. Since customers were usually browsing and purchasing more than one brand. Then I had to do extra work to filter those brands out. But now I can actually select the brand from the `productListItems` and only see the products within Activewear in my visualisation. 
 

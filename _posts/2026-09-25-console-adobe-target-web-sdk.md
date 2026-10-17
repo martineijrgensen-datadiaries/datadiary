@@ -155,8 +155,9 @@ So you can validate your activity by looking at:
 ---
 
 ## 6. Other things I picked up along the way
+  
+**Being counted isn't the same as seeing it**: Target counts you when the experience is delivered. That does not mean your script has finished changing the page. So if the script happens to give up, Target doesn't really care. You're still counted. I think it's always a good idea to test-run the script multiple times. 
 
-- **Being counted isn't the same as seeing it.** Target counts you when the experience is delivered. That does not mean your script has finished changing the page. So if the script happens to give up, Target doesn't really care. You're still counted. I think it's always a good idea to test-run the script multiple times. 
 ---
 
 
