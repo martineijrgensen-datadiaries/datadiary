@@ -7,7 +7,7 @@ read_time: 6
 emoji: "♾️"
 ---
 
-You know the table. Products down the side. Orders in one column, percent change against last period in the next. You might even have Conditional formatting on, so the winners are green and the losers are red.
+This is a classic one. You have a table. All the products are listed down the side. Then you've got 'orders' in one column and percent change against last period in another column. You might even have Conditional formatting on, so the winners are green and the losers are red.
 
 And at the very top, you have the greenest of them all: **Infinity%**. 
 
