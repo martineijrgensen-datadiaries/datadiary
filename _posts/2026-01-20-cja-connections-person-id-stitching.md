@@ -7,11 +7,12 @@ read_time: 6
 emoji: "🔗"
 ---
 
-How does Customer Journey Analytics connection setup work? And can you already report on unique people across datasets before stitching ever comes into play?
+How does Customer Journey Analytics connection setup work? And can you already report on unique people across datasets before stitching ever comes into the picture? These are some of the question I had when I first started working with CJA. 
+I really wanted to understand how the configuration of a connection would impact the analysis in our workspaces. 
 
-When you create a Connection with different datasets, CJA does not keep those datasets separate.
+First, I learned that when you create a Connection with different datasets, CJA does not keep those datasets separate.
 
-### Instead:
+### What happens is:
 
 - All included event datasets are merged into one logical event dataset
 - Reporting is done based on this merged dataset (together with profile and lookup data)
